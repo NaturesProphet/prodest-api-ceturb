@@ -7,10 +7,12 @@ import { ViagensController } from "./controllers/viagens.controller";
 import { ViagensService } from "./services/viagens.service";
 import { ItinerariosController } from "./controllers/itinerarios.controller";
 import { ItinerariosService } from "./services/itinerarios.service";
+import { AgenciaController } from "./controllers/agencia.controller";
+import { AgenciasService } from "./services/agencia.service";
 
 @Module( {
   imports: [ HttpModule ],
-  controllers: [ CeturbController, LinhasController, ViagensController, ItinerariosController ],
-  providers: [ PontoService, LinhasService, ViagensService, ItinerariosService ]
+  controllers: [ CeturbController, LinhasController, ViagensController, ItinerariosController, AgenciaController ],
+  providers: [ PontoService, LinhasService, ViagensService, ItinerariosService, AgenciasService ]
 } )
 export class CeturbModule { }
