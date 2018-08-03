@@ -9,7 +9,7 @@ export class AgenciaController {
     constructor( public service: AgenciasService ) { }
 
     @Get()
-    @ApiOperation( { title: 'lista as linhas existentes' } )
+    @ApiOperation( { title: 'lista as agencias existentes' } )
     @ApiResponse( { status: 200, description: 'Found.' } )
     @ApiResponse( { status: 404, description: 'Not found.' } )
     public async listar () {

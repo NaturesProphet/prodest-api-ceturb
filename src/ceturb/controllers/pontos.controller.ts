@@ -4,9 +4,9 @@ import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Ponto } from "../models/dto/ponto.entity";
 
-@ApiUseTags( "ceturb" )
+@ApiUseTags( "Pontos" )
 @Controller()
-export class CeturbController {
+export class PontosController {
 
   constructor( private readonly pontoService: PontoService ) { }
 
