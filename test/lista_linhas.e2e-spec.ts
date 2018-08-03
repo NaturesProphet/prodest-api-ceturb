@@ -1,12 +1,12 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
-const feature = loadFeature( "./test/features/pontos_de_parada.feature" );
+const feature = loadFeature( "./test/features/buscaLinhas.feature" );
 import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 
-let pontos: any;
+let linhas: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -20,23 +20,23 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-  test( "Retornar todos os pontos ativos registrados.", ( {
+  test( "Existem linhas registradas", ( {
     given,
     when,
     then
   } ) => {
-    given( "que existam pontos de parada registrados.", () => {
+    given( "que a API da geocontrol funciona", () => {
       request( app.getHttpServer() )
-        .get( "/v1/pontos" )
+        .get( "/linhas" )
         .expect( 200 );
     } );
 
-    when( "o usuário solicitar as informações sobre os pontos.", async () => {
-      pontos = await request( app.getHttpServer() ).get( "/v1/pontos" );      
+    when( "eu pesquisar", async () => {
+      linhas = await request( app.getHttpServer() ).get( "/linhas" );
     } );
 
-    then( "o sistema retorna todos os pontos ativos.", () => {
-      //expect( pontos.lenght ).toBeGreaterThanOrEqual(0);
+    then( "retorna as linhas cadastradas", () => {
+      //expect( linhas.lenght ).toBeGreaterThanOrEqual( 0 );
     } );
   } );
 } );

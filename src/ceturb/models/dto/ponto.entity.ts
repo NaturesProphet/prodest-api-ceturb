@@ -1,13 +1,14 @@
+import { ApiModelProperty } from '@nestjs/swagger';
 export class Ponto {
-  readonly id: number;
-  readonly codigo: string;
-  readonly municipio: string;
-  readonly logradouro: string;
-  readonly referencia: string;
-  readonly latitude: number;
-  readonly longitude: number;
-  readonly azimute: number;
-  readonly terminal: boolean;
+  @ApiModelProperty() readonly id: number;
+  @ApiModelProperty()readonly codigo: string;
+  @ApiModelProperty()readonly municipio: string;
+  @ApiModelProperty()readonly logradouro: string;
+  @ApiModelProperty()readonly referencia: string;
+  @ApiModelProperty()readonly latitude: number;
+  @ApiModelProperty()readonly longitude: number;
+  @ApiModelProperty()readonly azimute: number;
+  @ApiModelProperty()readonly terminal: boolean;
 
   constructor(
     id: number,
