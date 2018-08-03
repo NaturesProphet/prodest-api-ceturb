@@ -11,10 +11,11 @@ import { AgenciaController } from "./controllers/agencia.controller";
 import { AgenciasService } from "./services/agencia.service";
 import { PontosItinerariosController } from "./controllers/pontosItinerario.controller";
 import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service";
+import { DefaultController } from "./controllers/default.controller";
 
 @Module( {
   imports: [ HttpModule ],
-  controllers: [ PontosController, LinhasController, ViagensController, ItinerariosController, AgenciaController, PontosItinerariosController ],
+  controllers: [ PontosController, LinhasController, ViagensController, ItinerariosController, AgenciaController, PontosItinerariosController, DefaultController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService, AgenciasService, PontoItinerarioService ]
 } )
 export class CeturbModule { }

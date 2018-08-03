@@ -1,9 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { ViagensService } from '../services/viagens.service';
 
 
 @Controller( 'viagens' )
+@ApiUseTags( "Viagens" )
 export class ViagensController {
     constructor( private readonly service: ViagensService ) { }
 

@@ -10,16 +10,6 @@ export class PontosController {
 
   constructor( private readonly pontoService: PontoService ) { }
 
-  @Get( "/" )
-  @ApiOperation( {
-    description: "Retorna uma mensagem de estado de saude da API dO_Ob",
-    title: "Pocando!"
-  } )
-  @ApiResponse( { status: 200, description: "Retorna mensagem 'Pocando!'" } )
-  async default () {
-    return "Pocando!";
-  }
-
   @Get( "/pontos" )
   @ApiOperation( {
     description: "retornar os pontos ativos",
