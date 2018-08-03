@@ -18,8 +18,8 @@ export class DefaultController {
     @Get( '*' )
     @ApiOperation( { title: 'rota para endpoints inexistentes (404)' } )
     @ApiResponse( { status: 404, description: 'Nao tem nada para ser visto aqui' } )
-    public async noGetRoutes ( @Res() res ) {
-        res.redirect( 'https://okpotatodotcom.files.wordpress.com/2014/12/gandalf-lost.gif' );
+    public async noGetRoutes () {
+        return "<html><body>404<br><img src = 'https://okpotatodotcom.files.wordpress.com/2014/12/gandalf-lost.gif'></html></body>"
     }
 
 }
