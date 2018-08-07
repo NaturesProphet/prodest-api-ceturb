@@ -17,6 +17,7 @@ test_job:
   script:
      - npm install
      - npm run test
+     - npm run test:e2e
    
 quality_job:
     stage: quality
@@ -24,6 +25,7 @@ quality_job:
         - primetoninc/jdk:1.7
     script:     
      - npm install
+     - npm run test:cov
      - wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip
      - apt-get update
      - apt-get install unzip
