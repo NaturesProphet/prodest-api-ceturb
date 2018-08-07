@@ -9,7 +9,10 @@ describe( 'LinhasService', () => {
     } ).compile();
     service = module.get<ItinerariosService>( ItinerariosService );
   } );
-  it( 'should be defined', () => {
-    expect( service ).toBeDefined();
+  it( 'O retorno de itinerários deve ser maior do que 0', async () => {
+    expect( await service.lista_itinerario() ).toBeDefined();
+    let itinerarios = []
+    itinerarios = await service.lista_itinerario();
+    expect( itinerarios.length).toBeGreaterThanOrEqual(0);
   } );
 } );
