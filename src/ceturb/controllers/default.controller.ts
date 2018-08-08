@@ -1,5 +1,7 @@
-import { Controller, Get, Res, NotFoundException, HttpCode } from '@nestjs/common';
+import { Controller, Get, Res, NotFoundException, HttpCode, Body, HttpService } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { CeturbUtils } from '../services/CeturbUtils'
+import { request } from 'https';
 
 @Controller()
 @ApiUseTags( 'Estamos Vivos!' )
@@ -13,6 +15,11 @@ export class DefaultController {
     @ApiResponse( { status: 200, description: "Retorna mensagem 'Pocando!'" } )
     async default () {
         return "Pocando!";
+    }
+
+    @Get( '/teste' )
+    async getBodyTest () {
+        return CeturbUtils.getBody( 'https://gvbus.geocontrol.com.br/pontual-api-web/listarLinhas' );
     }
 
     @Get( '*' )

@@ -1,6 +1,7 @@
 import { Injectable, HttpService, Res, Body } from '@nestjs/common';
 var request = require( 'request' );
 import { Linha } from '../models/linhas.model.Dto';
+import { CeturbUtils } from './CeturbUtils';
 
 @Injectable()
 export class LinhasService {
@@ -26,6 +27,25 @@ export class LinhasService {
                 throw new Error( err );
             } );
 
+        return this.linhas;
+    }
+
+
+
+
+
+    public async NovoRetornarLinhas () {
+        this.resp = await CeturbUtils.getBody( this.url );
+
+
+        for ( let index = 0; index < this.resp.length; index++ ) {
+            const obj = {
+                id: this.resp[ index ].id,
+                codigo: this.resp[ index ].codigo,
+                descricao: this.resp[ index ].descricao
+            }
+            this.linhas.push( obj );
+        }
         return this.linhas;
     }
 }
