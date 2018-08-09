@@ -3,10 +3,8 @@ import * as request from 'request-promise';
 
 @Injectable()
 export class ViagensService {
-    private readonly url: string = "https://gvbus.geocontrol.com.br/pontual-api-web/listarViagens";
 
     public async retornar_viagens () {
-        return await request.get( this.url, { json: true } );
+        return [ { "teste": "teste" }, { "teste": "teste" }, ]
     }
 }
-

@@ -1,7 +1,7 @@
 import { Test } from "@nestjs/testing";
 import { HttpService } from "@nestjs/common";
 import { PontoService } from "./ponto.service";
-import { async } from "rxjs/internal/scheduler/async";
+jest.mock( "./ponto.service" );
 
 describe( "Ponto Service", () => {
   let service: PontoService;
@@ -15,8 +15,12 @@ describe( "Ponto Service", () => {
   } );
 
   it( '"retornar os pontos ativos"', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    expect( await service.retornar_pontos() ).toBeDefined();
+    PontoService.prototype.retornar_pontos = jest
+      .fn()
+      .mockImplementationOnce( () => {
+        let data = [ { "teste": "teste" }, { "teste": "teste" } ];
+        return data;
+      } );
     let pontos = [];
     pontos = await service.retornar_pontos();
     expect( pontos.length ).toBeGreaterThan( 0 );
