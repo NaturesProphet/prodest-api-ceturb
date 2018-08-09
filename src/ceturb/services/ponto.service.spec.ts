@@ -15,9 +15,10 @@ describe( "Ponto Service", () => {
   } );
 
   it( '"retornar os pontos ativos"', async () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     expect( await service.retornar_pontos() ).toBeDefined();
     let pontos = [];
     pontos = await service.retornar_pontos();
-    expect( pontos.length ).toBeGreaterThanOrEqual( 0 ); 
+    expect( pontos.length ).toBeGreaterThan( 0 );
   } );
 } );

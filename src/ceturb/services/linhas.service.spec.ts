@@ -14,10 +14,11 @@ describe( 'LinhasService', () => {
   } );
 
   it( 'O retorno de linhas deve ser maior do que 0', async () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     expect( await service.retornar_linhas() ).toBeDefined();
     let linhas = [];
     linhas = await service.retornar_linhas();
-    expect( linhas.length ).toBeGreaterThanOrEqual( 0 );
+    expect( linhas.length ).toBeGreaterThan( 0 );
   } );
 } );
 

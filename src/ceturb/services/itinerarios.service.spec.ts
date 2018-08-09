@@ -10,9 +10,10 @@ describe( 'LinhasService', () => {
     service = module.get<ItinerariosService>( ItinerariosService );
   } );
   it( 'O retorno de itinerários deve ser maior do que 0', async () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     expect( await service.lista_itinerario() ).toBeDefined();
     let itinerarios = []
     itinerarios = await service.lista_itinerario();
-    expect( itinerarios.length).toBeGreaterThanOrEqual(0);
+    expect( itinerarios.length ).toBeGreaterThan( 0 );
   } );
 } );

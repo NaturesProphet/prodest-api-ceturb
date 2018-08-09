@@ -12,6 +12,7 @@ describe( 'ViagensService', () => {
   } );
 
   it( 'retorno de viagens deve ser maior do que 0', async () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     expect( service.retornar_viagens ).toBeDefined();
     let viagens = [];
     viagens = await service.retornar_viagens();
