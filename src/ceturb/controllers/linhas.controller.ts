@@ -19,6 +19,6 @@ export class LinhasController {
 
     @Get( '/novo' )
     public async listarnovo () {
-        return await this.service.NovoRetornarLinhas()
+        return await this.service.retornar_linhas();
     }
 }
