@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ItinerariosService } from './itinerarios.service';
+jest.mock( './itinerarios.service' );
 
 describe( 'LinhasService', () => {
   let service: ItinerariosService;
@@ -9,11 +10,18 @@ describe( 'LinhasService', () => {
     } ).compile();
     service = module.get<ItinerariosService>( ItinerariosService );
   } );
+
   it( 'O retorno de itinerários deve ser maior do que 0', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    expect( await service.lista_itinerario() ).toBeDefined();
+    ItinerariosService.prototype.lista_itinerario = jest
+      .fn()
+      .mockImplementationOnce( () => {
+        let data = [ { "teste": "teste" }, { "teste": "teste" } ];
+        return data;
+      } );
+
     let itinerarios = []
     itinerarios = await service.lista_itinerario();
     expect( itinerarios.length ).toBeGreaterThan( 0 );
   } );
+
 } );
