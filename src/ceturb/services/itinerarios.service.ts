@@ -1,6 +1,6 @@
 import { Injectable, HttpService, Res } from '@nestjs/common';
-var request = require( 'request' );
 import { Itinerario } from '../models/itinerarios.model.Dto';
+import * as request from 'request-promise';
 
 @Injectable()
 export class ItinerariosService {
@@ -10,19 +10,6 @@ export class ItinerariosService {
     constructor() { }
 
     public async lista_itinerario () {
-        await request( this.url, { json: true }, ( error, response, body ) => {
-            if ( error ) { console.log( error.message ) }
-            this.resp = body;
-            for ( let i = 0; i < this.resp.length; i++ ) {
-                const obj = {
-                    id: this.resp[ i ].id,
-                    codigo: this.resp[ i ].codigo,
-                    bandeira: this.resp[ i ].bandeira,
-                    linhaid: this.resp[ i ].linhaId
-                }
-                this.itinerarios.push( obj );
-            }
-        } );
-        return this.itinerarios;
+        return await request.get( this.url, { json: true } );
     }
 }
