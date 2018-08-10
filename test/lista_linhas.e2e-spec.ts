@@ -5,6 +5,8 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+jest.mock( "../src/app.module" );
+
 
 let linhas: any;
 
@@ -36,7 +38,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna as linhas cadastradas", () => {
-      //expect( linhas.lenght ).toBeGreaterThanOrEqual( 0 );
+      //expect( linhas.lenght ).toBeGreaterThan( 0 );
     } );
   } );
 

@@ -5,6 +5,7 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+jest.mock( "../src/app.module" );
 
 let pontos: any;
 
@@ -36,7 +37,7 @@ defineFeature( feature, test => {
     } );
 
     then( "o sistema retorna todos os pontos ativos.", () => {
-      //expect( pontos.lenght ).toBeGreaterThanOrEqual(0);
+      //expect( pontos.lenght ).toBeGreaterThan( 0 );
     } );
   } );
 

@@ -5,6 +5,7 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+jest.mock( "../src/app.module" );
 
 let itinerario: any;
 
@@ -32,11 +33,11 @@ defineFeature( feature, test => {
     } );
 
     when( "Eu pesquisar", async () => {
-      itinerario = await request( app.getHttpServer() ).get( "/linhas" );
+      itinerario = await request( app.getHttpServer() ).get( "/itinerario" );
     } );
 
     then( "retorna os itinerários cadastrados", () => {
-      //expect( itinerario.lenght ).toBeGreaterThanOrEqual( 0 );
+      //expect( itinerario.lenght ).toBeGreaterThan( 0 );
     } );
   } );
 

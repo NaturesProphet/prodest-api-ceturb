@@ -5,6 +5,7 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+jest.mock( "../src/app.module" );
 
 let Agencia: any;
 
@@ -36,7 +37,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna as agencias cadastradas", () => {
-      //expect( Agencia.lenght ).toBeGreaterThanOrEqual( 0 );
+      //expect( Agencia.lenght ).toBeGreaterThan( 0 );
     } );
   } );
 

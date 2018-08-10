@@ -5,6 +5,7 @@ import request from 'supertest';
 
 import { INestApplication, HttpModule } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
+jest.mock( "../src/app.module" );
 
 let pontosItinerarios: any;
 
@@ -46,7 +47,7 @@ defineFeature( feature, test => {
     then(
       'o sistema retorna todas as associações entre pontos e itinerários.',
       () => {
-        //expect( pontosItinerarios.lenght ).toBeGreaterThanOrEqual(0);
+        //expect( pontosItinerarios.lenght ).toBeGreaterThan( 0 );
       },
     );
   } );

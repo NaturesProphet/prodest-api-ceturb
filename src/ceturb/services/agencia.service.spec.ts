@@ -12,11 +12,11 @@ describe( 'AgenciasService', () => {
   } );
 
   it( 'O retorno de Agencias deve ser maior do que 0', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     expect( await service.listar_agencias ).toBeDefined();
     let agencias = [];
     agencias = await service.listar_agencias();
     expect( agencias.length ).toBeGreaterThan( 0 );
   } );
+
 } );
 
