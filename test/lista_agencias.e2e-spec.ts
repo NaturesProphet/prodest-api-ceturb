@@ -39,4 +39,10 @@ defineFeature( feature, test => {
       //expect( Agencia.lenght ).toBeGreaterThanOrEqual( 0 );
     } );
   } );
+
+
+  afterAll( async () => {
+    await app.close();
+  } );
+
 } );

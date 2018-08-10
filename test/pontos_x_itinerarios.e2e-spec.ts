@@ -50,4 +50,10 @@ defineFeature( feature, test => {
       },
     );
   } );
+
+  afterAll( async () => {
+    await app.close();
+  } );
+
+
 } );

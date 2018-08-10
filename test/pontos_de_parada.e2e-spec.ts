@@ -32,11 +32,16 @@ defineFeature( feature, test => {
     } );
 
     when( "o usuário solicitar as informações sobre os pontos.", async () => {
-      pontos = await request( app.getHttpServer() ).get( "/v1/pontos" );      
+      pontos = await request( app.getHttpServer() ).get( "/v1/pontos" );
     } );
 
     then( "o sistema retorna todos os pontos ativos.", () => {
       //expect( pontos.lenght ).toBeGreaterThanOrEqual(0);
     } );
   } );
+
+  afterAll( async () => {
+    await app.close();
+  } );
+
 } );

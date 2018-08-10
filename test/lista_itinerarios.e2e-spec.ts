@@ -32,11 +32,17 @@ defineFeature( feature, test => {
     } );
 
     when( "Eu pesquisar", async () => {
-        itinerario = await request( app.getHttpServer() ).get( "/linhas" );
+      itinerario = await request( app.getHttpServer() ).get( "/linhas" );
     } );
 
     then( "retorna os itinerários cadastrados", () => {
       //expect( itinerario.lenght ).toBeGreaterThanOrEqual( 0 );
     } );
   } );
+
+  afterAll( async () => {
+    await app.close();
+  } );
+
+
 } );
