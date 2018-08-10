@@ -14,14 +14,14 @@ import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service"
 import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
-import { HorariosObsController } from './controllers/horariosObs.controller';
-import { HorariosObsService } from './services/horarioObs.service';
+import { HorariosObsService } from './services/horarioObs.service'
+
 
 @Module( {
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController, 
     ItinerariosController, AgenciaController, PontosItinerariosController, 
-    HorariosController, HorariosObsController, DefaultController],
+    HorariosController, DefaultController],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService, 
     AgenciasService, PontoItinerarioService, HorariosService, HorariosObsService ]
 } )
