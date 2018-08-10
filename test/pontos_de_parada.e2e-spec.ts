@@ -28,16 +28,17 @@ defineFeature( feature, test => {
   } ) => {
     given( "que existam pontos de parada registrados.", () => {
       request( app.getHttpServer() )
-        .get( "/v1/pontos" )
+        .get( "/pontos" )
         .expect( 200 );
     } );
 
     when( "o usuário solicitar as informações sobre os pontos.", async () => {
-      pontos = await request( app.getHttpServer() ).get( "/v1/pontos" );
+      let requisicao = await request( app.getHttpServer() ).get( "/pontos" );
+      pontos = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
     then( "o sistema retorna todos os pontos ativos.", () => {
-      //expect( pontos.lenght ).toBeGreaterThan( 0 );
+      expect( pontos.length ).toBeGreaterThan( 0 );
     } );
   } );
 

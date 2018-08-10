@@ -7,7 +7,7 @@ import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 
-let itinerario: any;
+let itinerarios: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -33,17 +33,17 @@ defineFeature( feature, test => {
     } );
 
     when( "Eu pesquisar", async () => {
-      itinerario = await request( app.getHttpServer() ).get( "/itinerario" );
+      let requisicao = await request( app.getHttpServer() ).get( "/itinerarios" );
+      itinerarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
     then( "retorna os itinerários cadastrados", () => {
-      //expect( itinerario.lenght ).toBeGreaterThan( 0 );
+      expect( itinerarios.length ).toBeGreaterThan( 0 );
     } );
   } );
 
   afterAll( async () => {
     await app.close();
   } );
-
 
 } );

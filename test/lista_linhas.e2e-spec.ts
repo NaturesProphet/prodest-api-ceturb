@@ -8,7 +8,7 @@ import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 
 
-let linhas: any;
+let linhas = [];
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -34,17 +34,17 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar", async () => {
-      linhas = await request( app.getHttpServer() ).get( "/linhas" );
+      let requisicao = await request( app.getHttpServer() ).get( "/linhas" );
+      linhas = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
     then( "retorna as linhas cadastradas", () => {
-      //expect( linhas.lenght ).toBeGreaterThan( 0 );
+      expect( linhas.length ).toBeGreaterThan( 0 );
     } );
   } );
 
   afterAll( async () => {
     await app.close();
   } );
-
 
 } );

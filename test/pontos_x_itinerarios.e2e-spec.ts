@@ -30,7 +30,7 @@ defineFeature( feature, test => {
       'que existam associações entre pontos e itinerários registrados.',
       () => {
         request( app.getHttpServer() )
-          .get( '/v1/pontosItinerarios' )
+          .get( '/pontosItinerarios' )
           .expect( 200 );
       },
     );
@@ -38,16 +38,15 @@ defineFeature( feature, test => {
     when(
       'o usuário solicitar as informações sobre as associações entre pontos e itinerários.',
       async () => {
-        pontosItinerarios = await request( app.getHttpServer() ).get(
-          '/v1/pontosItinerarios',
-        );
+        let requisicao = await request( app.getHttpServer() ).get( "/pontosItinerarios" );
+        pontosItinerarios = JSON.parse( JSON.stringify( requisicao.body ) );
       },
     );
 
     then(
       'o sistema retorna todas as associações entre pontos e itinerários.',
       () => {
-        //expect( pontosItinerarios.lenght ).toBeGreaterThan( 0 );
+        expect( pontosItinerarios.length ).toBeGreaterThan( 0 );
       },
     );
   } );

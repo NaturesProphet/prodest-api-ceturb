@@ -7,7 +7,7 @@ import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 
-let Agencia: any;
+let agencias: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -28,19 +28,19 @@ defineFeature( feature, test => {
   } ) => {
     given( "que a API da geocontrol funciona", () => {
       request( app.getHttpServer() )
-        .get( "/agencia" )
+        .get( "/agencias" )
         .expect( 200 );
     } );
 
     when( "eu pesquisar", async () => {
-      Agencia = await request( app.getHttpServer() ).get( "/agencia" );
+      let requisicao = await request( app.getHttpServer() ).get( "/agencias" );
+      agencias = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
     then( "retorna as agencias cadastradas", () => {
-      //expect( Agencia.lenght ).toBeGreaterThan( 0 );
+      expect( agencias.length ).toBeGreaterThan( 0 );
     } );
   } );
-
 
   afterAll( async () => {
     await app.close();

@@ -33,11 +33,12 @@ defineFeature( feature, test => {
         } );
 
         when( "eu pesquisar", async () => {
-            linhas = await request( app.getHttpServer() ).get( "/viagens" );
+            let requisicao = await request( app.getHttpServer() ).get( "/linhas" );
+            linhas = JSON.parse( JSON.stringify( requisicao.body ) );
         } );
 
         then( "retorna as viagens cadastradas", () => {
-            //expect( linhas.lenght ).toBeGreaterThan( 0 );
+            expect( linhas.length ).toBeGreaterThan( 0 );
         } );
     } );
 

@@ -6,7 +6,7 @@ import * as request from 'request-promise';
 export class PontoItinerarioService {
 
   public async retornar_pontosItinerarios () {
-    return [ { "teste": "teste" }, { "teste": "teste" }, ]
+    return [ { "teste": "teste" }, { "teste": "teste" } ]
   }
 
 }
