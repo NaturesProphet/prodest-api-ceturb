@@ -1,6 +1,6 @@
 Feature: retornar_itinerarios
 
-   Função responsável pro buscar os itinerários na API da geoControl
+   Função responsável por buscar os itinerários na API da geoControl
 
    Scenario: Existem itinerários registrados
         Given que a API da geoControl funciona
