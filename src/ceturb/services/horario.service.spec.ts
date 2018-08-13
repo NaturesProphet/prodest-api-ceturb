@@ -15,7 +15,7 @@ describe( 'HorarioService', () => {
     HorariosService.prototype.lista_horario = jest
       .fn()
       .mockImplementationOnce( () => {
-        let data = [ { "teste": "teste" }, { "teste": "teste" } ];
+        let data = [ { "teste": "teste" }, { "teste": "teste" },{ "teste": "teste" },{ "teste": "teste" } ];
         return data;
       } );
 
