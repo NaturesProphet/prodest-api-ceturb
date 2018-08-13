@@ -1,13 +1,13 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
-const feature = loadFeature( "./test/features/buscaHorario.feature" );
+const feature = loadFeature( "./test/features/buscaHorarioObs.feature" );
 import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 
-let horarios: any;
+let horariosObs: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -21,7 +21,7 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-    test( "Existem horários de linhas registradas", ( {
+    test( "Existem observações de horários de linhas registradas", ( {
         given,
         when,
         then
@@ -33,14 +33,14 @@ defineFeature( feature, test => {
         .expect( 200 );
     } );
 
-    when( "eu pesquisar uma linha", async () => {
+    when( "eu pesquisar as observações do horário de uma linha", async () => {
       let linha = '500';
       let requisicao = await request( app.getHttpServer() ).get( "/horarios/"+linha);
-      horarios = JSON.parse( JSON.stringify( requisicao.body ) );
+      horariosObs = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
-    then( "retornará os horários cadastradas daquela linha", () => {
-      expect( horarios.length ).toBeGreaterThan( 0 );
+    then( "retornará as observações do horário cadastradas daquela linha", () => {
+      expect( horariosObs.length ).toBeGreaterThan( 0 );
     } );
   } );
 

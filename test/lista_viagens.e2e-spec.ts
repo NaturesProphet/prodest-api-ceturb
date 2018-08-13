@@ -33,7 +33,7 @@ defineFeature( feature, test => {
         } );
 
         when( "eu pesquisar", async () => {
-            let requisicao = await request( app.getHttpServer() ).get( "/linhas" );
+            let requisicao = await request( app.getHttpServer() ).get( "/viagens" );
             linhas = JSON.parse( JSON.stringify( requisicao.body ) );
         } );
 
