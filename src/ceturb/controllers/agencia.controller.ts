@@ -1,6 +1,7 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Res, HttpException, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AgenciasService } from '../services/agencia.service';
+import { InformationNotFound } from '../models/exception/InformationNotFound';
 
 @Controller( 'agencias' )
 @ApiUseTags( 'Agencias' )
@@ -10,9 +11,13 @@ export class AgenciaController {
 
     @Get()
     @ApiOperation( { title: 'lista as agencias existentes' } )
-    @ApiResponse( { status: 200, description: 'Found.' } )
-    @ApiResponse( { status: 404, description: 'Not found.' } )
+    @ApiResponse( { status: 200, description: 'Agencia Encontrada' } )
+    @ApiResponse( { status: 204, description: 'Agencia Não Encontrada' } )
     public async listar () {
-        return await this.service.listar_agencias();
+        try {
+            return await this.service.listar_agencias();
+        } catch ( err ) {
+            throw new InformationNotFound( "Agencia Não Encontrada" );
+        }
     }
 }
