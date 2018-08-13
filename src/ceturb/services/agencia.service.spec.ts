@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AgenciasService } from './agencia.service';
+jest.mock( './agencia.service' );
 
 describe( 'AgenciasService', () => {
   let service: AgenciasService;
@@ -12,7 +13,20 @@ describe( 'AgenciasService', () => {
   } );
 
   it( 'O retorno de Agencias deve ser maior do que 0', async () => {
-    expect( await service.listar_agencias ).toBeDefined();
+    AgenciasService.prototype.listar_agencias = jest
+      .fn()
+      .mockImplementationOnce( () => {
+        return [
+          {
+            "agency_id": 1,
+            "agency_name": "CETURB/ES",
+            "agency_timezone": "America/Sao_Paulo",
+            "agency_url": "https://ceturb.es.gov.br/",
+            "agency_lang": "pt",
+            "agency_phone": "+55 27 3232 4500"
+          }
+        ];
+      } );
     let agencias = [];
     agencias = await service.listar_agencias();
     expect( agencias.length ).toBeGreaterThan( 0 );
