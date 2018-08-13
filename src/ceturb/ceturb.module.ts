@@ -14,7 +14,6 @@ import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service"
 import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
-import { HorariosObsService } from './services/horarioObs.service'
 
 
 @Module( {
@@ -23,6 +22,6 @@ import { HorariosObsService } from './services/horarioObs.service'
     ItinerariosController, AgenciaController, PontosItinerariosController, 
     HorariosController, DefaultController],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService, 
-    AgenciasService, PontoItinerarioService, HorariosService, HorariosObsService ]
+    AgenciasService, PontoItinerarioService, HorariosService ]
 } )
 export class CeturbModule { }

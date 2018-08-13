@@ -6,7 +6,6 @@ import { PontoService } from "../ceturb/services/__mocks__/ponto.service";
 import { PontoItinerarioService } from "../ceturb/services/__mocks__/pontos_x_itinerarios.service";
 import { ItinerariosService } from "../ceturb/services/__mocks__/itinerarios.service";
 import { HorariosService } from '../ceturb/services/__mocks__/horario.service';
-import { HorariosObsService } from '../ceturb/services/__mocks__/horarioObs.service';
 
 import { AgenciaController } from "../ceturb/controllers/agencia.controller";
 import { LinhasController } from "../ceturb/controllers/linhas.controller";
@@ -26,7 +25,6 @@ import { HorariosController } from '../ceturb/controllers/horarios.controller';
   providers: [
     AgenciasService, LinhasService, ViagensService, PontoService,
     PontoItinerarioService, ItinerariosService, HorariosService,
-    HorariosObsService
   ]
 
 } )

@@ -24,4 +24,18 @@ describe( 'LinhasService', () => {
     expect( itinerarios.length ).toBeGreaterThan( 0 );
   } );
 
+  it( 'O retorno de um itinerários de uma linha deve ser maior do que 0', async () => {
+    ItinerariosService.prototype.lista_itinerario = jest
+      .fn()
+      .mockImplementationOnce( () => {
+        let data = [ { "teste": "teste" }, { "teste": "teste" } ];
+        return data;
+      } );
+
+    let itinerarios = [];
+    let linha = '500';
+    itinerarios = await service.busca_itinerario(linha);
+    expect( itinerarios.length ).toBeGreaterThan( 0 );
+  } );
+
 } );
