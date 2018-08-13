@@ -3,7 +3,7 @@ import * as request from 'request-promise';
 
 @Injectable()
 export class HorariosObsService {
-    private readonly url: string = "http://api.ceturb.des.es.gov.br/onibus/api/BuscaHorarioObse";
+    private readonly url: string = "http://api.ceturb.es.gov.br/onibus/api/BuscaHorarioObse";
 
     public async lista_horarioObs(linha: string) {
         
