@@ -27,7 +27,7 @@ defineFeature( feature, test => {
     when,
     then
   } ) => {
-    given( "que a API da geocontrol funciona", () => {
+    given( "Eu quero saber as informações das agencias públicas de transporte", () => {
       request( app.getHttpServer() )
         .get( "/agencias" )
         .expect( 200 );
@@ -38,18 +38,23 @@ defineFeature( feature, test => {
       agencias = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
-    then( "retorna as agencias cadastradas", () => {
+    then( "recebo as informações", () => {
       expect( agencias.length ).toBeGreaterThan( 0 );
     } );
   } );
 
 
   test( 'Não existem agencias registradas', ( { given, when, then, pending } ) => {
-    given( 'que a API da geocontrol funciona', () => {
+    given( 'Eu quero saber as informações das agencias públicas de transporte', () => {
       request( app.getHttpServer() )
         .get( "/agencias" )
         .expect( 200 );
     } );
+
+    given( 'Não há informações sobre essas', () => {
+
+    } );
+
 
     when( 'eu pesquisar', async () => {
 
@@ -62,7 +67,7 @@ defineFeature( feature, test => {
       agencias = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
-    then( 'retorna um array vazio', () => {
+    then( 'recebo uma mensagem informando que não há agencias', () => {
       expect( agencias.length ).toBeLessThanOrEqual( 0 );
     } );
   } );
