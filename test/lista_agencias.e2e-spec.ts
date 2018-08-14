@@ -3,9 +3,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaAgencia.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule } from "@nestjs/common";
+import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { AgenciasService } from "../src/ceturb/services/agencia.service";
+import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 jest.mock( "../src/ceturb/services/agencia.service" );
 let agencias: any;
@@ -48,11 +49,17 @@ defineFeature( feature, test => {
     given( 'Eu quero saber as informações das agencias públicas de transporte', () => {
       request( app.getHttpServer() )
         .get( "/agencias" )
-        .expect( 200 );
+        .expect( 204 );
     } );
 
     given( 'Não há informações sobre essas', () => {
-
+      AgenciasService.prototype.listar_agencias = jest.fn()
+        .mockImplementationOnce( () => {
+          return HttpStatus.NO_CONTENT;
+        } );
+      request( app.getHttpServer() )
+        .get( "/agencias" )
+        .expect( 204 );
     } );
 
 
@@ -60,18 +67,17 @@ defineFeature( feature, test => {
 
       AgenciasService.prototype.listar_agencias = jest.fn()
         .mockImplementationOnce( () => {
-          return [];
+          throw new InformationNotFound( "Agencia Não Encontrada" );
         } );
 
       let requisicao = await request( app.getHttpServer() ).get( "/agencias" );
-      agencias = JSON.parse( JSON.stringify( requisicao.body ) );
+      agencias = requisicao.status;
     } );
 
     then( 'recebo uma mensagem informando que não há agencias', () => {
-      expect( agencias.length ).toBeLessThanOrEqual( 0 );
+      expect( agencias ).toBe( 204 );
     } );
   } );
-
 
 
   afterAll( async () => {

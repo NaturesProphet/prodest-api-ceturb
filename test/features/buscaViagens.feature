@@ -4,6 +4,11 @@ Feature: retornar_viagens
 
 
     Scenario: Existem viagens registradas
-        Given que a API da geocontrol funciona
-        When eu pesquisar
+        Given Eu quero saber as informações das viagens cadastradas
+        When eu pesquisar viagens
         Then retorna as viagens cadastradas
+
+    Scenario: Não existem viagens registradas
+        Given Eu quero saber as informações das viagens cadastradas
+        When eu pesquisar viagens
+        Then retorna uma mensagem informando que não há informações disponíveis

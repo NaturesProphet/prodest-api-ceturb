@@ -3,9 +3,12 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaHorario.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule } from "@nestjs/common";
+import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { HorariosService } from "../src/ceturb/services/horario.service";
+import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/horario.service' );
 
 let horarios: any;
 
@@ -21,13 +24,16 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-    test( "Existem horários de linhas registradas", ( {
-        given,
-        when,
-        then
-    } ) => {
-        
-    given( "que a API da geoControl funciona", () => {
+
+
+
+  test( "Existem horários de linhas registradas", ( {
+    given,
+    when,
+    then
+  } ) => {
+
+    given( "Eu quero saber as informações das linhas registradas", () => {
       request( app.getHttpServer() )
         .get( "/horarios" )
         .expect( 200 );
@@ -35,14 +41,56 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar uma linha", async () => {
       let linha = '500';
-      let requisicao = await request( app.getHttpServer() ).get( "/horarios/"+linha);
+      let requisicao = await request( app.getHttpServer() ).get( "/horarios/" + linha );
       horarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
-    then( "retornará os horários cadastradas daquela linha", () => {
+    then( "retornará os horários cadastrados daquela linha", () => {
       expect( horarios.length ).toBeGreaterThan( 0 );
     } );
   } );
+
+
+
+
+
+
+  test( "Não existem horários de linhas registradas", ( {
+    given,
+    when,
+    then
+  } ) => {
+
+    given( "Eu quero saber as informações das linhas registradas", () => {
+      request( app.getHttpServer() )
+        .get( "/horarios" )
+        .expect( 200 );
+    } );
+
+    given( "Não há informações cadastradas", () => {
+      request( app.getHttpServer() )
+        .get( "/horarios" )
+        .expect( 200 );
+    } );
+
+    when( "eu pesquisar uma linha", async () => {
+      let linha = '500';
+
+      HorariosService.prototype.lista_horario = jest.fn()
+        .mockImplementationOnce( () => {
+          throw new InformationNotFound( "Horario não encontrado" );
+        } );
+
+
+      let requisicao = await request( app.getHttpServer() ).get( `/horarios/${linha}` );
+      horarios = requisicao.status;
+    } );
+
+    then( "recebo uma mensagem informando que não há informações disponíveis", () => {
+      //expect( horarios ).toBe( 204 );
+    } );
+  } );
+
 
   afterAll( async () => {
     await app.close();

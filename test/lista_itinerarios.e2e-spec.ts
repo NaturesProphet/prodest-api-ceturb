@@ -2,10 +2,12 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaItinerario.feature" );
 import request from "supertest";
-
-import { INestApplication, HttpModule } from "@nestjs/common";
+import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
+import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
+jest.mock( "../src/ceturb/services/itinerarios.service" );
 
 let itinerarios: any;
 
@@ -15,7 +17,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();
@@ -26,13 +28,13 @@ defineFeature( feature, test => {
     when,
     then
   } ) => {
-    given( "que a API da geoControl funciona", () => {
+    given( "Eu quero saber as informações dos itinerários registrados", () => {
       request( app.getHttpServer() )
-        .get( "/itinerario" )
-        .expect( 200 );
+        .get( "/itinerarios" )
+        .expect( 204 );
     } );
 
-    when( "Eu pesquisar", async () => {
+    when( "Eu pesquisar os itinerários", async () => {
       let requisicao = await request( app.getHttpServer() ).get( "/itinerarios" );
       itinerarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
@@ -41,6 +43,38 @@ defineFeature( feature, test => {
       expect( itinerarios.length ).toBeGreaterThan( 0 );
     } );
   } );
+
+
+  test( "Não existem itinerários registrados", ( {
+    given,
+    when,
+    then
+  } ) => {
+    let req;
+    ItinerariosService.prototype.lista_itinerario = jest.fn()
+      .mockImplementationOnce( () => {
+        throw new InformationNotFound( "nenhum registro encontrado" );
+      } );
+
+    given( "Eu quero saber as informações dos itinerários registrados", async () => {
+      ItinerariosService.prototype.lista_itinerario = jest.fn()
+        .mockImplementationOnce( () => {
+          throw new InformationNotFound( "nenhum registro encontrado" );
+        } );
+      req = await request( app.getHttpServer() ).get( "/itinerarios" );
+      //console.log( req.status )
+    } );
+
+    when( "Eu pesquisar os itinerários", async () => {
+      let requisicao = await request( app.getHttpServer() ).get( "/itinerarios" );
+      itinerarios = JSON.parse( JSON.stringify( requisicao.body ) );
+    } );
+
+    then( "retorna uma mensagem informando que não há informações disponíveis", () => {
+      expect( itinerarios.length ).toBeGreaterThan( 0 );
+    } );
+  } );
+
 
   afterAll( async () => {
     await app.close();
