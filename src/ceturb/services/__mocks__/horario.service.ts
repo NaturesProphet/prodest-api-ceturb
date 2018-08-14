@@ -42,4 +42,8 @@ export class HorariosService {
 
         return [ obj1, obj2, obj3 ];
     }
+
+    public async lista_horarioObs(linha: string) {
+        return [ { "teste": "teste" }, { "teste": "teste" },{ "teste": "teste" }]
+    }
 }

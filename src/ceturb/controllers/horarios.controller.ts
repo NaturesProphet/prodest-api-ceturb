@@ -1,13 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { HorariosService } from '../services/horario.service';
-import { HorariosObsService } from '../services/horarioObs.service';
 
 @Controller( 'horarios' )
 @ApiUseTags( 'Horarios' )
 export class HorariosController {
 
-    constructor( public service: HorariosService, public obsService: HorariosObsService ) { }
+    constructor( public service: HorariosService ) { }
 
     @Get(':linha')
     @ApiOperation( { title: 'lista as linhas existentes' } )
@@ -24,6 +23,6 @@ export class HorariosController {
     @ApiResponse( { status: 404, description: 'Not found.' } )
 
     public async listarObs (@Param('linha')linha) {
-        return await this.obsService.lista_horarioObs(linha);
+        return await this.service.lista_horarioObs(linha);
     }
 }

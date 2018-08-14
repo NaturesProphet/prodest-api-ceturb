@@ -60,4 +60,18 @@ describe( 'HorarioService', () => {
     expect( horarios.length ).toBeGreaterThan( 0 );
   } );
 
+  it( 'O retorno de horários deve ser maior do que 0', async () => {
+    HorariosService.prototype.lista_horarioObs = jest
+      .fn()
+      .mockImplementationOnce( () => {
+        let data = [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ];
+        return data;
+      } );
+
+    let horariosObs = []
+    let linha = '500'
+    horariosObs = await service.lista_horarioObs( linha );
+    expect( horariosObs.length ).toBeGreaterThan( 0 );
+  } );
+
 } );

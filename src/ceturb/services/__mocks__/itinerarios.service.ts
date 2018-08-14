@@ -27,5 +27,9 @@ export class ItinerariosService {
 
         return [ obj1, obj2, obj3 ];
     }
+
+    public async busca_itinerario () {
+        return [ { "teste": "teste" }, { "teste": "teste" }, ]
+    }
 }
 
