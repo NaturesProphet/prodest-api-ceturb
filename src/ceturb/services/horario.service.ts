@@ -6,12 +6,12 @@ export class HorariosService {
     private readonly urlHorario: string = "http://api.ceturb.es.gov.br/onibus/api/BuscaHorarios";
     private readonly urlObservacao: string = "http://api.ceturb.es.gov.br/onibus/api/BuscaHorarioObse";
 
-    public async lista_horario ( linha: string ) {
+    public async lista_horario ( linha: number ) {
         let newUrl = this.urlHorario + '/' + linha;
         return await request.get( newUrl, { json: true } );
     }
 
-    public async lista_horarioObs ( linha: string ) {
+    public async lista_horarioObs ( linha: number ) {
         let newUrl = this.urlObservacao + '/' + linha
         return await request.get( newUrl, { json: true } );
     }

@@ -28,6 +28,10 @@ export class HorariosController {
     @ApiResponse( { status: 404, description: 'Not found.' } )
 
     public async listarObs ( @Param( 'linha' ) linha ) {
-        return await this.service.lista_horarioObs( linha );
+        try {
+            return await this.service.lista_horarioObs( linha );
+        } catch ( err ) {
+            throw new InformationNotFound( "Observações não encontradas" );
+        }
     }
 }
