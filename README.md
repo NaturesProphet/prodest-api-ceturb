@@ -4,6 +4,7 @@
 # API-CETURB
 
 ## Rotas
+/docs - Abre o swagger <br><br>
 /itinerarios - retorna todos os itinerarios cadastrados <br><br>
 /itinerarios/500 - retorna o itinerario cadastrado da linha 500 <br><br>
 /horarios/500 - retorna os horarios de saida cadastrados da linha 500 <br><br>
