@@ -60,7 +60,6 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna uma mensagem informando que não há informações disponíveis", () => {
-      console.log( resposta.body )
       expect( resposta.status ).toBe( 204 );
     } );
   } );
