@@ -53,8 +53,8 @@ describe( 'LinhasService', () => {
       } );
 
     let itinerarios = [];
-    let linha = '500';
-    itinerarios = await service.busca_itinerario(linha);
+    let linha = 500;
+    itinerarios = await service.busca_itinerario( linha );
     expect( itinerarios.length ).toBeGreaterThan( 0 );
   } );
 

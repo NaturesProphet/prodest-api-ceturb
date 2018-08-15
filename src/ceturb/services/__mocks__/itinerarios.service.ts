@@ -1,4 +1,5 @@
 import { Injectable, HttpService, Res } from '@nestjs/common';
+import { InformationNotFound } from '../../models/exception/InformationNotFound';
 
 @Injectable()
 export class ItinerariosService {
@@ -28,8 +29,30 @@ export class ItinerariosService {
         return [ obj1, obj2, obj3 ];
     }
 
-    public async busca_itinerario () {
-        return [ { "teste": "teste" }, { "teste": "teste" }, ]
+    public async busca_itinerario ( linha: number ) {
+        if ( linha > 0 ) {
+            let obj1 = {
+                "Linha": "0500",
+                "Sentido": "I",
+                "Sequencia": 1,
+                "Tipo": "D",
+                "Desc_Via": "T. VILA VELHA",
+                "Descricao_Linha": "T. VILA VELHA / T. ITACIBÁ VIA 3ª PONTE",
+                "Mensagem": "Processamento sem Erro"
+            }
+
+            let obj2 = {
+                "Linha": "0500",
+                "Sentido": "I",
+                "Sequencia": 2,
+                "Tipo": "D",
+                "Desc_Via": "RUA CABO AILSON SIMÕES",
+                "Descricao_Linha": "T. VILA VELHA / T. ITACIBÁ VIA 3ª PONTE",
+                "Mensagem": "Processamento sem Erro"
+            }
+
+            return [ obj1, obj2 ];
+        } else return new InformationNotFound( "Não há registros para essa linha" );
     }
 }
 

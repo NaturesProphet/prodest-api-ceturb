@@ -10,7 +10,7 @@ export class ItinerariosService {
         return await request.get( this.urlGeoControl, { json: true } );
     }
 
-    public async busca_itinerario ( linha: string ) {
+    public async busca_itinerario ( linha: number ) {
         let newUrl = this.urlCeturb + '/' + linha;
         return await request.get( newUrl, { json: true } );
     }

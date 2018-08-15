@@ -55,7 +55,7 @@ describe( 'HorarioService', () => {
       } );
 
     let horarios = []
-    let linha = '500'
+    let linha = 500
     horarios = await service.lista_horario( linha );
     expect( horarios.length ).toBeGreaterThan( 0 );
   } );
@@ -69,7 +69,7 @@ describe( 'HorarioService', () => {
       } );
 
     let horariosObs = []
-    let linha = '500'
+    let linha = 500
     horariosObs = await service.lista_horarioObs( linha );
     expect( horariosObs.length ).toBeGreaterThan( 0 );
   } );
