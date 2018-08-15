@@ -3,6 +3,17 @@
 
 # API-CETURB
 
+## Rotas
+/itinerarios - retorna todos os itinerarios cadastrados <br><br>
+/itinerarios/500 - retorna o itinerario cadastrado da linha 500 <br><br>
+/horarios/500 - retorna os horarios de saida cadastrados da linha 500 <br><br>
+/horarios/obs/500 - retorna as observações cadastradas da linha 500 <br><br>
+/linhas - retorna as linhas cadastradas <br><br>
+/viagens - retorna as viagens cadastradas <br><br>
+/agencias - retorna os dados da empresa responsavel pelo serviço <br><br>
+/pontos - retorna todos os pontos cadastrados <br><br>
+/pontositinerarios - retorna a relação de pontos e itinerarios <br><br>
+
 ## Description
 
 Neste projeto estamos "re-construíndo" a API da ceturb, utilizando os dados da API da geocontrol como fonte primária de dados.  
