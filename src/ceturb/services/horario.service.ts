@@ -8,12 +8,12 @@ export class HorariosService {
 
     public async lista_horario ( linha: number ) {
         let newUrl = this.urlHorario + '/' + linha;
-        return await request.get( newUrl, { json: true } );
+        return request.get( newUrl, { json: true } );
     }
 
     public async lista_horarioObs ( linha: number ) {
         let newUrl = this.urlObservacao + '/' + linha
-        return await request.get( newUrl, { json: true } );
+        return request.get( newUrl, { json: true } );
     }
 }
 
