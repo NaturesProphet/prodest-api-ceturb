@@ -31,7 +31,6 @@ defineFeature( feature, test => {
   } ) => {
     given( "que existam pontos de parada registrados.", async () => {
       PontoService.prototype.retornar_pontos = jest.fn().mockImplementationOnce( () => {
-        console.log( 'Mock da linha 34' );
 
         let obj1 = {
           "id": 5281,
@@ -90,7 +89,6 @@ defineFeature( feature, test => {
 
     given( "não existem pontos registrados", async () => {
       PontoService.prototype.retornar_pontos = jest.fn().mockImplementationOnce( () => {
-        console.log( 'Mock da linha 51' );
         return new InformationNotFound( "nenhum registro encontrado" );
       } );
       resposta = await request( app.getHttpServer() ).get( "/pontos" );
