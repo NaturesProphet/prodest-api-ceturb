@@ -10,6 +10,7 @@ jest.mock( "../src/app.module" );
 
 
 let linhas = [];
+let resposta: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -28,22 +29,19 @@ defineFeature( feature, test => {
     when,
     then
   } ) => {
-    given( "Eu quero saber as informações das linhas registrados", () => {
-      request( app.getHttpServer() )
-        .get( "/linhas" )
-        .expect( 200 );
+    given( "Eu quero saber as informações das linhas registrados", async () => {
+      resposta = await request( app.getHttpServer() ).get( '/linhas' );
     } );
 
     when( "eu pesquisar", async () => {
-      let requisicao = await request( app.getHttpServer() ).get( "/linhas" );
-      linhas = JSON.parse( JSON.stringify( requisicao.body ) );
+      //busca ja feita acima
     } );
 
     then( "retorna as linhas cadastradas", () => {
+      linhas = JSON.parse( JSON.stringify( resposta.body ) );
       expect( linhas.length ).toBeGreaterThan( 0 );
     } );
   } );
-
 
 
   test( "Não existem linhas registradas", ( {
@@ -56,23 +54,19 @@ defineFeature( feature, test => {
 
     given( "não há linhas registradas", async () => {
       LinhasService.prototype.retornar_linhas = jest.fn().mockImplementationOnce( () => {
-        throw new InformationNotFound( "nenhum registro encontrado" );
+        return new InformationNotFound( "nenhum registro encontrado" );
       } );
-      let consulta = await request( app.getHttpServer() ).get( "/linhas" );
-      expect( consulta.status ).toBe( 204 );
+      resposta = await request( app.getHttpServer() ).get( "/linhas" );
+      expect( resposta.body.status ).toBe( 204 );
     } );
 
 
     when( "eu pesquisar", async () => {
-      let requisicao = await request( app.getHttpServer() ).get( "/linhas" );
+      //pesquisa ja feita acima
     } );
 
     then( "retorna uma mensagem informando que não há registros", async () => {
-      LinhasService.prototype.retornar_linhas = jest.fn().mockImplementationOnce( () => {
-        throw new InformationNotFound( "nenhum registro encontrado" );
-      } );
-      let consulta = await request( app.getHttpServer() ).get( "/linhas" );
-      expect( consulta.status ).toBe( 204 );
+      expect( resposta.body.message ).toBe( "nenhum registro encontrado" );
     } );
   } );
 

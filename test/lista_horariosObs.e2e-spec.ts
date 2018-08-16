@@ -15,6 +15,7 @@ defineFeature( feature, test => {
   let module: TestingModule;
   let app: INestApplication;
   let linha;
+  let resposta: any;
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
@@ -56,20 +57,15 @@ defineFeature( feature, test => {
   } ) => {
 
     given( "Eu quero saber as informações adicionais sobre horarios de uma linha", () => {
-      request( app.getHttpServer() )
-        .get( "/horarios/obs/0" )
-        .expect( 204 );
+      linha = 0; //propositalmente errado para forçar o cenario de erro
     } );
 
     when( "eu pesquisar as observações do horário da linha", async () => {
-      linha = 500;
-      let requisicao = await request( app.getHttpServer() ).get( "/horarios/obs/" + linha );
-      horarios = JSON.parse( JSON.stringify( requisicao.body ) );
+      resposta = await request( app.getHttpServer() ).get( `/horarios/obs/${linha}` );
     } );
 
     then( "retornará uma mensagem informando que não há registros", async () => {
-      let resposta = await request( app.getHttpServer() ).get( "/horarios/obs/0" );
-      expect( resposta.status ).toBe( 204 );
+      expect( resposta.body.message ).toBe( "Observações não encontradas" );
 
     } );
   } );

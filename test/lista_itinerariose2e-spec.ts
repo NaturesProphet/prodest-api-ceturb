@@ -27,18 +27,16 @@ defineFeature( feature, test => {
 
   test( "Existem itinerários registrados", ( { given, when, then } ) => {
 
-    given( "Eu quero saber as informações dos itinerários registrados", () => {
-      request( app.getHttpServer() )
-        .get( "/itinerarios" )
-        .expect( 200 );
+    given( "Eu quero saber as informações dos itinerários registrados", async () => {
+      resposta = await request( app.getHttpServer() ).get( `/itinerarios` );
     } );
 
     when( "Eu pesquisar os itinerários", async () => {
-      let requisicao = await request( app.getHttpServer() ).get( "/itinerarios" );
-      itinerarios = JSON.parse( JSON.stringify( requisicao.body ) );
+      //pesquisa ja feita acima
     } );
 
     then( "retorna os itinerários cadastrados", () => {
+      itinerarios = JSON.parse( JSON.stringify( resposta.body ) );
       expect( itinerarios.length ).toBeGreaterThan( 0 );
     } );
   } );
@@ -49,18 +47,17 @@ defineFeature( feature, test => {
     given( "Eu quero saber as informações dos itinerários registrados", async () => {
 
       ItinerariosService.prototype.lista_itinerario = jest.fn().mockImplementationOnce( () => {
-        throw new InformationNotFound( "nenhum registro encontrado" );
+        return new InformationNotFound( "nenhum registro encontrado" );
       } );
       resposta = await request( app.getHttpServer() ).get( '/itinerarios' );
     } );
 
     when( "Eu pesquisar os itinerários", async () => {
-      let consulta = await request( app.getHttpServer() ).get( "/itinerarios" );
-      expect( consulta.status ).toBe( 200 || 204 );
+      //busca ja feita acima
     } );
 
     then( "retorna uma mensagem informando que não há informações disponíveis", () => {
-      expect( resposta.status ).toBe( 204 );
+      expect( resposta.body.message ).toBe( "nenhum registro encontrado" );
     } );
   } );
 

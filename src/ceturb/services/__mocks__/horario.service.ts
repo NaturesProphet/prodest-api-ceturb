@@ -44,12 +44,12 @@ export class HorariosService {
                 "Dt_Inicio": "21/08/2016"
             }
             return [ obj1, obj2, obj3 ];
-        } else throw new InformationNotFound( "Horarios não encontrados" );
+        } else return new InformationNotFound( "Horarios não encontrados" );
     }
 
     public async lista_horarioObs ( linha: number ) {
         if ( linha > 0 ) {
             return [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ]
-        } else throw new InformationNotFound( "Observações não encontradas" );
+        } else return new InformationNotFound( "Observações não encontradas" );
     }
 }

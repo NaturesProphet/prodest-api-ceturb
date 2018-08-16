@@ -8,9 +8,10 @@ import { AppModule } from "../src/app.module";
 import { AgenciasService } from "../src/ceturb/services/agencia.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
-jest.mock( "../src/ceturb/services/agencia.service" );
+//jest.mock( "../src/ceturb/services/agencia.service" );
 
 let agencias: any;
+let resposta: any;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -29,10 +30,9 @@ defineFeature( feature, test => {
     when,
     then
   } ) => {
-    given( "Eu quero saber as informações das agencias públicas de transporte", () => {
-      request( app.getHttpServer() )
-        .get( "/agencias" )
-        .expect( 200 );
+    given( "Eu quero saber as informações das agencias públicas de transporte", async () => {
+      let resposta = await request( app.getHttpServer() ).get( "/agencias" );
+      expect( resposta.status ).toBe( 200 );
     } );
 
     when( "eu pesquisar", async () => {
@@ -41,42 +41,31 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo as informações", () => {
-      expect( agencias.length ).toBeGreaterThan( 0 );
+      expect( agencias.agency_id ).toBe( 1 );
     } );
   } );
 
 
   test( 'Não existem agencias registradas', ( { given, when, then, pending } ) => {
-    given( 'Eu quero saber as informações das agencias públicas de transporte', () => {
-      request( app.getHttpServer() )
-        .get( "/agencias" )
-        .expect( 204 );
+    given( 'Eu quero saber as informações das agencias públicas de transporte', async () => {
+      AgenciasService.prototype.listar_agencias = jest.fn()
+        .mockImplementationOnce( () => {
+          return new InformationNotFound( "Não há registros" );
+        } );
+      resposta = await request( app.getHttpServer() ).get( "/agencias" );
     } );
 
     given( 'Não há informações sobre essas', () => {
-      AgenciasService.prototype.listar_agencias = jest.fn()
-        .mockImplementationOnce( () => {
-          return HttpStatus.NO_CONTENT;
-        } );
-      request( app.getHttpServer() )
-        .get( "/agencias" )
-        .expect( 204 );
+      expect( resposta.body.status ).toBe( 204 );
     } );
 
 
     when( 'eu pesquisar', async () => {
-
-      AgenciasService.prototype.listar_agencias = jest.fn()
-        .mockImplementationOnce( () => {
-          throw new InformationNotFound( "Agencia Não Encontrada" );
-        } );
-
-      let requisicao = await request( app.getHttpServer() ).get( "/agencias" );
-      agencias = requisicao.status;
+      //pesquisa ja foi executada acima e armazenada em 'resposta'
     } );
 
     then( 'recebo uma mensagem informando que não há agencias', () => {
-      expect( agencias ).toBe( 204 );
+      expect( resposta.body.message ).toBe( "Não há registros" );
     } );
   } );
 
