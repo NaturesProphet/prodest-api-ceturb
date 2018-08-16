@@ -7,7 +7,7 @@ export class LinhasService {
 
     public async retornar_linhas () {
 
-        return await request.get( this.url, { json: true } );
+        return request.get( this.url, { json: true } );
 
     }
 }
