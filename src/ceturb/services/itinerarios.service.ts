@@ -7,12 +7,12 @@ export class ItinerariosService {
     private readonly urlCeturb: string = "http://api.ceturb.es.gov.br/onibus/api/BuscaItinerarios";
 
     public async lista_itinerario () {
-        return await request.get( this.urlGeoControl, { json: true } );
+        return request.get( this.urlGeoControl, { json: true } );
     }
 
     public async busca_itinerario ( linha: number ) {
         let newUrl = this.urlCeturb + '/' + linha;
-        return await request.get( newUrl, { json: true } );
+        return request.get( newUrl, { json: true } );
     }
 }
 
