@@ -48,8 +48,16 @@ describe( 'LinhasService', () => {
     ItinerariosService.prototype.lista_itinerario = jest
       .fn()
       .mockImplementationOnce( () => {
-        let data = [ { "teste": "teste" }, { "teste": "teste" } ];
-        return data;
+        let obj1 = {
+          "Linha": "0500",
+          "Sentido": "I",
+          "Sequencia": 1,
+          "Tipo": "D",
+          "Desc_Via": "T. VILA VELHA",
+          "Descricao_Linha": "T. VILA VELHA / T. ITACIBÁ VIA 3ª PONTE",
+          "Mensagem": "Processamento sem Erro",
+        }
+        return [ obj1 ];
       } );
 
     let itinerarios = [];
