@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PontoItinerarioService } from '../services/pontos_x_itinerarios.service';
 import { PontoItinerario } from '../models/pontoItinerario.entity';
@@ -21,11 +21,15 @@ export class PontosItinerariosController {
         type: PontoItinerario,
     } )
     @ApiResponse( { status: 204, description: 'Dados não encontrados' } )
-    async retornar_pontosItinerarios () {
+    async retornar_pontosItinerarios ( @Res() res ) {
         try {
-            return await this.service.retornar_pontosItinerarios();
+            res
+                .status( HttpStatus.OK )
+                .send( await this.service.retornar_pontosItinerarios() );
         } catch ( error ) {
-            throw new InformationNotFound( 'Dados não encontrados' );
+            res
+                .status( HttpStatus.NO_CONTENT )
+                .send( new InformationNotFound( 'Dados não encontrados' ) );
         }
     }
 }

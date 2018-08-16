@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { HorariosService } from '../services/horario.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
@@ -11,27 +11,36 @@ export class HorariosController {
 
     @Get( ':linha' )
     @ApiOperation( { title: 'lista as linhas existentes' } )
-    @ApiResponse( { status: 200, description: 'Found.' } )
-    @ApiResponse( { status: 204, description: 'No content.' } )
+    @ApiResponse( { status: 200, description: 'Horarios encontrados' } )
+    @ApiResponse( { status: 204, description: 'Horários não encontrados' } )
 
-    public async listar ( @Param( 'linha' ) linha ) {
+    public async listar ( @Param( 'linha' ) linha, @Res() res ) {
         try {
-            return await this.service.lista_horario( linha );
+            res
+                .status( HttpStatus.OK )
+                .send( await this.service.lista_horario( linha ) );
         } catch ( err ) {
-            throw new InformationNotFound( "Horario não encontrado" );
+            res
+                .status( HttpStatus.NO_CONTENT )
+                .send( new InformationNotFound( "Horario não encontrado" ) );
         }
     }
 
+
     @Get( '/obs/:linha' )
     @ApiOperation( { title: 'lista as linhas existentes' } )
-    @ApiResponse( { status: 200, description: 'Found.' } )
-    @ApiResponse( { status: 404, description: 'Not found.' } )
+    @ApiResponse( { status: 200, description: 'linhas encontradas' } )
+    @ApiResponse( { status: 204, description: 'Linhas não encontradas' } )
 
-    public async listarObs ( @Param( 'linha' ) linha ) {
+    public async listarObs ( @Param( 'linha' ) linha, @Res() res ) {
         try {
-            return await this.service.lista_horarioObs( linha );
+            res
+                .status( HttpStatus.OK )
+                .send( await this.service.lista_horarioObs( linha ) );
         } catch ( err ) {
-            throw new InformationNotFound( "Observações não encontradas" );
+            res
+                .status( HttpStatus.NO_CONTENT )
+                .send( new InformationNotFound( "Observações não encontradas" ) );
         }
     }
 }

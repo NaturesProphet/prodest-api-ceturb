@@ -13,11 +13,14 @@ export class AgenciaController {
     @ApiOperation( { title: 'lista as agencias existentes' } )
     @ApiResponse( { status: 200, description: 'Agencia Encontrada' } )
     @ApiResponse( { status: 204, description: 'Agencia Não Encontrada' } )
-    public async listar () {
+    public async listar ( @Res() res ) {
         try {
-            return await this.service.listar_agencias();
+            res
+                .status( HttpStatus.OK )
+                .send( await this.service.listar_agencias() );
         } catch ( err ) {
-            throw new InformationNotFound( "Agencia Não Encontrada" );
+            res.status( HttpStatus.NO_CONTENT )
+                .send( new InformationNotFound( "Agencia Não Encontrada" ) );
         }
     }
 }
