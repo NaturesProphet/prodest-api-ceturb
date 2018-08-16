@@ -8,7 +8,7 @@ export class PontoItinerarioService {
 
   public async retornar_pontosItinerarios () {
 
-    return await request.get( this.url, { json: true } );
+    return request.get( this.url, { json: true } );
 
   }
 }
