@@ -13,10 +13,10 @@ export class PontoItinerario {
     embarque: boolean,
     desembarque: boolean,
   ) {
-    itinerarioId = itinerarioId;
-    ordem = ordem;
-    pontoDeParadaId = pontoDeParadaId;
-    embarque = embarque;
-    desembarque = desembarque;
+    this.itinerarioId = itinerarioId;
+    this.ordem = ordem;
+    this.pontoDeParadaId = pontoDeParadaId;
+    this.embarque = embarque;
+    this.desembarque = desembarque;
   }
 }
