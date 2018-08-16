@@ -7,7 +7,7 @@ export class PontoService {
 
   public async retornar_pontos () {
 
-    return await request.get( this.url, { json: true } );
+    return request.get( this.url, { json: true } );
 
   }
 }
