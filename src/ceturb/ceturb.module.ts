@@ -15,7 +15,8 @@ import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
 import { CacheMiddleware } from "./common/middleware/cache.middleware";
-
+import * as apicache from 'apicache';
+let cache = apicache.middleware;
 
 @Module( {
   imports: [ HttpModule ],
@@ -28,7 +29,7 @@ import { CacheMiddleware } from "./common/middleware/cache.middleware";
 export class CeturbModule implements NestModule {
   configure ( consumer: MiddlewareConsumer ) {
     consumer
-      .apply( CacheMiddleware )
+      .apply( cache( '5 minutes' ) )
       .forRoutes( AgenciaController );
   }
 }
