@@ -23,6 +23,8 @@
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
     "@nestjs/swagger": "^2.2.0",
+    "@types/apicache": "^1.2.0",
+    "apicache": "^1.2.3",
     "fastify-formbody": "^2.0.0",
     "jest-cucumber": "^1.0.7",
     "reflect-metadata": "^0.1.12",

@@ -1,4 +1,4 @@
-import { Module, HttpModule } from "@nestjs/common";
+import { Module, HttpModule, NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { PontosController } from './controllers/pontos.controller';
 import { LinhasController } from './controllers/linhas.controller';
 import { PontoService } from "./services/ponto.service";
@@ -14,14 +14,21 @@ import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service"
 import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
+import { CacheMiddleware } from "./common/middleware/cache.middleware";
 
 
 @Module( {
   imports: [ HttpModule ],
-  controllers: [ PontosController, LinhasController, ViagensController, 
-    ItinerariosController, AgenciaController, PontosItinerariosController, 
-    HorariosController, DefaultController],
-  providers: [ PontoService, LinhasService, ViagensService, ItinerariosService, 
+  controllers: [ PontosController, LinhasController, ViagensController,
+    ItinerariosController, AgenciaController, PontosItinerariosController,
+    HorariosController, DefaultController ],
+  providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
     AgenciasService, PontoItinerarioService, HorariosService ]
 } )
-export class CeturbModule { }
+export class CeturbModule implements NestModule {
+  configure ( consumer: MiddlewareConsumer ) {
+    consumer
+      .apply( CacheMiddleware )
+      .forRoutes( AgenciaController );
+  }
+}
