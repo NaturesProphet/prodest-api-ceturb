@@ -15,7 +15,6 @@ export class AgenciaController {
     @ApiResponse( { status: 204, description: 'Agencia Não Encontrada' } )
     public async listar ( @Res() res ) {
         try {
-            console.log( 'passei' );
             res
                 .status( HttpStatus.OK )
                 .send( await this.service.listar_agencias() );

@@ -14,7 +14,6 @@ import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service"
 import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
-import { CacheMiddleware } from "./common/middleware/cache.middleware";
 import * as apicache from 'apicache';
 let cache = apicache.middleware;
 
@@ -29,7 +28,22 @@ let cache = apicache.middleware;
 export class CeturbModule implements NestModule {
   configure ( consumer: MiddlewareConsumer ) {
     consumer
-      .apply( cache( '5 minutes' ) )
-      .forRoutes( AgenciaController );
+      .apply( cache( '3 hours' ) )
+      .forRoutes( PontosController );
+    consumer
+      .apply( cache( '3 hours' ) )
+      .forRoutes( ItinerariosController );
+    consumer
+      .apply( cache( '3 hours' ) )
+      .forRoutes( ViagensController );
+    consumer
+      .apply( cache( '3 hours' ) )
+      .forRoutes( LinhasController );
+    consumer
+      .apply( cache( '3 hours' ) )
+      .forRoutes( PontosItinerariosController );
+    consumer
+      .apply( cache( '10 seconds' ) )
+      .forRoutes( HorariosController );
   }
 }
