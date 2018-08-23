@@ -17,16 +17,20 @@
     "webpack": "webpack --config webpack.config.js",
     "commit": "git-cz",
     "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
-    "release": "standard-version"
+    "release": "standard-version",
+    "redis": "docker run -d -p 6379:6379 redis",
+    "stopdocker": "docker stop $(docker ps -q -a) && docker rm $(docker ps -q -a)"
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
     "@nestjs/swagger": "^2.2.0",
     "@types/apicache": "^1.2.0",
+    "@types/redis": "^2.8.6",
     "apicache": "^1.2.3",
     "fastify-formbody": "^2.0.0",
     "jest-cucumber": "^1.0.7",
+    "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",

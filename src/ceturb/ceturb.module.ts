@@ -1,4 +1,4 @@
-import { Module, HttpModule, NestModule, MiddlewareConsumer } from "@nestjs/common";
+import { Module, HttpModule, NestModule, MiddlewareConsumer, ParseIntPipe } from "@nestjs/common";
 import { PontosController } from './controllers/pontos.controller';
 import { LinhasController } from './controllers/linhas.controller';
 import { PontoService } from "./services/ponto.service";
@@ -15,7 +15,23 @@ import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
 import * as apicache from 'apicache';
-let cache = apicache.middleware;
+import * as redis from 'redis';
+
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$ VARIÁVEIS DE AMBIENTE  $$$$$$$$$$$$$$$
+$$$$$$$ exemplos: $$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$ export VARIAVEL="VALOR" $$$$$$$$$$$$$$
+$$$$$$$ export REDIS_HOST="127.0.0.1" $$$$$$$$
+$$$$$$$ export REDIS_PORT="6379" $$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+
+let RedisHost: string = process.env.REDIS_HOST || '127.0.0.1';
+let RedisPort: number = parseInt( process.env.REDIS_PORT ) || 6379;
+
+let client = redis.createClient( RedisPort, RedisHost );
+
+
+let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
 
 @Module( {
   imports: [ HttpModule ],
@@ -28,22 +44,22 @@ let cache = apicache.middleware;
 export class CeturbModule implements NestModule {
   configure ( consumer: MiddlewareConsumer ) {
     consumer
-      .apply( cache( '3 hours' ) )
+      .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( PontosController );
     consumer
-      .apply( cache( '3 hours' ) )
+      .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ItinerariosController );
     consumer
-      .apply( cache( '3 hours' ) )
+      .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ViagensController );
     consumer
-      .apply( cache( '3 hours' ) )
+      .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( LinhasController );
     consumer
-      .apply( cache( '3 hours' ) )
+      .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( PontosItinerariosController );
     consumer
-      .apply( cache( '10 seconds' ) )
+      .apply( cacheWithRedis( '10 seconds' ) )
       .forRoutes( HorariosController );
   }
 }
