@@ -3,6 +3,20 @@
 
 # API-CETURB
 
+## Antes de rodar
+Essa API está configurada para fazer cache das requisições usando o serviço do <a href="https://redis.io/">redis</a>, portanto, é necessário subir o servidor do redis localmente ou apontar um endereço e porta de um servidor válido através das variaveis de ambiente.  
+Para simplesmente subir um redis local (ambiente de teste), você pode rodar esse script:  
+```bash
+npm run redis
+```
+Isso irá baixar uma imagem docker do redis e executa-la localmente.  
+  
+Para apontar um servidor dedicado (ambiente de produção) basta definir as variaveis de ambiente como nesse exemplo:  
+```bash
+export REDIS_HOST="127.0.0.1"
+export REDIS_PORT="6379"
+```
+
 ## Rotas
 /docs - Abre o swagger <br><br>
 /itinerarios - retorna todos os itinerarios cadastrados <br><br>
