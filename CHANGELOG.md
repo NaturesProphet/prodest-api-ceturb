@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.5.0...v1.5.1) (2018-08-24)
+
+
+### Bug Fixes
+
+* **Cucumber:** testes e2e atualizados para a nova funcionalidade de cache com Redis ([62dfd99](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/62dfd99))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2018-08-23)
 
