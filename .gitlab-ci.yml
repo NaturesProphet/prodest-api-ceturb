@@ -1,34 +1,38 @@
-image: node:8.11.2
-   
 stages:
   - build
   - test
   - quality
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+  - sonar-scanner-3.1.0.1141-linux/
+
+
 build_job:
+  image: node:8.11.2
   stage: build
   script:
-#    - export NODE_PATH=/usr/bin/tsc:/usr/bin/tsserver
      - npm install
      
 
 test_job:
+  image: node:8.11.2
   stage: test
   script:
      - npm install
      - npm run test
      - npm run test:e2e
+     - npm run test:cov
    
 quality_job:
-    stage: quality
-    services:
-        - primetoninc/jdk:1.7
-    script:     
-     - npm install
-     - npm run test:cov
-     - wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip
-     - apt-get update
-     - apt-get install unzip
-     - apt-get install -y jq
-     - unzip sonar-scanner-cli-3.1.0.1141-linux.zip
-     - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
+  image: node:8.11.2
+  stage: quality
+  services:
+      - primetoninc/jdk:1.7
+  dependencies:
+      - test_job    
+  script:     
+   - test -d "sonar-scanner-3.1.0.1141-linux" && echo "usando cache" || ( wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip && apt-get update && apt-get install unzip && apt-get install -y jq && unzip sonar-scanner-cli-3.1.0.1141-linux.zip )
+   - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
