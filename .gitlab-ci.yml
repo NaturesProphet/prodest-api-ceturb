@@ -24,7 +24,6 @@ test_job:
      - npm install
      - npm run test
      - npm run test:e2e
-     - npm run test:cov
    
 quality_job:
   image: node:8.11.2
@@ -35,4 +34,6 @@ quality_job:
       - test_job    
   script:     
    - test -d "sonar-scanner-3.1.0.1141-linux" && echo "usando cache" || ( wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip && apt-get update && apt-get install unzip && apt-get install -y jq && unzip sonar-scanner-cli-3.1.0.1141-linux.zip )
+   - npm install
+   - npm run test:cov
    - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
