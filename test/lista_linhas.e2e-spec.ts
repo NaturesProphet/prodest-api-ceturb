@@ -2,11 +2,12 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaLinhas.feature" );
 import request from "supertest";
-import { LinhasService } from '../src/ceturb/services/__mocks__/linhas.service';
+import { LinhasService } from '../src/ceturb/services/linhas.service';
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/linhas.service' );
 
 
 let linhas = [];

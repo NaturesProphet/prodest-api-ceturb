@@ -5,8 +5,8 @@ import request from "supertest";
 import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
-import { ItinerariosService } from '../src/ceturb/services/__mocks__/itinerarios.service';
-// jest.mock( '../src/ceturb/services/itinerarios.service' );
+import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
+jest.mock( '../src/ceturb/services/itinerarios.service' );
 jest.mock( "../src/app.module" );
 
 

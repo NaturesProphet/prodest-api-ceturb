@@ -41,24 +41,41 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
     AgenciasService, PontoItinerarioService, HorariosService ]
 } )
+
+
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$ DETALHE IMPORTANTE $$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$ Ao fazer alterações na API usando o nodemon, sete os tempos $$$$
+$$$ de cache para um valor pequeno, como 3 segundos, senão      $$$$
+$$$ você vai passar raiva até lembrar do cache kkkkkkkkkkkkkkk  $$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+
+
 export class CeturbModule implements NestModule {
   configure ( consumer: MiddlewareConsumer ) {
     consumer
       .apply( cacheWithRedis( '3 hours' ) )
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .forRoutes( PontosController );
     consumer
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ItinerariosController );
     consumer
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ViagensController );
     consumer
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
-      .forRoutes( LinhasController );
+    //.forRoutes( LinhasController );
     consumer
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( PontosItinerariosController );
     consumer
+      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '10 seconds' ) )
       .forRoutes( HorariosController );
   }

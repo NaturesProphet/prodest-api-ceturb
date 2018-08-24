@@ -8,6 +8,7 @@ import { AppModule } from '../src/app.module';
 import { PontoItinerarioService } from '../src/ceturb/services/pontos_x_itinerarios.service';
 import { InformationNotFound } from '../src/ceturb/models/exception/InformationNotFound';
 jest.mock( '../src/ceturb/services/pontos_x_itinerarios.service' );
+jest.mock( "../src/app.module" );
 
 
 let pontosItinerarios: any;

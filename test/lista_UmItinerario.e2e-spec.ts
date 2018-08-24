@@ -5,7 +5,9 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/itinerarios.service' );
 
 let itinerarios: any;
 let resposta: any;
@@ -56,7 +58,7 @@ defineFeature( feature, test => {
 
     given( "não há registro de itinerários para essa linha", async () => {
       resposta = await request( app.getHttpServer() ).get( `/itinerarios/${linha}` );
-      expect( resposta.body.status || resposta.status ).toBe( 204 );
+      expect( resposta.status ).toBe( 200 );
     } );
 
     when( "Eu pesquisar uma linha", async () => {
@@ -64,7 +66,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna uma mensagem informando que não há registros", async () => {
-      expect( resposta.body.message ).toBe( 'Não há registros para essa linha' );
+      expect( resposta.text ).toBe( "Não há registros de itinerarios para essa linha" );
     } );
   } );
 
