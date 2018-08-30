@@ -56,26 +56,20 @@ export class CeturbModule implements NestModule {
   configure ( consumer: MiddlewareConsumer ) {
     consumer
       .apply( cacheWithRedis( '3 hours' ) )
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .forRoutes( PontosController );
     consumer
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ItinerariosController );
     consumer
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( ViagensController );
     consumer
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
-    //.forRoutes( LinhasController );
+      .forRoutes( LinhasController );
     consumer
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '3 hours' ) )
       .forRoutes( PontosItinerariosController );
     consumer
-      //.apply( cacheWithRedis( '3 seconds' ) )
       .apply( cacheWithRedis( '10 seconds' ) )
       .forRoutes( HorariosController );
   }
