@@ -25,6 +25,7 @@ export REDIS_PORT="6379"
 /horarios/obs/500 - retorna as observações cadastradas da linha 500 <br><br>
 /linhas - retorna as linhas cadastradas <br><br>
 /viagens - retorna as viagens cadastradas <br><br>
+/viagens/7dias - retorna as viagens cadastradas para os próximos 7 dias<br><br>
 /agencias - retorna os dados da empresa responsavel pelo serviço <br><br>
 /pontos - retorna todos os pontos cadastrados <br><br>
 /pontositinerarios - retorna a relação de pontos e itinerarios <br><br>
