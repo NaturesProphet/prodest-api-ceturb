@@ -17,6 +17,5 @@ export class Agencia {
     agency_lang: string = "pt"
 
     @ApiModelProperty()
-    agency_phone: string = "+55 27 3232 4500";
-
+    agency_phone: string = "0800 039 1517";
 }
