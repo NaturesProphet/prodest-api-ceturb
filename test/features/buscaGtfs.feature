@@ -12,4 +12,4 @@ Feature: retornar_gtfs
         Given Eu quero saber as informações dos arquivos GTFS criados
         And Não há informações sobre esses arquivos
         When eu pesquisar
-        Then teste
+        Then recebo uma mensagem informando que não há arquivos

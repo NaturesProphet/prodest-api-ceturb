@@ -63,7 +63,7 @@ defineFeature( feature, test => {
 
 
     when( "eu pesquisar", async () => {
-      //pesquisa ja feita acima
+
     } );
 
     then( "retorna uma mensagem informando que não há registros", async () => {

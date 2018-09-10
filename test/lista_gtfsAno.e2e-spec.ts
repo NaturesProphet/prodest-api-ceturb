@@ -1,6 +1,6 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
-const feature = loadFeature( "./test/features/buscaGtfs.feature" );
+const feature = loadFeature( "./test/features/buscaGtfsAno.feature" );
 import request from "supertest";
 
 import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
@@ -11,6 +11,7 @@ jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let resposta: any;
+let ano: string;
 let gtfs = [];
 
 defineFeature( feature, test => {
@@ -25,40 +26,44 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-  test( "Existem arquivos GTFS registrados", ( {
+  test( "Existem arquivos GTFS registrados de um ano", ( {
     given,
     when,
     then
   } ) => {
 
-    given( "Eu quero saber as informações dos arquivos GTFS criados", async () => {
-        resposta = await request( app.getHttpServer() ).get( `/gtfs` );
+    given( "Eu quero saber as informações dos arquivos GTFS criados de um ano específico", async () => {
+        request( app.getHttpServer() )
+        .get( "/gtfs/2018" )
+        .expect( 200 );
     } );
 
     when( "eu pesquisar", async () => {
-      
+        ano = "2018";
+        let requisicao = await request( app.getHttpServer() ).get( "/gtfs/" + ano );
+        gtfs = requisicao.body
     } );
 
     then( "recebo as informações", () => {
-      gtfs = JSON.parse(JSON.stringify(resposta.body));
       expect( gtfs.length ).toBeGreaterThan( 0 );
     } );
   } );
 
-  test( "Não existem arquivos GTFS registrados", ( {
+  test( "Não existem arquivos GTFS registrados de um ano", ( {
     given,
     when,
     then
   } ) => {
-    given( "Eu quero saber as informações dos arquivos GTFS criados", () => {
+    given( "Eu quero saber as informações dos arquivos GTFS criados de um ano específico", () => {
+
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
         GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
-            return new InformationNotFound( "Não há arquivos registrados" );
+            return new InformationNotFound( "Não há arquivos registrados nesse ano" );
           } );
-          resposta = await request( app.getHttpServer() ).get( '/gtfs' );
-          expect( resposta.status ).toBe( 200 );
+          resposta = await request( app.getHttpServer() ).get( '/gtfs/0' );
+
     } );
 
     when( "eu pesquisar", async () => {
@@ -66,7 +71,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.body.message ).toBe( "Não há arquivos registrados" );
+      expect( resposta.body.message ).toBe( "Não há arquivos registrados nesse ano" );
     } );
   } );
 

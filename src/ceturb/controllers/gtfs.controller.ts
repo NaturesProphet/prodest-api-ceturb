@@ -97,7 +97,7 @@ export class GtfsController {
                 .send( response );
             }
             else{
-                let erro = {message: "Não há arquivos registrados nesse ano, mês, dia"}
+                let erro = {message: "Não há arquivos registrados nesse ano, mês e dia"}
                 res
                     .status( HttpStatus.OK )
                     .send( erro );
