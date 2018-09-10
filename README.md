@@ -16,6 +16,24 @@ Para apontar um servidor dedicado (ambiente de produção) basta definir as vari
 export REDIS_HOST="127.0.0.1"
 export REDIS_PORT="6379"
 ```
+Essa api também possui rotas para usar o <a href="https://www.minio.io/">Minio Client</a>, portando é necessário subir o servidor do Minio localmente, para simplesmente subir um minio local, você pode rodar esse script:
+
+```bash
+npm run minio
+```
+A chave do minio será definida por padrão para 'admin' e a chave secreta para 'admin123'
+
+Para configurar o minio execute o comando
+
+```bash
+npm run config:minio
+```
+
+E para subir dois arquivos automaticamente para realizar testes execute
+
+```bash
+npm run upload:minio
+```
 
 ## Rotas
 /docs - Abre o swagger <br><br>
