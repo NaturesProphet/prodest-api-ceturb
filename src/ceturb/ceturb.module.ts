@@ -14,8 +14,11 @@ import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service"
 import { DefaultController } from "./controllers/default.controller";
 import { HorariosController } from './controllers/horarios.controller';
 import { HorariosService } from './services/horario.service';
+import { EstimativasController } from "./controllers/estimativas.controller";
+import { EstimativasService } from "./services/estimativas.service";
 import * as apicache from 'apicache';
 import * as redis from 'redis';
+
 
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$ VARIÁVEIS DE AMBIENTE  $$$$$$$$$$$$$$$
@@ -37,9 +40,9 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController, AgenciaController, PontosItinerariosController,
-    HorariosController, DefaultController ],
+    HorariosController, EstimativasController, DefaultController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    AgenciasService, PontoItinerarioService, HorariosService ]
+    AgenciasService, PontoItinerarioService, HorariosService, EstimativasService ]
 } )
 
 
