@@ -1,10 +1,11 @@
 import { Controller, Post, Res, Body, HttpStatus } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { AreaService } from '../services/area.service';
 import { Envelope } from '../models/envelope.Dto';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 
 @Controller( 'area' )
+@ApiUseTags( 'Area' )
 export class AreaController {
     constructor( private readonly Service: AreaService ) { }
 

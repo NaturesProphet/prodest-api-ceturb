@@ -77,5 +77,11 @@ export class CeturbModule implements NestModule {
     consumer
       .apply( cacheWithRedis( '10 seconds' ) )
       .forRoutes( HorariosController );
+    consumer
+      .apply( cacheWithRedis( '10 seconds' ) )
+      .forRoutes( EstimativasController );
+    consumer
+      .apply( cacheWithRedis( '3 hours' ) )
+      .forRoutes( AreaController );
   }
 }
