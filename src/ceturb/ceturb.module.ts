@@ -34,11 +34,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
 
 let RedisHost: string = process.env.REDIS_HOST || '127.0.0.1';
 let RedisPort: number = parseInt( process.env.REDIS_PORT ) || 6379;
-
-const MinioKey: string = process.env.MINIO_KEY || 'admin';
-const MinioSecretKey: string = process.env.MINIO_SECRETKEY || 'admin123';
-const MinioAddress: string = process.env.MINIO_ADDRESS || 'http://172.17.0.1:9000';
-
+/*
+const MINIO_KEY: string = process.env.MINIO_KEY || 'admin';
+const MINIO_SECRETKEY: string = process.env.MINIO_SECRETKEY || 'admin123';
+const MINIO_ADDRESS: string = process.env.MINIO_ADDRESS || 'http://172.17.0.1:9000';
+*/
 let client = redis.createClient( RedisPort, RedisHost );
 
 
