@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CalendarioService } from './calendario.service';
-jest.mock( './calendario.service' );
 
 describe( 'CalendarioService', () => {
   let service: CalendarioService;
