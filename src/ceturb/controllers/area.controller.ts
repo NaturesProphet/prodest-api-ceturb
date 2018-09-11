@@ -12,7 +12,11 @@ export class AreaController {
 
     @Post()
     @ApiOperation( {
-        description: "retornar os ids dos pontos de parada dentro da area do mapa especificada",
+        description: "Retorna um array com os ids dos pontos de parada dentro da area do mapa especificada."
+            + "\n" + "O formato da requisição deve estar neste formato::\n  {\n\t"
+            + '"envelope": [ ­40.309548147161195, ­20.282983882640348, ­40.29407716556429, ­20.274791927077008]\n  }\n'
+            + 'a chave "envelope" deve conter um Array de doubles com 4 posições (left, top, right, bottom) '
+            + "representando as coordenadas do retângulo dentro do qual devem estar os pontos de parada",
         title: "Pontos de parada por Area do mapa"
     } )
     @ApiResponse( { status: 200, description: "Pontos encontrados" } )
