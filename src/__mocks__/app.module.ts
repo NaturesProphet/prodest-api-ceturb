@@ -14,17 +14,21 @@ import { PontosController } from "../ceturb/controllers/pontos.controller";
 import { PontosItinerariosController } from "../ceturb/controllers/pontosItinerario.controller";
 import { ItinerariosController } from '../ceturb/controllers/itinerarios.controller';
 import { HorariosController } from '../ceturb/controllers/horarios.controller';
+import { EstimativasController } from "ceturb/controllers/estimativas.controller";
+import { AreaController } from "ceturb/controllers/area.controller";
+import { EstimativasService } from "ceturb/services/estimativas.service";
+import { AreaService } from "ceturb/services/area.service";
 
 @Module( {
   controllers: [
     AgenciaController, LinhasController, ViagensController,
     PontosController, PontosItinerariosController, ItinerariosController,
-    HorariosController
+    HorariosController, EstimativasController, AreaController
   ],
 
   providers: [
     AgenciasService, LinhasService, ViagensService, PontoService,
-    PontoItinerarioService, ItinerariosService, HorariosService,
+    PontoItinerarioService, ItinerariosService, HorariosService, EstimativasService, AreaService
   ]
 
 } )

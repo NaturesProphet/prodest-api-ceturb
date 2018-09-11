@@ -21,7 +21,7 @@ export class AreaController {
     } )
     @ApiResponse( { status: 200, description: "Pontos encontrados" } )
     @ApiResponse( { status: 204, description: "Pontos não encontrados" } )
-    async retornar_estimativas_por_origem_e_linha ( @Res() res, @Body() body: Envelope ) {
+    async retornar_pontos_por_area_do_mapa ( @Res() res, @Body() body: Envelope ) {
         try {
             res
                 .status( HttpStatus.OK )
@@ -34,4 +34,3 @@ export class AreaController {
         }
     }
 }
-
