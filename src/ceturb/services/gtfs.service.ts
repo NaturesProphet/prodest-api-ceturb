@@ -5,9 +5,17 @@ import * as shell from 'shelljs';
 @Injectable()
 export class GtfsService {
     private files: Gtfs[] = [];
-    private readonly minioAddress = 'http://127.0.0.1:9000/gtfs';
+    private readonly MINIO_ADDRESS:string  = process.env.MINIO_ADDRESS || 'http://172.17.0.1:9000';
+    private readonly MINIO_SECRETKEY: string = process.env.MINIO_SECRETKEY || 'admin123';
+    private readonly MINIO_KEY: string = process.env.MINIO_KEY || 'admin';
+    
 
+    
     constructor(){  //Cria array de GTFS que já contem todas as informações
+
+        shell.exec(`./mc config host add minio ${this.MINIO_ADDRESS} ${this.MINIO_KEY} ${this.MINIO_SECRETKEY}`);
+        shell.exec(`./mc policy download minio/gtfs`);
+        
         let out = shell.exec('./mc ls minio/gtfs').stdout;
         let results = out.split("\n");
 
@@ -15,18 +23,23 @@ export class GtfsService {
         
         results.map(line => {
             let result = line.split('-');
-            let split1 = result[2].split(" "); // Separacao do dia e da hora
-            let split2 = result[3].split(" "); // Separacao do tamanho
+            let treatment = result[2].split(" "); // Separacao do dia e da hora
             result[0] = result[0].substring(1); // Retirada do colchetes
-            let url = this.minioAddress + '/' + split2[split2.length-1];  
-            
+                        
+            for(let i=5;i<treatment.length;i++){ //junta todas as partes do nome do arquivo que foram separadas no tratamento acima
+                treatment[4]+=result[i];
+                treatment.splice(i)
+            }
+
+            let url = this.MINIO_ADDRESS + '/' + treatment[4];
+
             let gtfs = {
                 year : result[0],
                 month : result[1],
-                day : split1[0],
-                hour : split1[1],
-                size : split2[split2.length-2],
-                filename : split2[split2.length-1],
+                day : treatment[0],
+                hour : treatment[1],
+                size : treatment[3],
+                filename : treatment[4],
                 url: url
             }
             this.files.push(gtfs);
