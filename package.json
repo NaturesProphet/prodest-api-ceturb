@@ -21,8 +21,7 @@
     "redis": "docker run -d -p 6379:6379 redis",
     "stopdocker": "docker stop $(docker ps -q -a) && docker rm $(docker ps -q -a)",
     "minio": "docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 minio/minio server /data",
-    "config:minio": "./mc config host add minio http://172.17.0.1:9000 admin admin123 && ./mc mb minio/gtfs && ./mc policy download minio/gtfs",
-    "upload:minio": "./mc cp tslint.json README.md minio/gtfs"
+    "config:minio": "./mc config host add minio http://172.17.0.1:9000 admin admin123 && ./mc mb minio/gtfs && ./mc policy download minio/gtfs"
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",
