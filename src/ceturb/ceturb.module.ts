@@ -22,6 +22,8 @@ import * as apicache from 'apicache';
 import * as redis from 'redis';
 import { AreaService } from "./services/area.service";
 import { AreaController } from "./controllers/area.controller";
+import { CalendarioService } from "./services/calendario.service";
+import { CalendarioController } from "./controllers/calendario.controller";
 
 
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -43,9 +45,9 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController, AgenciaController, PontosItinerariosController,
-    HorariosController, EstimativasController, AreaController, GtfsController, DefaultController ],
+    HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController, DefaultController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    AgenciasService, PontoItinerarioService, HorariosService, EstimativasService, AreaService, GtfsService ]
+    AgenciasService, PontoItinerarioService, HorariosService, EstimativasService, AreaService, GtfsService, CalendarioService ]
 } )
 
 

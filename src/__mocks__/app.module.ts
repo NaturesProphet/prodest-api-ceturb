@@ -20,18 +20,20 @@ import { AreaController } from "../ceturb/controllers/area.controller";
 import { EstimativasService } from "../ceturb/services/estimativas.service";
 import { AreaService } from "../ceturb/services/area.service";
 import { GtfsController } from '../ceturb/controllers/gtfs.controller';
+import { CalendarioService } from "../ceturb/services/calendario.service";
+import { CalendarioController } from "../ceturb/controllers/calendario.controller";
 
 @Module( {
   controllers: [
     AgenciaController, LinhasController, ViagensController,
     PontosController, PontosItinerariosController, ItinerariosController,
-    HorariosController, EstimativasController, AreaController, GtfsController
+    HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController
   ],
 
   providers: [
     AgenciasService, LinhasService, ViagensService, PontoService,
     PontoItinerarioService, ItinerariosService, HorariosService, EstimativasService,
-    AreaService, GtfsService
+    AreaService, GtfsService, CalendarioService
 
   ]
 
