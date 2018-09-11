@@ -10,6 +10,6 @@ Feature: retornar_pontos_por_area_do_mapa
 
     Scenario: Não existem pontos na area
         Given Eu quero saber quais são os pontos em uma area do mapa
-        And Não há informações sobre essas
+        And Não há pontos na area designada
         When eu pesquisar
         Then recebo uma mensagem informando que não há pontos dentro da area designada
