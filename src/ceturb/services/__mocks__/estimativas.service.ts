@@ -35,10 +35,8 @@ export class EstimativasService {
             ]
         }
         if ( Params.id != 0 ) {
-            console.log( "OK" )
             return resposta;
         } else {
-            console.log( "caiu" )
             throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
         }
     }
@@ -76,7 +74,9 @@ export class EstimativasService {
                 },
             ]
         }
-        return resposta;
+        if ( body.pontoDeDestinoId != 0 && body.pontoDeOrigemId != 0 )
+            return resposta;
+        else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
     }
 
 

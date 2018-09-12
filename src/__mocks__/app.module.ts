@@ -27,17 +27,16 @@ import { CalendarioController } from "../ceturb/controllers/calendario.controlle
   controllers: [
     AgenciaController, LinhasController, ViagensController,
     PontosController, PontosItinerariosController, ItinerariosController,
-    HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController
+    HorariosController, EstimativasController, AreaController, CalendarioController
   ],
 
   providers: [
     AgenciasService, LinhasService, ViagensService, PontoService,
     PontoItinerarioService, ItinerariosService, HorariosService, EstimativasService,
-    AreaService, GtfsService, CalendarioService
+    AreaService, CalendarioService
 
   ]
 
 } )
 
 export class AppModule { }
-
