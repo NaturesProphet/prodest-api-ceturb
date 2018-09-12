@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GtfsService } from './gtfs.service';
-jest.mock( './horario.service' );
+jest.mock( './gtfs.service' );
 
 describe( 'HorarioService', () => {
   let service: GtfsService;

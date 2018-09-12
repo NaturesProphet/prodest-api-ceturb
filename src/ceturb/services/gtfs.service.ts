@@ -19,27 +19,26 @@ export class GtfsService {
         results.pop(); // Retira a string vazia criada no split
         
         results.map(line => {
-            let result = line.split('-');
-            let treatment = result[2].split(" "); // Separacao do dia e da hora
-            result[0] = result[0].substring(1); // Retirada do colchetes
-                        
-            for(let i=5;i<treatment.length;i++){ //junta todas as partes do nome do arquivo que foram separadas no tratamento acima
-                treatment[4]+=result[i];
-                treatment.splice(i)
-            }
+            let date = line.substring(1,11)
+            let calendar = date.split('-');
 
-            let url = this.minioService.getAddress() + '/' + treatment[4];
+            let hour = line.substring(12,20);
+
+            let result = line.substring(25);
+            let results = result.split(" ");
+            results = results.filter(n=>n);
+
+            let url = this.minioService.getAddress() + '/gtfs/' + results[1];
 
             let gtfs = {
-                year : result[0],
-                month : result[1],
-                day : treatment[0],
-                hour : treatment[1],
-                size : treatment[3],
-                filename : treatment[4],
+                year : calendar[0],
+                month : calendar[1],
+                day : calendar[2],
+                hour : hour,
+                size : results[0],
+                filename : results[1],
                 url: url
             }
-            console.log("nome "+gtfs.filename)
             this.files.push(gtfs);
         });
     }
@@ -50,7 +49,7 @@ export class GtfsService {
     }
 
     public async getByYear(year: String){
-        this.ls();
+        await this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {
@@ -62,7 +61,7 @@ export class GtfsService {
     }
 
     public async getByYearMonth(year: String, month: String){
-        this.ls();
+        await this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {
@@ -74,7 +73,7 @@ export class GtfsService {
     }
 
     public async getByYearMonthDay(year: String, month: String, day: String){
-        this.ls();
+        await this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {
