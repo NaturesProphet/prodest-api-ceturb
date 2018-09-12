@@ -108,6 +108,8 @@ export class EstimativasService {
                 },
             ]
         }
-        return resposta;
+        if ( body.linhaId != 0 && body.pontoDeOrigemId != 0 )
+            return resposta;
+        else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
     }
 }
