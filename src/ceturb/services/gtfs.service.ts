@@ -1,22 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Gtfs } from '../models/gtfs.model.Dto';
-import * as shell from 'shelljs';
+import { MinioService } from './minio.service'
 
 @Injectable()
 export class GtfsService {
     private files: Gtfs[] = [];
-    private readonly MINIO_ADDRESS:string  = process.env.MINIO_ADDRESS || 'http://172.17.0.1:9000';
-    private readonly MINIO_SECRETKEY: string = process.env.MINIO_SECRETKEY || 'admin123';
-    private readonly MINIO_KEY: string = process.env.MINIO_KEY || 'admin';
     
 
-    
-    constructor(){  //Cria array de GTFS que já contem todas as informações
+    constructor(private minioService:MinioService){ //Configura o minio 
+        this.minioService.config();
+    }
 
-        shell.exec(`./mc config host add minio ${this.MINIO_ADDRESS} ${this.MINIO_KEY} ${this.MINIO_SECRETKEY}`);
-        shell.exec(`./mc policy download minio/gtfs`);
-        
-        let out = shell.exec('./mc ls minio/gtfs').stdout;
+    private async ls(){ //Cria array de GTFS que já contem todas as informações
+        this.files = [];
+        let out =  await this.minioService.ls();
         let results = out.split("\n");
 
         results.pop(); // Retira a string vazia criada no split
@@ -31,7 +28,7 @@ export class GtfsService {
                 treatment.splice(i)
             }
 
-            let url = this.MINIO_ADDRESS + '/' + treatment[4];
+            let url = this.minioService.getAddress() + '/' + treatment[4];
 
             let gtfs = {
                 year : result[0],
@@ -42,15 +39,18 @@ export class GtfsService {
                 filename : treatment[4],
                 url: url
             }
+            console.log("nome "+gtfs.filename)
             this.files.push(gtfs);
         });
     }
 
     public async getAll () {
+        this.ls();
         return this.files;
     }
 
     public async getByYear(year: String){
+        this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {
@@ -62,6 +62,7 @@ export class GtfsService {
     }
 
     public async getByYearMonth(year: String, month: String){
+        this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {
@@ -73,6 +74,7 @@ export class GtfsService {
     }
 
     public async getByYearMonthDay(year: String, month: String, day: String){
+        this.ls();
         let files: Gtfs[] = [];
 
         this.files.map(line => {

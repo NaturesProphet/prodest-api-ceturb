@@ -24,6 +24,7 @@ import { AreaService } from "./services/area.service";
 import { AreaController } from "./controllers/area.controller";
 import { CalendarioService } from "./services/calendario.service";
 import { CalendarioController } from "./controllers/calendario.controller";
+import { MinioService } from './services/minio.service'
 
 
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -47,7 +48,7 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
     ItinerariosController, AgenciaController, PontosItinerariosController,
     HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController, DefaultController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    AgenciasService, PontoItinerarioService, HorariosService, EstimativasService, AreaService, GtfsService, CalendarioService ]
+    AgenciasService, PontoItinerarioService, HorariosService, EstimativasService, AreaService, GtfsService, MinioService, CalendarioService ]
 } )
 
 
