@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 import * as request from 'request-promise';
 import { OrigemEDestino } from '../models/origemEDestino.Dto';
 import { OrigemELinha } from '../models/origemELinha.Dto';
@@ -28,12 +28,14 @@ export class EstimativasService {
      * Método que busca estimativas por pontos de origem e destino na API da geocontrol
      * @param body corpo da requisição contendo ids do ponto de origem e destino
      */
-    async ObterPorOrigemEDestino ( body: OrigemEDestino ) {
-        console.log( body )
+    async ObterPorOrigemEDestino ( @Param() params ) {
         const options = {
             method: 'POST',
             uri: `${this.url}/obterEstimativasPorOrigemEDestino`,
-            body: body,
+            body: {
+                pontoDeOrigemId: parseInt( params.id_origem ),
+                pontoDeDestinoId: parseInt( params.id_destino )
+            },
             json: true
         };
         return request( options );
