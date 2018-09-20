@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.4"></a>
+## [1.6.4](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.3...v1.6.4) (2018-09-20)
+
+
+### Bug Fixes
+
+* **area:** busca de pontos em area refatorada para GET ([d4cfc99](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/d4cfc99))
+
+
+
 <a name="1.6.3"></a>
 ## [1.6.3](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.2...v1.6.3) (2018-09-20)
 
