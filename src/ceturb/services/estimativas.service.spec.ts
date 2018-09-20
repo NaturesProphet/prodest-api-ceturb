@@ -1,8 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstimativasService } from './estimativas.service';
-import { OrigemEDestino } from '../models/origemEDestino.Dto';
-import { OrigemELinha } from '../models/origemELinha.Dto';
 jest.mock( './estimativas.service' );
+
+class parametroOrigemEDestino {
+  id_origem: number;
+  id_destino: number;
+}
+
+class parametroOrigemELinha {
+  id_origem: number;
+  id_linha: number;
+}
 
 describe( 'EstimativasService', () => {
   let service: EstimativasService;
@@ -20,19 +28,19 @@ describe( 'EstimativasService', () => {
 
 
   it( 'O retorno de estimativas por origem e destino devem ser maior que 0', async () => {
-    let query = new OrigemEDestino();
-    query.pontoDeDestinoId = 1;
-    query.pontoDeOrigemId = 1;
-    let consulta = await service.ObterPorOrigemEDestino( query );
+    var param = new parametroOrigemEDestino();
+    param.id_destino = 1;
+    param.id_origem = 1;
+    let consulta = await service.ObterPorOrigemEDestino( param );
     expect( consulta.estimativas.length ).toBeGreaterThan( 0 );
   } );
 
 
   it( 'O retorno de estimativas por origem e Linha devem ser maior que 0', async () => {
-    let query = new OrigemELinha();
-    query.linhaId = 1;
-    query.pontoDeOrigemId = 1;
-    let consulta = await service.ObterPorOrigemELinha( query );
+    var param = new parametroOrigemELinha();
+    param.id_linha = 1;
+    param.id_origem = 1;
+    let consulta = await service.ObterPorOrigemELinha( param );
     expect( consulta.estimativas.length ).toBeGreaterThan( 0 );
   } );
 

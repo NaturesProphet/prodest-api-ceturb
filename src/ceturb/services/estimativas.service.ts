@@ -1,7 +1,5 @@
 import { Injectable, Param } from '@nestjs/common';
 import * as request from 'request-promise';
-import { OrigemEDestino } from '../models/origemEDestino.Dto';
-import { OrigemELinha } from '../models/origemELinha.Dto';
 
 @Injectable()
 export class EstimativasService {
@@ -26,7 +24,7 @@ export class EstimativasService {
 
     /**
      * Método que busca estimativas por pontos de origem e destino na API da geocontrol
-     * @param body corpo da requisição contendo ids do ponto de origem e destino
+     * @param params parâmetros da requisição contendo ids do ponto de origem e destino
      */
     async ObterPorOrigemEDestino ( @Param() params ) {
         const options = {
@@ -45,7 +43,7 @@ export class EstimativasService {
 
     /**
          * Método que busca estimativas por pontos de origem e destino na API da geocontrol
-         * @param body corpo da requisição contendo ids do ponto de origem e destino
+         * @param params parâmetros da requisição contendo ids do ponto de origem e destino
          */
     async ObterPorOrigemELinha ( @Param() params ) {
         const options = {
@@ -59,5 +57,4 @@ export class EstimativasService {
         };
         return request( options );
     }
-
 }

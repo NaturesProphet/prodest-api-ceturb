@@ -6,15 +6,14 @@ import request from "supertest";
 import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { EstimativasService } from "../src/ceturb/services/estimativas.service";
-import { OrigemEDestino } from "../src/ceturb/models/origemEDestino.Dto";
-import { OrigemELinha } from "../src/ceturb/models/origemELinha.Dto";
 jest.mock( "../src/app.module" );
 jest.mock( "../src/ceturb/services/estimativas.service" );
 
 
 let estimativas: any;
 let resposta: any;
-let query: OrigemELinha = new OrigemELinha();
+let id_origem: number;
+let id_linha: number;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -34,13 +33,13 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as estimativas de uma linha em um ponto", async () => {
-      query.linhaId = 726;
-      query.pontoDeOrigemId = 562;
+      id_linha = 726;
+      id_origem = 562;
     } );
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .post( `/estimativas/origemELinha` ).send( query );
+        .get( `/estimativas/origemELinha/${id_origem}/${id_linha}` );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -58,8 +57,8 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as estimativas de uma linha em um ponto", async () => {
-      query.linhaId = 0;
-      query.pontoDeOrigemId = 0
+      id_linha = 0;
+      id_origem = 0;
     } );
 
     given( "o ponto ou a linha que informei são inválidos ou não existem", async () => {
@@ -68,7 +67,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .post( `/estimativas/origemELinha` ).send( query );
+        .get( `/estimativas/origemELinha/${id_origem}/${id_linha}` );
       expect( resposta.status ).toBe( 404 );
     } );
 
