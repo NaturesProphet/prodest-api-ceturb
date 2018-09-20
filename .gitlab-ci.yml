@@ -1,7 +1,7 @@
 stages:
-  - build
   - test
   - quality
+  - build
   - deploy
   - stress
 
@@ -11,31 +11,17 @@ cache:
   - node_modules/
   - sonar-scanner-3.1.0.1141-linux/
 
-
-build_job:
-  image: node:8.11.2
-  stage: build
-  only:
-    - tags
-  script:
-     - npm install
-     
-
 test_job:
   image: node:8.11.2
   stage: test
-  only:
-    - tags
   script:
      - npm install
      - npm run test
      - npm run test:e2e
-   
+
 quality_job:
   image: node:8.11.2
   stage: quality
-  only:
-    - tags
   services:
       - primetoninc/jdk:1.7
   dependencies:
@@ -46,6 +32,14 @@ quality_job:
    - npm run test:cov
    - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
 
+build_job:
+  image: node:8.11.2
+  stage: build
+  only:
+    - tags
+  script:
+     - npm install
+   
 deploy_job:
   stage: deploy
   image: node:8.11-alpine

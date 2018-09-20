@@ -20,7 +20,8 @@
     "release": "standard-version",
     "redis": "docker run -d -p 6379:6379 redis",
     "stopdocker": "docker stop $(docker ps -q -a) && docker rm $(docker ps -q -a)",
-    "minio": "docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 minio/minio server /data"
+    "minio": "docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 minio/minio server /data",
+    "commit:build": "git add . && npm run commit && npm run release && git push --tags origin dev"
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",
