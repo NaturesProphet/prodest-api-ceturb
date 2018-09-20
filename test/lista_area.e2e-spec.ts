@@ -36,7 +36,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar", async () => {
-      resposta = await request( app.getHttpServer() ).post( "/area" ).send( { body: area_de_busca } );
+      resposta = await request( app.getHttpServer() ).get( "/area/1/2/3/4" );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -58,7 +58,7 @@ defineFeature( feature, test => {
       AreaService.prototype.BuscaPontosPorArea = jest.fn().mockImplementationOnce( () => {
         throw new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).post( "/area" ).send( { body: area_de_busca } );
+      resposta = await request( app.getHttpServer() ).get( "/area/1/2/3/4" );
     } );
 
     given( 'Não há pontos na area designada', () => {

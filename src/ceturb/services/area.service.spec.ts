@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AreaService } from './area.service';
-import { Envelope } from '../models/envelope.Dto';
 jest.mock( './area.service' );
 
 describe( 'AreaService', () => {
@@ -14,9 +13,8 @@ describe( 'AreaService', () => {
 
 
   it( 'O retorno de pontos de parada deve ser maior do que 0', async () => {
-    let query = new Envelope();
-    query.envelope = [ 1, 2, 3, 4 ];
-    let consulta = await service.BuscaPontosPorArea( query );
+    let envelope = [ 1, 2, 3, 4 ];
+    let consulta = await service.BuscaPontosPorArea( envelope );
     expect( consulta.pontosDeParada.length ).toBeGreaterThan( 0 );
   } );
 

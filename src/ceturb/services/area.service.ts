@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 import * as request from 'request-promise';
-import { Envelope } from '../models/envelope.Dto';
+
 
 @Injectable()
 export class AreaService {
@@ -15,11 +15,13 @@ export class AreaService {
         }
     * @param body corpo da requisição contendo as coordenadas
     */
-    async BuscaPontosPorArea ( body: Envelope ) {
+    async BuscaPontosPorArea ( coordenadas: number[] ) {
         const options = {
             method: 'POST',
             uri: this.url,
-            body: body,
+            body: {
+                envelope: coordenadas
+            },
             json: true
         };
         return request( options );
