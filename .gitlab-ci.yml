@@ -2,6 +2,8 @@ stages:
   - build
   - test
   - quality
+  - deploy
+  - stress
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -13,6 +15,8 @@ cache:
 build_job:
   image: node:8.11.2
   stage: build
+  only:
+    - tags
   script:
      - npm install
      
@@ -20,6 +24,8 @@ build_job:
 test_job:
   image: node:8.11.2
   stage: test
+  only:
+    - tags
   script:
      - npm install
      - npm run test
@@ -28,6 +34,8 @@ test_job:
 quality_job:
   image: node:8.11.2
   stage: quality
+  only:
+    - tags
   services:
       - primetoninc/jdk:1.7
   dependencies:
@@ -37,3 +45,30 @@ quality_job:
    - npm install
    - npm run test:cov
    - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
+
+deploy_job:
+  stage: deploy
+  image: node:8.11-alpine
+  only:
+    - tags
+  script:
+    - npm i upgrade-rancher
+    - ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID 1st316
+  dependencies:
+    - build_job
+
+stress_job:
+ stage: stress
+ image: docker:stable
+ dependencies:
+   - deploy_job
+ only:
+   - tags
+ services:
+   - docker:dind
+ script:
+   - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts blazemeter/taurus quick_test.yml 2>&1
+ artifacts:
+  paths:
+    - $(pwd)/stress/artifacts
+  expire_in: 2 week
