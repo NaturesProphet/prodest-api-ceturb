@@ -2,8 +2,6 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Controller, Get, Res, HttpStatus, Param, Post, Body } from "@nestjs/common";
 import { EstimativasService } from '../services/estimativas.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
-import { OrigemEDestino } from '../models/origemEDestino.Dto';
-import { OrigemELinha } from '../models/origemELinha.Dto';
 
 @Controller( 'estimativas' )
 @ApiUseTags( 'Estimativas' )

@@ -1,6 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { OrigemEDestino } from '../../models/origemEDestino.Dto';
-import { OrigemELinha } from '../../models/origemELinha.Dto';
+import { Injectable, Param } from '@nestjs/common';
 import { InformationNotFound } from '../../models/exception/InformationNotFound';
 
 @Injectable()
@@ -48,7 +46,7 @@ export class EstimativasService {
      * Método que busca estimativas por pontos de origem e destino na API da geocontrol
      * @param body corpo da requisição contendo ids do ponto de origem e destino
      */
-    async ObterPorOrigemEDestino ( body: OrigemEDestino ) {
+    async ObterPorOrigemEDestino ( params ) {
         const resposta = {
             "horarioDoServidor": 1485282858181, // Horário do relógio no servidor no formato "millis"  
             "pontoDeOrigemId": 452, // Id do ponto de origem 
@@ -74,7 +72,7 @@ export class EstimativasService {
                 },
             ]
         }
-        if ( body.pontoDeDestinoId != 0 && body.pontoDeOrigemId != 0 )
+        if ( parseInt( params.id_destino ) != 0 && parseInt( params.id_origem ) != 0 )
             return resposta;
         else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
     }
@@ -84,7 +82,7 @@ export class EstimativasService {
          * Método que busca estimativas por pontos de origem e destino na API da geocontrol
          * @param body corpo da requisição contendo ids do ponto de origem e destino
          */
-    async ObterPorOrigemELinha ( body: OrigemELinha ) {
+    async ObterPorOrigemELinha ( params ) {
         const resposta = {
             "horarioDoServidor": 1485282858181, // Horário do relógio no servidor no formato "millis"  
             "pontoDeOrigemId": 452, // Id do ponto de origem 
@@ -108,7 +106,7 @@ export class EstimativasService {
                 },
             ]
         }
-        if ( body.linhaId != 0 && body.pontoDeOrigemId != 0 )
+        if ( parseInt( params.id_linha ) != 0 && parseInt( params.id_origem ) != 0 )
             return resposta;
         else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
     }
