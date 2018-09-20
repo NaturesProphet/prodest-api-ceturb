@@ -52,18 +52,18 @@ export class EstimativasController {
     }
 
 
-    @Post( "/origemELinha" )
+    @Get( "/origemELinha/:id_origem/:id_linha" )
     @ApiOperation( {
         description: "retornar estimativas por ponto de origem e linha",
         title: "Estimativas por Origem e linha"
     } )
     @ApiResponse( { status: 200, description: "Estimativas encontradas" } )
-    @ApiResponse( { status: 204, description: "Estimativas não encontrados" } )
-    async retornar_estimativas_por_origem_e_linha ( @Res() res, @Body() body: OrigemELinha ) {
+    @ApiResponse( { status: 404, description: "Estimativas não encontrados" } )
+    async retornar_estimativas_por_origem_e_linha ( @Res() res, @Param() params ) {
         try {
             res
                 .status( HttpStatus.OK )
-                .send( await this.Service.ObterPorOrigemELinha( body ) );
+                .send( await this.Service.ObterPorOrigemELinha( params ) );
         }
         catch ( error ) {
             res

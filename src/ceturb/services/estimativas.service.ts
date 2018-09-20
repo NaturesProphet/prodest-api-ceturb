@@ -47,12 +47,14 @@ export class EstimativasService {
          * Método que busca estimativas por pontos de origem e destino na API da geocontrol
          * @param body corpo da requisição contendo ids do ponto de origem e destino
          */
-    async ObterPorOrigemELinha ( body: OrigemELinha ) {
-        console.log( body )
+    async ObterPorOrigemELinha ( @Param() params ) {
         const options = {
             method: 'POST',
             uri: `${this.url}/obterEstimativasPorOrigemELinha`,
-            body: body,
+            body: {
+                pontoDeOrigemId: parseInt( params.id_origem ),
+                linhaId: parseInt( params.id_linha )
+            },
             json: true
         };
         return request( options );
