@@ -41,7 +41,7 @@ quality_job:
    - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
 
 deploy_job:
-  stage: deploy_dev
+  stage: deploy
   image: node:8.11-alpine
   only:
     - tags
