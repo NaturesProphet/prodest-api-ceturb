@@ -33,12 +33,19 @@ quality_job:
    - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
 
 build_job:
-  image: node:8.11.2
   stage: build
+  image: docker:stable
+
+  services:
+    - docker:dind
   only:
     - tags
   script:
-     - npm install
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_TAG .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_TAG
+    - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_TAG $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
    
 deploy_job:
   stage: deploy
