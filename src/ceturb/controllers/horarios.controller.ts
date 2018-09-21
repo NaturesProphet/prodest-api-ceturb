@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { HorariosService } from '../services/horario.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 
@@ -13,6 +13,11 @@ export class HorariosController {
     @ApiOperation( { title: 'lista as linhas existentes' } )
     @ApiResponse( { status: 200, description: 'Horarios encontrados' } )
     @ApiResponse( { status: 204, description: 'Horários não encontrados' } )
+    @ApiImplicitParam( {
+        name: 'linha',
+        description: 'Numero de bandeira da Linha',
+        required: true,
+    } )
 
     public async listar ( @Param( 'linha' ) linha, @Res() res ) {
         try {
@@ -31,6 +36,11 @@ export class HorariosController {
     @ApiOperation( { title: 'lista as linhas existentes' } )
     @ApiResponse( { status: 200, description: 'linhas encontradas' } )
     @ApiResponse( { status: 204, description: 'Linhas não encontradas' } )
+    @ApiImplicitParam( {
+        name: 'linha',
+        description: 'Numero de bandeira da Linha',
+        required: true,
+    } )
 
     public async listarObs ( @Param( 'linha' ) linha, @Res() res ) {
         try {

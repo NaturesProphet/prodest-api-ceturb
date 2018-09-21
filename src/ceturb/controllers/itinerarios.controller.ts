@@ -1,5 +1,5 @@
 import { Controller, Get, Res, Param, HttpStatus } from '@nestjs/common';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { ItinerariosService } from '../services/itinerarios.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 
@@ -29,6 +29,11 @@ export class ItinerariosController {
     @ApiOperation( { title: 'lista os itinerários existentes de uma linha' } )
     @ApiResponse( { status: 200, description: 'itinerário encontrado' } )
     @ApiResponse( { status: 204, description: 'Itinerario não encontrado' } )
+    @ApiImplicitParam( {
+        name: 'linha',
+        description: 'Numero de bandeira da Linha',
+        required: true,
+    } )
     public async buscar ( @Param( 'linha' ) linha, @Res() res ) {
         try {
             let response = await this.service.busca_itinerario( linha );
