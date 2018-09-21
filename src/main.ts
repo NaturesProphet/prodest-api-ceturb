@@ -5,10 +5,10 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap () {
   const app = await NestFactory.create( AppModule );
   const options = new DocumentBuilder()
-    .setTitle( 'api-ceturb' )
-    .setDescription( 'Configuração do API-Ceturb' )
-    .setVersion( '0.1' )
-    .addTag( 'ceturb' )
+    .setTitle( 'Nova api-ceturb' )
+    .setDescription( 'API de acesso aos dados do transporte público do estado do Espírito Santo' )
+    .setVersion( '1.6' )
+    .addTag( 'api-ceturb' )
     .build();
   const document = SwaggerModule.createDocument( app, options );
   SwaggerModule.setup( "docs", app, document );
