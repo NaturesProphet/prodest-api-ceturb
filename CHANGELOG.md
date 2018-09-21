@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.8"></a>
+## [1.6.8](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.4...v1.6.8) (2018-09-21)
+
+
+### Bug Fixes
+
+* **Ci:** Refatoracao do ci ([45d744d](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/45d744d))
+* **SWAGGER:** Correção do Swagger ([7905382](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/7905382))
+
+
+
 <a name="1.6.7"></a>
 ## [1.6.7](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.4...v1.6.7) (2018-09-21)
 
