@@ -5,12 +5,17 @@ stages:
   - deploy
   - stress
 
+image: registry.es.gov.br/espm/apis/api-ceturb/node:latest
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
   - sonar-scanner-3.1.0.1141-linux/
 
+before_script:
+  - npm install
+  
 test_job:
   image: node:8.11.2
   stage: test
