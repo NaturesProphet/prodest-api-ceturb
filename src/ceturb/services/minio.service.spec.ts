@@ -11,28 +11,17 @@ describe( 'HorarioService', () => {
     service = module.get<MinioService>( MinioService );
   } );
 
+
   it( '', async () => {
-    MinioService.prototype.config = jest
-      .fn()
-      .mockImplementationOnce( () => {
-        let config = 'Added `minio` successfully.'        
-        return config;
-      } );
     let minio = await service.config();
-    console.log(minio)
-    expect( minio ).toBe('Added `minio` successfully.')
+    expect( minio ).toBe( 'Added `minio` successfully.' )
   } );
 
+
   it( 'O retorno do endereço do minio deve estar correto', async () => {
-    MinioService.prototype.getAddress = jest
-      .fn()
-      .mockImplementationOnce( () => {
-        let address = 'http://172.17.0.1:9000'        
-        return address;
-      } );
     let address = '';
     address = await service.getAddress();
-    console.log(address)
-    expect( address ).toBe('http://172.17.0.1:9000')
+    expect( address ).toBe( 'http://172.17.0.1:9000' )
   } );
+
 } );
