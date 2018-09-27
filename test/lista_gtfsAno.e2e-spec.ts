@@ -10,6 +10,7 @@ import { InformationNotFound } from "../src/ceturb/models/exception/InformationN
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
+let endpoint: string;
 let resposta: any;
 let ano: string;
 let gtfs = [];
@@ -33,18 +34,18 @@ defineFeature( feature, test => {
   } ) => {
 
     given( "Eu quero saber as informações dos arquivos GTFS criados de um ano específico", async () => {
-        request( app.getHttpServer() )
-        .get( "/gtfs/2018" )
-        .expect( 200 );
+      endpoint = '/gtfs/'
     } );
 
     when( "eu pesquisar", async () => {
-        ano = "2018";
-        let requisicao = await request( app.getHttpServer() ).get( "/gtfs/" + ano );
-        gtfs = requisicao.body
+      ano = "2018";
+      endpoint += ano;
+      resposta = await request( app.getHttpServer() ).get( endpoint );
+
     } );
 
     then( "recebo as informações", () => {
+      gtfs = resposta.body
       expect( gtfs.length ).toBeGreaterThan( 0 );
     } );
   } );
@@ -55,23 +56,22 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações dos arquivos GTFS criados de um ano específico", () => {
-
+      endpoint = '/gtfs/'
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
-        GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
-            return new InformationNotFound( "Não há arquivos registrados nesse ano" );
-          } );
-          resposta = await request( app.getHttpServer() ).get( '/gtfs/0' );
-
+      GtfsService.prototype.getByYear = jest.fn().mockImplementationOnce( () => {
+        return [];
+      } );
     } );
 
     when( "eu pesquisar", async () => {
-      //pesquisa ja feita acima
+      endpoint += '0';
+      resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.body.message ).toBe( "Não há arquivos registrados nesse ano" );
+      expect( resposta.text ).toBe( "Não há arquivos registrados nesse ano" );
     } );
   } );
 
