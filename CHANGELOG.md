@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.11"></a>
+## [1.6.11](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.10...v1.6.11) (2018-09-27)
+
+
+### Bug Fixes
+
+* **e2e:** teste e2e de /gtfs corrigido ([965b996](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/965b996))
+* **e2e:** teste e2e de /gtfs/ano corrigido ([c586812](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/c586812))
+* **e2e:** teste e2e de /gtfs/ano/mes corrigido ([2952fc5](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/2952fc5))
+* **e2e:** todos os testes e2e do barbosa consertados ([1f686a2](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/1f686a2))
+* **gtfs_service:** map --> forEach ([e818e0d](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/e818e0d))
+* **minio:** Um teste unitario concertado ([158bff8](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/158bff8))
+* **minio_service:** await removido ([762ab03](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/762ab03))
+* **mock:** String ---> string ([503457f](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/503457f))
+
+
+
 <a name="1.6.10"></a>
 ## [1.6.10](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.9...v1.6.10) (2018-09-25)
 
