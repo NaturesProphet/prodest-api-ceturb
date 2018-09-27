@@ -9,6 +9,7 @@ import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/calendario.service' );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let calendarios: any;
 let resposta: any;

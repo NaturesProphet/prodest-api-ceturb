@@ -9,6 +9,7 @@ import { AgenciasService } from "../src/ceturb/services/agencia.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 //jest.mock( "../src/ceturb/services/agencia.service" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let agencias: any;
 let resposta: any;

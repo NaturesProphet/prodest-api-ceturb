@@ -9,6 +9,7 @@ import { PontoService } from '../src/ceturb/services/ponto.service'
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( '../src/ceturb/services/ponto.service' );
 jest.mock( "../src/app.module" )
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let pontos: any;
 let resposta: any;

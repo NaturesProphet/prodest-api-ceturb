@@ -8,6 +8,7 @@ import { ViagensService } from '../src/ceturb/services/viagens.service'
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( '../src/ceturb/services/viagens.service' );
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 
 let viagens = [];

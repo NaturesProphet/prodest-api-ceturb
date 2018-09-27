@@ -8,6 +8,7 @@ import { AppModule } from "../src/app.module";
 import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/itinerarios.service' );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let itinerarios: any;
 let resposta: any;

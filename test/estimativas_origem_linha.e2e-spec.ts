@@ -8,6 +8,7 @@ import { AppModule } from "../src/app.module";
 import { EstimativasService } from "../src/ceturb/services/estimativas.service";
 jest.mock( "../src/app.module" );
 jest.mock( "../src/ceturb/services/estimativas.service" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 
 let estimativas: any;

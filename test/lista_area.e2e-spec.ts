@@ -9,6 +9,7 @@ import { AreaService } from "../src/ceturb/services/area.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 jest.mock( "../src/ceturb/services/area.service" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let lista_de_pontos: any;
 let resposta: any;

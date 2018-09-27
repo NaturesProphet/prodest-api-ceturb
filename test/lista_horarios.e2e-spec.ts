@@ -7,6 +7,7 @@ import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/horario.service' );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let horarios: any;
 let linha: number;

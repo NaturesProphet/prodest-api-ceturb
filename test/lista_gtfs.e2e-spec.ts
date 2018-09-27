@@ -6,12 +6,13 @@ import request from "supertest";
 import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let resposta: any;
 let gtfs = [];
+let endpoint: string;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -32,15 +33,15 @@ defineFeature( feature, test => {
   } ) => {
 
     given( "Eu quero saber as informações dos arquivos GTFS criados", async () => {
-        resposta = await request( app.getHttpServer() ).get( `/gtfs` );
+      endpoint = '/gtfs';
     } );
 
     when( "eu pesquisar", async () => {
-      
+      resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
     then( "recebo as informações", () => {
-      gtfs = JSON.parse(JSON.stringify(resposta.body));
+      gtfs = JSON.parse( JSON.stringify( resposta.body ) );
       expect( gtfs.length ).toBeGreaterThan( 0 );
     } );
   } );
@@ -51,14 +52,15 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações dos arquivos GTFS criados", () => {
+      endpoint = '/gtfs';
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
-        GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
-            return new InformationNotFound( "Não há arquivos registrados" );
-          } );
-          resposta = await request( app.getHttpServer() ).get( '/gtfs' );
-          expect( resposta.status ).toBe( 200 );
+      GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
+        return [];
+      } );
+      resposta = await request( app.getHttpServer() ).get( '/gtfs' );
+      expect( resposta.status ).toBe( 404 );
     } );
 
     when( "eu pesquisar", async () => {
@@ -66,7 +68,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.body.message ).toBe( "Não há arquivos registrados" );
+      expect( resposta.text ).toBe( 'Não há arquivos registrados' );
     } );
   } );
 

@@ -8,6 +8,7 @@ import { InformationNotFound } from "../src/ceturb/models/exception/InformationN
 import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
 jest.mock( '../src/ceturb/services/itinerarios.service' );
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 
 

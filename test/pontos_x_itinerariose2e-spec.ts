@@ -9,6 +9,7 @@ import { PontoItinerarioService } from '../src/ceturb/services/pontos_x_itinerar
 import { InformationNotFound } from '../src/ceturb/models/exception/InformationNotFound';
 jest.mock( '../src/ceturb/services/pontos_x_itinerarios.service' );
 jest.mock( "../src/app.module" );
+jest.mock( '../src/ceturb/services/gtfs.service' );
 
 
 let pontosItinerarios: any;

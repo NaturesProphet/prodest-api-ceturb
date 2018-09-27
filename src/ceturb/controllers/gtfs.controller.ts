@@ -12,7 +12,8 @@ export class GtfsController {
     @Get()
     @ApiOperation( { title: 'lista os arquivos GTFS existentes no minio' } )
     @ApiResponse( { status: 200, description: 'Gtfs Encontrado' } )
-    @ApiResponse( { status: 204, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 404, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 500, description: 'Erro interno no servidor' } )
     public async getAll ( @Res() res ) {
         try {
             let response = await this.service.getAll();
@@ -22,22 +23,22 @@ export class GtfsController {
                     .send( response );
             }
             else {
-                let erro = { message: "Não há arquivos registrados" }
                 res
-                    .status( HttpStatus.OK )
-                    .send( erro );
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( "Não há arquivos registrados" );
             }
 
         } catch ( err ) {
-            res.status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Gtfs Não Encontrado" ) );
+            res.status( HttpStatus.INTERNAL_SERVER_ERROR )
+                .send( 'Ocorreu um erro interno no servidor.' );
         }
     }
 
     @Get( '/:ano' )
     @ApiOperation( { title: 'lista os arquivos GTFS existentes no minio de um ano específicos' } )
     @ApiResponse( { status: 200, description: 'Gtfs Encontrado' } )
-    @ApiResponse( { status: 204, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 404, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 500, description: 'Erro interno no servidor' } )
     @ApiImplicitParam( {
         name: 'ano',
         description: 'Ano do GTFS',
@@ -52,22 +53,22 @@ export class GtfsController {
                     .send( response );
             }
             else {
-                let erro = { message: "Não há arquivos registrados nesse ano" }
                 res
-                    .status( HttpStatus.OK )
-                    .send( erro );
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( "Não há arquivos registrados nesse ano" );
             }
 
         } catch ( err ) {
-            res.status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Gtfs Não Encontrado" ) );
+            res.status( HttpStatus.INTERNAL_SERVER_ERROR )
+                .send( 'Ocorreu um erro interno no servidor.' );
         }
     }
 
     @Get( '/:year/:month' )
     @ApiOperation( { title: 'lista os arquivos GTFS existentes no minio de um ano e mês específicos' } )
     @ApiResponse( { status: 200, description: 'Gtfs Encontrado' } )
-    @ApiResponse( { status: 204, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 404, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 500, description: 'Erro interno no servidor' } )
     @ApiImplicitParam( {
         name: 'year',
         description: 'Ano do GTFS',
@@ -87,15 +88,14 @@ export class GtfsController {
                     .send( response );
             }
             else {
-                let erro = { message: "Não há arquivos registrados nesse ano e mês" }
                 res
-                    .status( HttpStatus.OK )
-                    .send( erro );
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( "Não há arquivos registrados nesse ano e mês" );
             }
 
         } catch ( err ) {
-            res.status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Gtfs Não Encontrado" ) );
+            res.status( HttpStatus.INTERNAL_SERVER_ERROR )
+                .send( 'Ocorreu um erro interno no servidor.' );
         }
     }
 
@@ -103,6 +103,7 @@ export class GtfsController {
     @ApiOperation( { title: 'lista os arquivos GTFS existentes no minio de um ano e mês específicos' } )
     @ApiResponse( { status: 200, description: 'Gtfs Encontrado' } )
     @ApiResponse( { status: 204, description: 'Gtfs Não Encontrado' } )
+    @ApiResponse( { status: 500, description: 'Erro interno no servidor' } )
     @ApiImplicitParam( {
         name: 'year',
         description: 'Ano do GTFS',
@@ -127,14 +128,13 @@ export class GtfsController {
                     .send( response );
             }
             else {
-                let erro = { message: "Não há arquivos registrados nesse ano, mês e dia" }
                 res
-                    .status( HttpStatus.OK )
-                    .send( erro );
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( "Não há arquivos registrados nesse ano, mês e dia" );
             }
         } catch ( err ) {
-            res.status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Gtfs Não Encontrado" ) );
+            res.status( HttpStatus.INTERNAL_SERVER_ERROR )
+                .send( 'Ocorreu um erro interno no servidor.' );
         }
     }
 }
