@@ -6,7 +6,6 @@ import request from "supertest";
 import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 

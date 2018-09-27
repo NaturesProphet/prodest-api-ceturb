@@ -10,6 +10,7 @@ import { InformationNotFound } from "../src/ceturb/models/exception/InformationN
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
+let endpoint: string;
 let resposta: any;
 let ano: string;
 let mes: string;
@@ -34,19 +35,17 @@ defineFeature( feature, test => {
   } ) => {
 
     given( "Eu quero saber as informações dos arquivos GTFS criados de um ano e mês específico", async () => {
-        request( app.getHttpServer() )
-        .get( "/gtfs/2018/10" )
-        .expect( 200 );
+      ano = '2018';
+      mes = '10'
+      endpoint = `/gtfs/${ano}/${mes}`;
     } );
 
     when( "eu pesquisar", async () => {
-        ano = "2018";
-        mes = "10";
-        let requisicao = await request( app.getHttpServer() ).get( `/gtfs/${ano}/${mes}`);
-        gtfs = requisicao.body
+      resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
     then( "recebo as informações", () => {
+      gtfs = resposta.body;
       expect( gtfs.length ).toBeGreaterThan( 0 );
     } );
   } );
@@ -57,23 +56,23 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações dos arquivos GTFS criados de um ano e mês específico", () => {
-
+      ano = '0';
+      mes = '0';
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
-        GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
-            return new InformationNotFound( "Não há arquivos registrados nesse ano e mês" );
-          } );
-          resposta = await request( app.getHttpServer() ).get( '/gtfs/0/0' );
-
+      endpoint = `/gtfs/${ano}/${mes}`;
+      GtfsService.prototype.getByYearMonth = jest.fn().mockImplementationOnce( () => {
+        return [];
+      } );
     } );
 
     when( "eu pesquisar", async () => {
-      //pesquisa ja feita acima
+      resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.body.message ).toBe( "Não há arquivos registrados nesse ano e mês" );
+      expect( resposta.text ).toBe( "Não há arquivos registrados nesse ano e mês" );
     } );
   } );
 
