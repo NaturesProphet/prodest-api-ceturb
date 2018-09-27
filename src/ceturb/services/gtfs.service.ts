@@ -48,11 +48,11 @@ export class GtfsService {
         return this.files;
     }
 
-    public async getByYear ( year: String ) {
+    public async getByYear ( year: string ) {
         await this.ls();
         let files: Gtfs[] = [];
 
-        this.files.map( line => {
+        this.files.forEach( line => {
             if ( line.year == year ) {
                 files.push( line );
             }
@@ -60,11 +60,11 @@ export class GtfsService {
         return files;
     }
 
-    public async getByYearMonth ( year: String, month: String ) {
+    public async getByYearMonth ( year: string, month: string ) {
         await this.ls();
         let files: Gtfs[] = [];
 
-        this.files.map( line => {
+        this.files.forEach( line => {
             if ( line.year == year && line.month == month ) {
                 files.push( line );
             }
@@ -72,11 +72,11 @@ export class GtfsService {
         return files;
     }
 
-    public async getByYearMonthDay ( year: String, month: String, day: String ) {
+    public async getByYearMonthDay ( year: string, month: string, day: string ) {
         await this.ls();
         let files: Gtfs[] = [];
 
-        this.files.map( line => {
+        this.files.forEach( line => {
             if ( line.year == year && line.month == month && line.day == day ) {
                 files.push( line );
             }

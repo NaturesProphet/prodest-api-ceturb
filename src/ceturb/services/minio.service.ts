@@ -23,6 +23,6 @@ export class MinioService {
     }
 
     public async ls (): Promise<string> {
-        return await shell.exec( `${this.list}` ).stdout;
+        return shell.exec( `${this.list}` ).stdout;
     }
 }
