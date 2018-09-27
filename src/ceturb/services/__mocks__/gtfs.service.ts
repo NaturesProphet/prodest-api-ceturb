@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InformationNotFound } from '../../models/exception/InformationNotFound';
 
 @Injectable()
 export class GtfsService {
@@ -39,18 +38,18 @@ export class GtfsService {
         return [ obj1, obj2, obj3 ];
     }
 
-    public async getByYear ( year: String ) {
+    public async getByYear ( year: string ) {
 
         return [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ]
 
     }
 
-    public async getByYearMonth ( year: String, month: String ) {
+    public async getByYearMonth ( year: string, month: string ) {
 
         return [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ]
     }
 
-    public async getByYearMonthDay ( year: String, month: String, day: String ) {
+    public async getByYearMonthDay ( year: string, month: string, day: string ) {
 
         return [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ]
 
