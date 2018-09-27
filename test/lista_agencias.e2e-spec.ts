@@ -3,12 +3,11 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaAgencia.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { AgenciasService } from "../src/ceturb/services/agencia.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
-//jest.mock( "../src/ceturb/services/agencia.service" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
 let agencias: any;
@@ -20,7 +19,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

@@ -5,7 +5,6 @@ import request from "supertest";
 
 import { INestApplication, HttpModule } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/itinerarios.service' );
 jest.mock( '../src/ceturb/services/gtfs.service' );
@@ -21,7 +20,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

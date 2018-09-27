@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaCalendario.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { CalendarioService } from '../src/ceturb/services/calendario.service';
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
@@ -21,7 +21,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

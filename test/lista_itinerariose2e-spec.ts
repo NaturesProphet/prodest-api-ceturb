@@ -2,7 +2,7 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaItinerario.feature" );
 import request from "supertest";
-import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';

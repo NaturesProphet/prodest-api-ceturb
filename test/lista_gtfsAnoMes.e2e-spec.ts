@@ -3,10 +3,9 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaGtfsAnoMes.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 
@@ -22,7 +21,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

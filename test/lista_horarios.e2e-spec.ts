@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaHorario.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule, HttpStatus } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 jest.mock( "../src/app.module" );
 jest.mock( '../src/ceturb/services/horario.service' );
@@ -20,7 +20,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

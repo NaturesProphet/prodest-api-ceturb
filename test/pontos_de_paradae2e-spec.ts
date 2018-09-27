@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/pontos_de_parada.feature" );
 import request from "supertest";
 
-import { INestApplication, HttpModule } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { PontoService } from '../src/ceturb/services/ponto.service'
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
@@ -20,7 +20,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();

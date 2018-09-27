@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 const feature = loadFeature( "./test/features/buscaLinhas.feature" );
 import request from "supertest";
 import { LinhasService } from '../src/ceturb/services/linhas.service';
-import { INestApplication, HttpModule } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 jest.mock( "../src/app.module" );
@@ -20,7 +20,7 @@ defineFeature( feature, test => {
 
   beforeAll( async () => {
     module = await Test.createTestingModule( {
-      imports: [ HttpModule, AppModule ]
+      imports: [ AppModule ]
     } ).compile();
     app = module.createNestApplication();
     await app.init();
