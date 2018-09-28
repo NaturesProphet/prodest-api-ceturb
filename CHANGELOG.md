@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.12"></a>
+## [1.6.12](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.11...v1.6.12) (2018-09-28)
+
+
+### Bug Fixes
+
+* **gtfs-minio:** codesmells restantes ([bc6d5c0](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/bc6d5c0))
+
+
+
 <a name="1.6.11"></a>
 ## [1.6.11](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.10...v1.6.11) (2018-09-27)
 
