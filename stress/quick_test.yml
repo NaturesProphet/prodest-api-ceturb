@@ -6,4 +6,7 @@ execution:
 scenarios:
   quick-test:
     requests:
-    - http://ceturb.10.243.9.12.xip.io/
+    - http://ceturb.10.243.9.12.xip.io/pontos
+    - http://ceturb.10.243.9.12.xip.io/linhas
+    - http://ceturb.10.243.9.12.xip.io/viagens
+    - http://ceturb.10.243.9.12.xip.io/itinerarios
