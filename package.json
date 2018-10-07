@@ -1,7 +1,7 @@
 {
   "name": "api-ceturb",
   "version": "1.6.12",
-  "description": "api certurb",
+  "description": "API de acesso aos dados do transporte público do estado do Espírito Santo",
   "author": "Prodest",
   "license": "MIT",
   "scripts": {

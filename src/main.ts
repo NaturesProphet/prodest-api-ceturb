@@ -1,13 +1,14 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+const pacote = require( '../package.json' );
 
 async function bootstrap () {
   const app = await NestFactory.create( AppModule );
   const options = new DocumentBuilder()
     .setTitle( 'Nova api-ceturb' )
-    .setDescription( 'API de acesso aos dados do transporte público do estado do Espírito Santo' )
-    .setVersion( '1.6' )
+    .setDescription( pacote.description )
+    .setVersion( pacote.version )
     .addTag( 'api-ceturb' )
     .build();
   const document = SwaggerModule.createDocument( app, options );
