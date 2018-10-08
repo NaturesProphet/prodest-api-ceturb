@@ -10,7 +10,14 @@ REDIS_PORT              # Apontar a porta do servidor do Redis
 MINIO_ADDRESS           # Apontar o IP do servidor do Minio
 MINIO_SECRETKEY         # Senha do minio
 MINIO_KEY               # Login do minio
+TRANSCOLDB_HOST         # servidor do banco de dados
+TRANSCOLDB_PORT         # porta do banco de dados
+TRANSCOLDB_USER         # Usuario do banco de dados
+TRANSCOLDB_PASSWORD     # senha do banco de dados
+TRANSCOLDB_SCHEMA       # nome do banco de dados
+TRANSCOLDB_ORM_SYNC     # sincronia do TypeORM com as tabelas do banco - false por padrão
 ```
+
 
 ## Antes de rodar
 Essa API está configurada para fazer cache das requisições usando o serviço do <a href="https://redis.io/">redis</a>, portanto, é necessário subir o servidor do redis localmente ou apontar um endereço e porta de um servidor válido através das variaveis de ambiente.  

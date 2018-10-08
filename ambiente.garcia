@@ -1,0 +1,5 @@
+export TRANSCOLDB_HOST=localhost
+export TRANSCOLDB_USER=Usuario
+export TRANSCOLDB_PASSWORD=Senh@Dif1cil
+export TRANSCOLDB_SCHEMA=GoogleTransit
+export TRANSCOLDB_ORM_SYNC=false
