@@ -3,7 +3,7 @@ import * as shell from 'shelljs';
 
 @Injectable()
 export class MinioService {
-    private readonly MINIO_ADDRESS: string = process.env.MINIO_ADDRESS || 'http://172.17.0.1:9000';
+    private readonly MINIO_ADDRESS: string = process.env.MINIO_ADDRESS || 'http://127.0.0.1:9000';
     private readonly MINIO_SECRETKEY: string = process.env.MINIO_SECRETKEY || 'admin123';
     private readonly MINIO_KEY: string = process.env.MINIO_KEY || 'admin';
 
