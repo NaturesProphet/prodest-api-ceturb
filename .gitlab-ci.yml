@@ -5,7 +5,6 @@ stages:
   - deploy
   - stress
 
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -29,7 +28,7 @@ quality_job:
   dependencies:
       - test_job    
   script:     
-   - test -d "sonar-scanner-cli-3.2.0.1227-linux.zip" && echo "usando cache" || ( apt-get update && apt-get install unzip && wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip && unzip sonar-scanner-cli-3.2.0.1227-linux.zip )
+   - test -d "sonar-scanner-cli-3.2.0.1227-linux.zip" && echo "usando cache" || ( wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip )
    - npm install
    - npm run test:cov
    - ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
