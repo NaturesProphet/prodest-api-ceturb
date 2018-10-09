@@ -27,10 +27,10 @@ quality_job:
   dependencies:
       - test_job    
   script:     
-   - test -d "sonar-scanner-3.1.0.1141-linux" && echo "usando cache" || ( wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.1.0.1141-linux.zip && apt-get update && apt-get install unzip && apt-get install -y jq && unzip sonar-scanner-cli-3.1.0.1141-linux.zip )
+   - test -d "sonar-scanner-3.1.0.1141-linux" && echo "usando cache" || ( wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip )
    - npm install
    - npm run test:cov
-   - ./sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner
+   - ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
 
 build_job:
   stage: build
