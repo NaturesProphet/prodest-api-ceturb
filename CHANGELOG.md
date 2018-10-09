@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.12...v1.7.0) (2018-10-09)
+
+
+### Features
+
+* **Feriado:** primeiro endpoint integrando a api-ceturb com o transcolDB ([73cfc23](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/73cfc23))
+
+
+
 <a name="1.6.12"></a>
 ## [1.6.12](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.6.11...v1.6.12) (2018-09-28)
 
