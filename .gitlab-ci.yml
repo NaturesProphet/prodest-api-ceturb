@@ -5,6 +5,7 @@ stages:
   - deploy
   - stress
 
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
