@@ -9,8 +9,6 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
-  #- sonar-scanner-3.1.0.1141-linux/
-  - sonar-scanner-3.2.0.1227-linux/
   
 test_job:
   image: node:8.11.2
