@@ -16,6 +16,9 @@ export class ItinerarioPonto extends Auditoria {
     @Column( "int" )
     ordem: number;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
     @ManyToOne( type => Ponto, { nullable: false } )
     @JoinColumn( { name: "ponto_id" } )
     ponto_id: number;

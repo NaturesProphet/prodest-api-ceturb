@@ -17,6 +17,9 @@ export class Itinerario extends Auditoria {
     @Column()
     bandeira: string;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
 
     //###################################################################
     //############################ RELAÇÕES #############################

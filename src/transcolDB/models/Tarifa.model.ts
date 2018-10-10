@@ -1,7 +1,7 @@
-import { Entity, Column, ManyToMany, Double, JoinTable, JoinColumn, ManyToOne } from 'typeorm';
-import { FormaPagamento } from './FormaPagamento.model';
+import { Entity, Column, Double, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Agencia } from './Agencia.model';
 import { Auditoria } from './Auditoria.model';
+import { LinhaTarifaVigencia } from './LinhaTarifaVigencia.model';
 
 
 @Entity()
@@ -9,8 +9,8 @@ export class Tarifa extends Auditoria {
     @Column( "float" )
     preco: Double;
 
-    @Column()
-    tipo: string;
+    @Column( "date" )
+    dataupload: Date;
 
 
     //###################################################################
@@ -23,17 +23,8 @@ export class Tarifa extends Auditoria {
     @JoinColumn( { name: "agencia_id" } )
     agencia_id: number;
 
-    //varias tarifas são pagas por varias formas de pagamento
-    @ManyToMany( type => FormaPagamento )
-    @JoinTable( {
-        name: "tarifa_formapagamento", joinColumns: [
-            { name: "tarifa_id" }
-        ], inverseJoinColumns: [
-            {
-                name: "formapagamento_id"
-            }
-        ]
-    } )
-    formasPagamento: FormaPagamento[];
+
+    @OneToMany( type => LinhaTarifaVigencia, linhatarifavigencias => LinhaTarifaVigencia )
+    linhatarifavigencias: LinhaTarifaVigencia[];
 
 }

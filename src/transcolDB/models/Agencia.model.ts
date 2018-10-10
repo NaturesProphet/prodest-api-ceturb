@@ -19,6 +19,9 @@ export class Agencia extends Auditoria {
     @Column()
     telefone: string;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
 
 
     //###################################################################

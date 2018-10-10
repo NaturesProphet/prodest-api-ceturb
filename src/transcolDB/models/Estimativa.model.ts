@@ -16,6 +16,9 @@ export class Estimativa extends Auditoria {
     @Column( 'bit' )
     pontofinal: boolean;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
 
 
     //###################################################################

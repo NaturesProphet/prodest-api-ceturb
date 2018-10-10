@@ -27,6 +27,9 @@ export class Linha extends Auditoria {
     @Column( "bit", { default: 0 } )
     domingo: boolean;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
 
     //###################################################################
     //############################ RELAÇÕES #############################

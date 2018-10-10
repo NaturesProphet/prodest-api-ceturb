@@ -34,6 +34,9 @@ export class Ponto extends Auditoria {
     @Column( "int" )
     azimute: number;
 
+    @Column( "bit", { default: 0 } )
+    historico: boolean;
+
 
 
     //###################################################################
