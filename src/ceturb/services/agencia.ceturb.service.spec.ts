@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AgenciasService } from './agencia.service';
-jest.mock( './agencia.service' );
+import { AgenciasService } from './agencia.ceturb.service';
+jest.mock( './agencia.ceturb.service' );
 
 describe( 'AgenciasService', () => {
   let service: AgenciasService;

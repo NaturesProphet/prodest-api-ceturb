@@ -3,10 +3,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { PontoService } from '../src/ceturb/services/ponto.service'
+import { PontoService } from '../src/ceturb/services/ponto.ceturb.service'
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 const feature = loadFeature( "./test/features/pontos_de_parada.feature" );
-jest.mock( '../src/ceturb/services/ponto.service' );
+jest.mock( '../src/ceturb/services/ponto.ceturb.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//

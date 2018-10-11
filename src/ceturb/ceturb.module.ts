@@ -1,14 +1,14 @@
 import { Module, HttpModule, NestModule, MiddlewareConsumer, ParseIntPipe } from "@nestjs/common";
 import { PontosController } from './controllers/pontos.controller';
 import { LinhasController } from './controllers/linhas.controller';
-import { PontoService } from "./services/ponto.service";
+import { PontoService } from "./services/ponto.ceturb.service";
 import { LinhasService } from './services/linhas.service';
 import { ViagensController } from "./controllers/viagens.controller";
 import { ViagensService } from "./services/viagens.service";
 import { ItinerariosController } from "./controllers/itinerarios.controller";
 import { ItinerariosService } from "./services/itinerarios.service";
 import { AgenciaController } from "./controllers/agencia.controller";
-import { AgenciasService } from "./services/agencia.service";
+import { AgenciasService } from "./services/agencia.ceturb.service";
 import { PontosItinerariosController } from "./controllers/pontosItinerario.controller";
 import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service";
 import { DefaultController } from "./controllers/default.controller";

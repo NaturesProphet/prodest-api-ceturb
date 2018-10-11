@@ -1,5 +1,5 @@
 import { Controller, Get, Res, HttpStatus } from "@nestjs/common";
-import { PontoService } from '../services/ponto.service';
+import { PontoService } from '../services/ponto.ceturb.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 

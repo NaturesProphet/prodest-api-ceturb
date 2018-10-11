@@ -1,6 +1,6 @@
 import { Controller, Get, Res, HttpException, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { AgenciasService } from '../services/agencia.service';
+import { AgenciasService } from '../services/agencia.ceturb.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 
 @Controller( 'agencias' )

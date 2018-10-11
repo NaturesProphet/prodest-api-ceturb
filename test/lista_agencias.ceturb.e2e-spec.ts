@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { AgenciasService } from "../src/ceturb/services/agencia.service";
+import { AgenciasService } from "../src/ceturb/services/agencia.ceturb.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 const feature = loadFeature( "./test/features/buscaAgencia.feature" );
 

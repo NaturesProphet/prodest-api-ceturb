@@ -1,7 +1,7 @@
 import { Test } from "@nestjs/testing";
 import { HttpService } from "@nestjs/common";
-import { PontoService } from "./ponto.service";
-jest.mock( "./ponto.service" );
+import { PontoService } from "./ponto.ceturb.service";
+jest.mock( "./ponto.ceturb.service" );
 
 describe( "Ponto Service", () => {
   let service: PontoService;
