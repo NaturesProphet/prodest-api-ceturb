@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.7.1...v1.8.0) (2018-10-11)
+
+
+### Features
+
+* **cache:** Cache com REDIS implementado globalmente via APpModul ([e15ecd5](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/e15ecd5))
+* **servicos:** integração dos serviços do transcolDB no api-ceturb ([553ea2c](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/553ea2c))
+* **TranscolDB:** INTEGRAÇÃO COMPLETA COM O TRANSCOLDB ([81dcd1f](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/81dcd1f))
+
+
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.7.0...v1.7.1) (2018-10-10)
 
