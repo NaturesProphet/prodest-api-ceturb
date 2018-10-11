@@ -6,7 +6,7 @@ import { Estimativa } from '../models/Estimativa.model';
 
 @Controller( 'transcoldb/ponto' )
 @ApiUseTags( 'Pontos@TranscolDB' )
-export class PontoController {
+export class BDPontoController {
     constructor( private readonly Service: PontoService ) { }
 
 

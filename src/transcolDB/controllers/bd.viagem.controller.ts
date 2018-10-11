@@ -5,7 +5,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/viagem' )
 @ApiUseTags( 'Viagems@TranscolDB' )
-export class ViagemController {
+export class BDViagemController {
     constructor( private readonly Service: ViagemService ) { }
     @Get()
     @ApiOperation( {

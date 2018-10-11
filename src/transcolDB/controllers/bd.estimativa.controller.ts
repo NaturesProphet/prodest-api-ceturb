@@ -5,7 +5,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/estimativa' )
 @ApiUseTags( 'Estimativas@TranscolDB' )
-export class EstimativaController {
+export class BDEstimativaController {
     constructor( private readonly Service: EstimativaService ) { }
 
 

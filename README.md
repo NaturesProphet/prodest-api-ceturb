@@ -51,6 +51,47 @@ E para subir dois arquivos automaticamente para realizar testes execute
 npm run upload:minio
 ```
 
+# TranscolDB - Banco de dados auxiliar integrado
+
+## Descrição
+
+A nova api-ceturb foi integrada com o banco de dados auxilair, desenvolvido para dar apoio às tarefas de geração de GTFS.  
+
+### Observação importante
+Note que a sincronia do ORM está desativada por padrão. Isso significa que o app não irá gerar as tabelas no banco automaticamente. Isto está configurado assim devido a restrições de segurança na infra da prodest.
+
+Para ativar a sincronia e deixar que o app crie as tabelas automaticamente, use a variavel de ambiente TRANSCOLDB_ORM_SYNC
+```bash
+export TRANSCOLDB_ORM_SYNC=true
+```
+
+## Configuração do Banco de Dados SQL-SERVER
+### Produção:
+Utilize as variaveis de ambiente para informar à API a configuração do banco de dados de produção:
+```bash
+TRANSCOLDB_HOST
+TRANSCOLDB_PORT
+TRANSCOLDB_USER
+TRANSCOLDB_PASSWORD
+TRANSCOLDB_SCHEMA
+```
+### Desenvolvimento
+Um banco de dados SQL-SERVER para testes está disponível direto no package, utilizando DOCKER. Para levantar este banco de dados para o ambiente de testes, basta executar este comando:
+
+```bash
+npm run sqlserver
+```
+
+Ative o ORM SYNC para que o app possa criar as tabelas automaticamente
+```bash
+export TRANSCOLDB_ORM_SYNC=true
+```
+
+Para desligar as imagens docker, execute este outro:
+```bash
+npm run stopdocker
+```
+
 ## Rotas
 /docs - Abre o swagger <br><br>
 /itinerarios - retorna todos os itinerarios cadastrados <br><br>

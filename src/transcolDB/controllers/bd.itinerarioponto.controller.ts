@@ -5,7 +5,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/itinerario_ponto' )
 @ApiUseTags( 'Tabela intermediária itinerario_ponto em @TranscolDB' )
-export class ItinerariopontoController {
+export class BDItinerariopontoController {
     constructor( private readonly Service: ItinerariopontoService ) { }
 
 

@@ -8,7 +8,7 @@ import { Tarifa } from '../models/Tarifa.model';
 
 @Controller( 'transcoldb/agencia' )
 @ApiUseTags( 'Agencias@TranscolDB' )
-export class AgenciaController {
+export class BDAgenciaController {
     constructor( private readonly Service: AgenciaService ) { }
 
 

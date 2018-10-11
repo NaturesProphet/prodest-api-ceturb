@@ -5,7 +5,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/pontogeografico' )
 @ApiUseTags( 'Pontos Geográficos em @TranscolDB' )
-export class PontogeograficoController {
+export class BDPontogeograficoController {
     constructor( private readonly Service: PontogeograficoService ) { }
 
 

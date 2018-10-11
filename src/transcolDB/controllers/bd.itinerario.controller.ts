@@ -6,7 +6,7 @@ import { Viagem } from '../models/Viagem.model';
 
 @Controller( 'transcoldb/itinerario' )
 @ApiUseTags( 'Itinerarios@TranscolDB' )
-export class ItinerarioController {
+export class BDItinerarioController {
     constructor( private readonly Service: ItinerarioService ) { }
 
 

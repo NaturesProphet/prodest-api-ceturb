@@ -4,7 +4,7 @@ import { ApiOperation, ApiResponse, ApiImplicitParam, ApiUseTags } from '@nestjs
 
 @Controller( 'transcoldb/feriado' )
 @ApiUseTags( 'Feriados@TranscolDB' )
-export class FeriadoController {
+export class BDFeriadoController {
     constructor( private readonly Service: FeriadoService ) { }
 
 

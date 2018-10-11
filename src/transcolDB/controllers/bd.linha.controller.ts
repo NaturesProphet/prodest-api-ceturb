@@ -5,7 +5,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/linha' )
 @ApiUseTags( 'Linhas@TranscolDB' )
-export class LinhaController {
+export class BDLinhaController {
     constructor( private readonly Service: LinhaService ) { }
 
 

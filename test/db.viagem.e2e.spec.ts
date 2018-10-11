@@ -12,6 +12,7 @@ jest.mock( '../src/transcolDB/services/viagem.service' );
 //--------------------------------------------------------------------//
 jest.mock( '../src/ceturb/ceturb.module' );
 jest.mock( "../src/transcolDB/transcolDB.module" );
+jest.mock( '../src/app.module' );
 jest.mock( '../src/ceturb/services/gtfs.service' );
 jest.mock( '../src/ceturb/services/minio.service' );
 //--------------------------------------------------------------------//
