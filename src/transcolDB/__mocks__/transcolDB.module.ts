@@ -1,4 +1,21 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AgenciaController } from '../controllers/bd.agencia.controller';
+import { AgenciaService } from '../services/agencia.service';
+import { LinhaService } from '../services/linha.service';
+import { LinhaController } from '../controllers/bd.linha.controller';
+import { PontoController } from '../controllers/bd.pontos.controller';
+import { PontoService } from '../services/ponto.service';
+import { ItinerarioController } from '../controllers/bd.itinerario.controller';
+import { ItinerarioService } from '../services/itinerario.service';
+import { ViagemController } from '../controllers/bd.viagem.controller';
+import { ViagemService } from '../services/viagem.service';
+import { EstimativaController } from '../controllers/bd.estimativa.controller';
+import { EstimativaService } from '../services/estimativa.service';
+import { ItinerariopontoController } from '../controllers/bd.itinerarioponto.controller';
+import { ItinerariopontoService } from '../services/itinerarioponto.service';
+import { PontogeograficoController } from '../controllers/bd.pontogeografico.controller';
+import { PontogeograficoService } from '../services/pontogeografico.service';
 import { FeriadoController } from '../controllers/bd.feriado.controller';
 import { FeriadoService } from '../services/feriado.service';
 
@@ -13,9 +30,12 @@ const orm_sync = ( process.env.TRANSCOLDB_ORM_SYNC === 'true' ) || false;
 
 
 @Module( {
-    imports: [],
-    controllers: [  FeriadoController ],
+    controllers: [ AgenciaController, LinhaController, PontoController,
+        ItinerarioController, ViagemController, EstimativaController,
+        ItinerariopontoController, PontogeograficoController, FeriadoController ],
 
-    providers: [ FeriadoService ]
+    providers: [ AgenciaService, LinhaService, PontoService, ItinerarioService,
+        ViagemService, EstimativaService, ItinerariopontoService,
+        PontogeograficoService, FeriadoService ]
 } )
 export class TranscolDBModule { }
