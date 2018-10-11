@@ -1,15 +1,25 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
-const feature = loadFeature( './test/features/buscaArea.feature' );
 import request from "supertest";
-
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { AreaService } from "../src/ceturb/services/area.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
-jest.mock( "../src/app.module" );
+const feature = loadFeature( './test/features/buscaArea.feature' );
 jest.mock( "../src/ceturb/services/area.service" );
+
+//--------------------------------------------------------------------//
+//---------------------mocks GLOBAIS obrigatórios --------------------//
+//--------------------------------------------------------------------//
+jest.mock( '../src/ceturb/ceturb.module' );
+jest.mock( "../src/transcolDB/transcolDB.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
+jest.mock( '../src/ceturb/services/minio.service' );
+//--------------------------------------------------------------------//
+//---------------------mocks GLOBAIS obrigatórios --------------------//
+//--------------------------------------------------------------------//
+
+
 
 let lista_de_pontos: any;
 let resposta: any;

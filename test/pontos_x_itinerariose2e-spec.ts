@@ -1,15 +1,25 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import { Test, TestingModule } from '@nestjs/testing';
-const feature = loadFeature( './test/features/pontos_x_itinerarios.feature' );
 import request from 'supertest';
-
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { PontoItinerarioService } from '../src/ceturb/services/pontos_x_itinerarios.service';
 import { InformationNotFound } from '../src/ceturb/models/exception/InformationNotFound';
+const feature = loadFeature( './test/features/pontos_x_itinerarios.feature' );
 jest.mock( '../src/ceturb/services/pontos_x_itinerarios.service' );
-jest.mock( "../src/app.module" );
+
+//--------------------------------------------------------------------//
+//---------------------mocks GLOBAIS obrigatórios --------------------//
+//--------------------------------------------------------------------//
+jest.mock( '../src/ceturb/ceturb.module' );
+jest.mock( "../src/transcolDB/transcolDB.module" );
 jest.mock( '../src/ceturb/services/gtfs.service' );
+jest.mock( '../src/ceturb/services/minio.service' );
+//--------------------------------------------------------------------//
+//---------------------mocks GLOBAIS obrigatórios --------------------//
+//--------------------------------------------------------------------//
+
+
 
 
 let pontosItinerarios: any;

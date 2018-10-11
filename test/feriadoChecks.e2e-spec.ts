@@ -2,9 +2,9 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
-import { AppModule } from "../src/app.module";
-import { GtfsService } from "../src/ceturb/services/gtfs.service";
-const feature = loadFeature( "./test/features/buscaGtfs.feature" );
+import { AppModule } from '../src/app.module';
+const feature = loadFeature( "./test/features/feriadoChecks.feature" );
+jest.mock( '../src/transcolDB/services/feriado.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -19,9 +19,13 @@ jest.mock( '../src/ceturb/services/minio.service' );
 
 
 
+
+
 let resposta: any;
-let gtfs = [];
 let endpoint: string;
+let dia: string;
+let mes: string;
+let ano: string;
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -35,51 +39,61 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-  test( "Existem arquivos GTFS registrados", ( {
+  test( "A data pesquisada É um feriado", ( {
     given,
     when,
     then
   } ) => {
+    given( "quero saber se uma data está registrada como um feriado", async () => {
+      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
+    } );
 
-    given( "Eu quero saber as informações dos arquivos GTFS criados", async () => {
-      endpoint = '/gtfs';
+    given( "a data que informei é um feriado", async () => {
+      dia = '25';
+      mes = '12';
+      ano = '2018';
+      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
-    then( "recebo as informações", () => {
-      gtfs = JSON.parse( JSON.stringify( resposta.body ) );
-      expect( gtfs.length ).toBeGreaterThan( 0 );
+    then( "recebo a informação desejada", () => {
+      expect( resposta.status ).toBe( 200 );
+      expect( resposta.body.feriado ).toBe( true );
     } );
   } );
 
-  test( "Não existem arquivos GTFS registrados", ( {
+
+
+
+  test( "A data pesquisada NÃO é um feriado", ( {
     given,
     when,
     then
   } ) => {
-    given( "Eu quero saber as informações dos arquivos GTFS criados", () => {
-      endpoint = '/gtfs';
+    given( "quero saber se uma data está registrada como um feriado", async () => {
+      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
-    given( "Não há informações sobre esses arquivos", async () => {
-      GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
-        return [];
-      } );
-      resposta = await request( app.getHttpServer() ).get( '/gtfs' );
-      expect( resposta.status ).toBe( 404 );
+    given( "a data que informei não é um feriado", async () => {
+      dia = '04';
+      mes = '10';
+      ano = '2018';
+      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     when( "eu pesquisar", async () => {
-      //pesquisa ja feita acima
+      resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
-    then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.text ).toBe( 'Não há arquivos registrados' );
+    then( "recebo a informação desejada", () => {
+      expect( resposta.status ).toBe( 200 );
+      expect( resposta.body.feriado ).toBe( false );
     } );
   } );
+
 
 
   afterAll( async () => {

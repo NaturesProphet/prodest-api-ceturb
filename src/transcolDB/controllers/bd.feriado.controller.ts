@@ -3,15 +3,15 @@ import { FeriadoService } from '../services/feriado.service';
 import { ApiOperation, ApiResponse, ApiImplicitParam, ApiUseTags } from '@nestjs/swagger';
 
 @Controller( 'transcoldb/feriado' )
-@ApiUseTags( 'Feriados' )
+@ApiUseTags( 'Feriados@TranscolDB' )
 export class FeriadoController {
     constructor( private readonly Service: FeriadoService ) { }
 
 
     @Get()
     @ApiOperation( {
-        description: "Lista TODOS os feriados registrados",
-        title: "Consulta Feriados"
+        description: "Lista TODOS os feriados registrados no banco de dados auxiliar",
+        title: "Consulta feriados no banco auxiliar"
     } )
     @ApiResponse( { status: 302, description: "Feriados encontrados" } )
     @ApiResponse( { status: 404, description: "Feriados não encontrados" } )
