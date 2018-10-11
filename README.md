@@ -55,7 +55,7 @@ npm run upload:minio
 
 ## Descrição
 
-A nova api-ceturb foi integrada com o banco de dados auxilair, desenvolvido para dar apoio às tarefas de geração de GTFS.  
+A nova api-ceturb foi integrada com o banco de dados auxiliar, desenvolvido para dar apoio às tarefas de geração de GTFS.  
 
 ### Observação importante
 Note que a sincronia do ORM está desativada por padrão. Isso significa que o app não irá gerar as tabelas no banco automaticamente. Isto está configurado assim devido a restrições de segurança na infra da prodest.
@@ -93,21 +93,11 @@ npm run stopdocker
 ```
 
 ## Rotas
-/docs - Abre o swagger <br><br>
-/itinerarios - retorna todos os itinerarios cadastrados <br><br>
-/itinerarios/500 - retorna o itinerario cadastrado da linha 500 <br><br>
-/horarios/500 - retorna os horarios de saida cadastrados da linha 500 <br><br>
-/horarios/obs/500 - retorna as observações cadastradas da linha 500 <br><br>
-/linhas - retorna as linhas cadastradas <br><br>
-/viagens - retorna as viagens cadastradas <br><br>
-/viagens/7dias - retorna as viagens cadastradas para os próximos 7 dias<br><br>
-/agencias - retorna os dados da empresa responsavel pelo serviço <br><br>
-/pontos - retorna todos os pontos cadastrados <br><br>
-/pontositinerarios - retorna a relação de pontos e itinerarios <br><br>
+/docs - Abre o swagger e exibe todas as rotas disponíveis.  
 
 ## Description
 
-Neste projeto estamos "re-construíndo" a API da ceturb, utilizando os dados da API da geocontrol como fonte primária de dados.  
+Neste projeto estamos "re-construíndo" a API da ceturb, utilizando os dados da API da geocontrol como fonte primária de dados e um banco de dados auxiliar como apoio.  
 A documentação das rotas está documentada com Swagger e se econtra disponível na rota /docs
 
 ## Installation
