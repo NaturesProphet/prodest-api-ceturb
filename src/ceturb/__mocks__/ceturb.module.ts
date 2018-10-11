@@ -11,7 +11,6 @@ import { AgenciaController } from "../controllers/agencia.controller";
 import { AgenciasService } from "../services/agencia.ceturb.service";
 import { PontosItinerariosController } from "../controllers/pontosItinerario.controller";
 import { PontoItinerarioService } from "../services/pontos_x_itinerarios.service";
-import { DefaultController } from "../controllers/default.controller";
 import { HorariosController } from '../controllers/horarios.controller';
 import { HorariosService } from '../services/horario.service';
 import { EstimativasController } from "../controllers/estimativas.controller";
@@ -45,7 +44,7 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
 @Module( {
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController, AgenciaController, PontosItinerariosController,
-    HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController, DefaultController ],
+    HorariosController, EstimativasController, AreaController, GtfsController, CalendarioController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
     AgenciasService, PontoItinerarioService, HorariosService, EstimativasService, AreaService, GtfsService, MinioService, CalendarioService ]
 } )

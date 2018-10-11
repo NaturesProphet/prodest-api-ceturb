@@ -11,7 +11,7 @@ export class FeriadoController {
     @Get()
     @ApiOperation( {
         description: "Lista TODOS os feriados registrados no banco de dados auxiliar",
-        title: "Consulta feriados no banco auxiliar"
+        title: "Consulta feriados noem @TranscolDB"
     } )
     @ApiResponse( { status: 302, description: "Feriados encontrados" } )
     @ApiResponse( { status: 404, description: "Feriados não encontrados" } )
@@ -38,8 +38,8 @@ export class FeriadoController {
 
     @Get( '/:ano/:mes/:dia' )
     @ApiOperation( {
-        description: "Indica se a data consultada é um feriado ou não.",
-        title: "Consulta Feriados Boolean"
+        description: "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
+        title: "Consulta Feriados Boolean em @TranscolDB"
     } )
     @ApiResponse( { status: 200, description: "Consulta executada com sucesso." } )
     @ApiImplicitParam( {

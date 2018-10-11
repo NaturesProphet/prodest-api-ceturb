@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { Filtro } from "transcolDB/commom/filter/Filtro";
 const pacote = require( '../package.json' );
 
 async function bootstrap () {
@@ -13,7 +14,7 @@ async function bootstrap () {
     .build();
   const document = SwaggerModule.createDocument( app, options );
   SwaggerModule.setup( "docs", app, document );
-
+  app.useGlobalFilters( new Filtro() );
   await app.listen( 3000 );
 }
 bootstrap();
