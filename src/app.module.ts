@@ -20,6 +20,7 @@ import { BDLinhaController } from "transcolDB/controllers/bd.linha.controller";
 import { BDPontoController } from "transcolDB/controllers/bd.pontos.controller";
 import { BDPontogeograficoController } from "transcolDB/controllers/bd.pontogeografico.controller";
 import { BDViagemController } from "transcolDB/controllers/bd.viagem.controller";
+import { DefaultController } from "default.controller";
 
 
 
@@ -30,7 +31,8 @@ let cacheWithRedis = apicache.options( { redisClient: client } ).middleware;
 
 
 @Module( {
-  imports: [ CeturbModule, TranscolDBModule ]
+  imports: [ CeturbModule, TranscolDBModule ],
+  controllers: [ DefaultController ]
 } )
 
 export class AppModule implements NestModule {

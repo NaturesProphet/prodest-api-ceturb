@@ -7,13 +7,11 @@ export class DefaultController {
 
     @Get( "/" )
     @ApiOperation( {
-        description: "Retorna uma mensagem de estado de saude da API dO_Ob",
-        title: "Pocando!"
+        description: "Redireciona para a pagina Swagger da API dO_Ob",
+        title: "Swagger"
     } )
-    @ApiResponse( { status: 200, description: "Retorna mensagem 'Pocando!'" } )
+    @ApiResponse( { status: 200, description: "redireciona para a rota do swagger" } )
     async default ( @Res() res ) {
-        res
-            .status( HttpStatus.OK )
-            .send( "Pocando!" );
+        res.redirect( '/docs/' );
     }
 }
