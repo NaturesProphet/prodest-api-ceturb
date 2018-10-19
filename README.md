@@ -5,6 +5,7 @@
 
 ## Variáveis de ambiente configuráveis para o Docker
 ```bash
+NODE_ENV                # definir como 'production' para o swagger operar usando HTTPS
 CETURB_ROOT_ENDPOINT    # definir uma rota raiz personalizada para a aplicação ( exemplo: '/v2' ). ( default: '' )
 REDIS_HOST              # Apontar o IP do servidor do Redis
 REDIS_PORT              # Apontar a porta do servidor do Redis
