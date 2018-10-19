@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { PontogeograficoService } from '../services/pontogeografico.service';
 import { PontoGeografico } from '../models/PontoGeografico.model';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/pontogeografico' )
+@Controller( `${raiz}/transcoldb/pontogeografico` )
 @ApiUseTags( 'Pontos Geográficos em @TranscolDB' )
 export class BDPontogeograficoController {
     constructor( private readonly Service: PontogeograficoService ) { }

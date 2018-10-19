@@ -1,9 +1,11 @@
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
-import { Controller, Get, Res, HttpStatus, Param, Post, Body } from "@nestjs/common";
+import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { EstimativasService } from '../services/estimativas.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'estimativas' )
+@Controller( `${raiz}/estimativas` )
 @ApiUseTags( 'Estimativas' )
 export class EstimativasController {
     constructor( private readonly Service: EstimativasService ) { }

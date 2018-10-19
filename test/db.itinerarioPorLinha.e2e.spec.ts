@@ -6,6 +6,8 @@ import { ItinerarioService } from '../src/transcolDB/services/itinerario.service
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.itinerarioPorLinha.feature" );
 jest.mock( '../src/transcolDB/services/itinerario.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -44,7 +46,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de itinerarios para uma linha", async () => {
       cod_linha = '509';
-      endpoint = `/transcoldb/itinerario/${cod_linha}`;
+      endpoint = `${raiz}/transcoldb/itinerario/${cod_linha}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -64,7 +66,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de itinerarios para uma linha", async () => {
       cod_linha = '000';
-      endpoint = `/transcoldb/itinerario/${cod_linha}`;
+      endpoint = `${raiz}/transcoldb/itinerario/${cod_linha}`;
     } );
 
     given( "Não há registros", async () => {

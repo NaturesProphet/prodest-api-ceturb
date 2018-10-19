@@ -6,6 +6,8 @@ import { AgenciaService } from '../src/transcolDB/services/agencia.service'
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.agencia.feature" );
 jest.mock( '../src/transcolDB/services/agencia.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -42,7 +44,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = '/transcoldb/agencia';
+      endpoint = `${raiz}/transcoldb/agencia`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -61,7 +63,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = '/transcoldb/agencia';
+      endpoint = `${raiz}/transcoldb/agencia`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -87,7 +89,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = '/transcoldb/agencia';
+      endpoint = `${raiz}/transcoldb/agencia`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

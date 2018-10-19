@@ -3,6 +3,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( './test/features/buscaEstimativas_origem_linha.feature' );
 jest.mock( "../src/ceturb/services/estimativas.service" );
 
@@ -51,7 +53,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .get( `/estimativas/origemELinha/${id_origem}/${id_linha}` );
+        .get( `${raiz}/estimativas/origemELinha/${id_origem}/${id_linha}` );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -79,7 +81,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .get( `/estimativas/origemELinha/${id_origem}/${id_linha}` );
+        .get( `${raiz}/estimativas/origemELinha/${id_origem}/${id_linha}` );
       expect( resposta.status ).toBe( 404 );
     } );
 

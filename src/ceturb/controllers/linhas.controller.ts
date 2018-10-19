@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { LinhasService } from '../services/linhas.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'linhas' )
+@Controller( `${raiz}/linhas` )
 @ApiUseTags( 'Linhas' )
 export class LinhasController {
 

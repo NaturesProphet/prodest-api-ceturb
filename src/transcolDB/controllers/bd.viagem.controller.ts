@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ViagemService } from '../services/viagem.service';
 import { Viagem } from '../models/Viagem.model';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/viagem' )
+@Controller( `${raiz}/transcoldb/viagem` )
 @ApiUseTags( 'Viagems@TranscolDB' )
 export class BDViagemController {
     constructor( private readonly Service: ViagemService ) { }

@@ -3,8 +3,10 @@ import { PontoService } from '../services/ponto.service';
 import { Ponto } from '../models/Ponto.model';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Estimativa } from '../models/Estimativa.model';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/ponto' )
+@Controller( `${raiz}/transcoldb/ponto` )
 @ApiUseTags( 'Pontos@TranscolDB' )
 export class BDPontoController {
     constructor( private readonly Service: PontoService ) { }

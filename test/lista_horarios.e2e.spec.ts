@@ -3,6 +3,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaHorario.feature" );
 jest.mock( '../src/ceturb/services/horario.service' );
 
@@ -50,7 +52,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar uma linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `/horarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
     } );
 
     then( "retornará os horários cadastrados daquela linha", () => {
@@ -72,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     given( "Não há informações cadastradas", async () => {
-      resposta = await request( app.getHttpServer() ).get( `/horarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
       expect( resposta.body.status ).toBe( 204 );
     } );
 

@@ -4,6 +4,8 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { ItinerarioService } from '../src/transcolDB/services/itinerario.service';
 import { AppModule } from '../src/app.module';
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/db.viagemsPorItinerario.feature" );
 jest.mock( '../src/transcolDB/services/itinerario.service' );
 
@@ -45,7 +47,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de viagems de um itinerário específico", async () => {
       codigo_itinerario = '12345'
-      endpoint = `/transcoldb/itinerario/viagem/${codigo_itinerario}`;
+      endpoint = `${raiz}/transcoldb/itinerario/viagem/${codigo_itinerario}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -65,7 +67,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de viagems de um itinerário específico", async () => {
       codigo_itinerario = '000000000000000'
-      endpoint = `/transcoldb/itinerario/viagem/${codigo_itinerario}`;
+      endpoint = `${raiz}/transcoldb/itinerario/viagem/${codigo_itinerario}`;
     } );
 
     given( "Não há registros disponíveis", async () => {

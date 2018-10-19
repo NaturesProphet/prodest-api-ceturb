@@ -6,6 +6,8 @@ import { AgenciaService } from '../src/transcolDB/services/agencia.service';
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.contato.feature" );
 jest.mock( '../src/transcolDB/services/agencia.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 
 //--------------------------------------------------------------------//
@@ -44,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de contatos", async () => {
-      endpoint = '/transcoldb/agencia/contato';
+      endpoint = `${raiz}/transcoldb/agencia/contato`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -63,7 +65,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de contatos", async () => {
-      endpoint = '/transcoldb/agencia/contato';
+      endpoint = `${raiz}/transcoldb/agencia/contato`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -89,7 +91,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de contatos", async () => {
-      endpoint = '/transcoldb/agencia/contato';
+      endpoint = `${raiz}/transcoldb/agencia/contato`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

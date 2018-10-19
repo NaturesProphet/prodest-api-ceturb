@@ -3,8 +3,10 @@ import { ItinerarioService } from '../services/itinerario.service';
 import { Itinerario } from '../models/Itinerario.model';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Viagem } from '../models/Viagem.model';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/itinerario' )
+@Controller( `${raiz}/transcoldb/itinerario` )
 @ApiUseTags( 'Itinerarios@TranscolDB' )
 export class BDItinerarioController {
     constructor( private readonly Service: ItinerarioService ) { }

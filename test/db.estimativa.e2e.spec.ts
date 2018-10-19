@@ -6,6 +6,8 @@ import { EstimativaService } from '../src/transcolDB/services/estimativa.service
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.estimativa.feature" );
 jest.mock( '../src/transcolDB/services/estimativa.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 
 //--------------------------------------------------------------------//
@@ -43,7 +45,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de estimativas", async () => {
-      endpoint = '/transcoldb/estimativa';
+      endpoint = `${raiz}/transcoldb/estimativa`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -62,7 +64,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de estimativas", async () => {
-      endpoint = '/transcoldb/estimativa';
+      endpoint = `${raiz}/transcoldb/estimativa`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -88,7 +90,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de estimativas", async () => {
-      endpoint = '/transcoldb/estimativa';
+      endpoint = `${raiz}/transcoldb/estimativa`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

@@ -2,9 +2,11 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { ViagensService } from '../services/viagens.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 
-@Controller( 'viagens' )
+@Controller( `${raiz}/viagens` )
 @ApiUseTags( "Viagens" )
 export class ViagensController {
     constructor( private readonly service: ViagensService ) { }

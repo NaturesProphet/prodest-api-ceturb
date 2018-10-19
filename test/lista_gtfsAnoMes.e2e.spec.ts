@@ -4,6 +4,8 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaGtfsAnoMes.feature" );
 
 //--------------------------------------------------------------------//
@@ -47,7 +49,7 @@ defineFeature( feature, test => {
     given( "Eu quero saber as informações dos arquivos GTFS criados de um ano e mês específico", async () => {
       ano = '2018';
       mes = '10'
-      endpoint = `/gtfs/${ano}/${mes}`;
+      endpoint = `${raiz}/gtfs/${ano}/${mes}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -71,7 +73,7 @@ defineFeature( feature, test => {
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
-      endpoint = `/gtfs/${ano}/${mes}`;
+      endpoint = `${raiz}/gtfs/${ano}/${mes}`;
       GtfsService.prototype.getByYearMonth = jest.fn().mockImplementationOnce( () => {
         return [];
       } );

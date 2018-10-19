@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { LinhaService } from '../services/linha.service';
 import { Linha } from '../models/Linha.model';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/linha' )
+@Controller( `${raiz}/transcoldb/linha` )
 @ApiUseTags( 'Linhas@TranscolDB' )
 export class BDLinhaController {
     constructor( private readonly Service: LinhaService ) { }

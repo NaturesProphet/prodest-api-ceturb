@@ -3,6 +3,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from '../src/app.module';
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/feriadoChecks.feature" );
 jest.mock( '../src/transcolDB/services/feriado.service' );
 
@@ -46,14 +48,14 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero saber se uma data está registrada como um feriado", async () => {
-      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     given( "a data que informei é um feriado", async () => {
       dia = '25';
       mes = '12';
       ano = '2018';
-      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -75,14 +77,14 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero saber se uma data está registrada como um feriado", async () => {
-      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     given( "a data que informei não é um feriado", async () => {
       dia = '04';
       mes = '10';
       ano = '2018';
-      endpoint = `/transcoldb/feriado/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/transcoldb/feriado/${ano}/${mes}/${dia}`;
     } );
 
     when( "eu pesquisar", async () => {

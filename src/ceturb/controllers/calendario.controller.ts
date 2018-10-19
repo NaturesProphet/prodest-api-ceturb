@@ -1,9 +1,11 @@
-import { Controller, Get, Res, HttpException, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { CalendarioService } from '../services/calendario.service';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'calendario' )
+@Controller( `${raiz}/calendario` )
 @ApiUseTags( 'Calendario' )
 export class CalendarioController {
 

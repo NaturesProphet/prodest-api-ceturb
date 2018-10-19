@@ -5,6 +5,8 @@ import { INestApplication } from "@nestjs/common";
 import { CalendarioService } from '../src/ceturb/services/calendario.service';
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaCalendario.feature" );
 jest.mock( '../src/ceturb/services/calendario.service' );
 
@@ -44,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber quais são os calendaris da semana", async () => {
-      url = '/calendario';
+      url = `${raiz}/calendario`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -60,7 +62,7 @@ defineFeature( feature, test => {
 
   test( 'Não existem registros de calendario', ( { given, when, then, pending } ) => {
     given( 'Eu quero saber quais são os calendaris da semana', async () => {
-      url = '/calendario';
+      url = `${raiz}/calendario`;
       CalendarioService.prototype.listar_calendario = jest.fn()
         .mockImplementationOnce( () => {
           return new InformationNotFound( "Não há registros" );

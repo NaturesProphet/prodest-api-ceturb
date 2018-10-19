@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ItinerariopontoService } from '../services/itinerarioponto.service';
 import { ItinerarioPonto } from '../models/itinerario_ponto.model';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/itinerario_ponto' )
+@Controller( `${raiz}/transcoldb/itinerario_ponto` )
 @ApiUseTags( 'Tabela intermediária itinerario_ponto em @TranscolDB' )
 export class BDItinerariopontoController {
     constructor( private readonly Service: ItinerariopontoService ) { }

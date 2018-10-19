@@ -1,9 +1,10 @@
 import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { GtfsService } from '../services/gtfs.service';
-import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'gtfs' )
+@Controller( `${raiz}/gtfs` )
 @ApiUseTags( 'GTFS' )
 export class GtfsController {
 

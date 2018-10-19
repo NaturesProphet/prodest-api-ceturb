@@ -1,9 +1,11 @@
-import { Controller, Post, Res, Body, HttpStatus, Param, Get } from '@nestjs/common';
+import { Controller, Res, HttpStatus, Param, Get } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags, ApiImplicitParam } from '@nestjs/swagger';
 import { AreaService } from '../services/area.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'area' )
+@Controller( `${raiz}/area` )
 @ApiUseTags( 'Area' )
 export class AreaController {
     constructor( private readonly Service: AreaService ) { }
@@ -44,10 +46,6 @@ export class AreaController {
         description: 'Coordenada do ponto geográfico esquerdo inferior (SIGNED FLOAT)',
         required: true,
     } )
-
-
-
-
     async retornar_pontos_por_area_do_mapa ( @Res() res, @Param() params ) {
         try {
             let Left: number = parseFloat( params.left );

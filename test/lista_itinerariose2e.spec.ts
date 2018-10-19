@@ -5,6 +5,8 @@ import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaItinerario.feature" );
 jest.mock( '../src/ceturb/services/itinerarios.service' );
 
@@ -42,7 +44,7 @@ defineFeature( feature, test => {
   test( "Existem itinerários registrados", ( { given, when, then } ) => {
 
     given( "Eu quero saber as informações dos itinerários registrados", async () => {
-      resposta = await request( app.getHttpServer() ).get( `/itinerarios` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/itinerarios` );
     } );
 
     when( "Eu pesquisar os itinerários", async () => {
@@ -63,7 +65,7 @@ defineFeature( feature, test => {
       ItinerariosService.prototype.lista_itinerario = jest.fn().mockImplementationOnce( () => {
         return new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).get( '/itinerarios' );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/itinerarios` );
     } );
 
     when( "Eu pesquisar os itinerários", async () => {

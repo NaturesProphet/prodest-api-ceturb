@@ -5,6 +5,8 @@ import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { AreaService } from "../src/ceturb/services/area.service";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( './test/features/buscaArea.feature' );
 jest.mock( "../src/ceturb/services/area.service" );
 
@@ -48,7 +50,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar", async () => {
-      resposta = await request( app.getHttpServer() ).get( "/area/1/2/3/4" );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/area/1/2/3/4` );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -70,7 +72,7 @@ defineFeature( feature, test => {
       AreaService.prototype.BuscaPontosPorArea = jest.fn().mockImplementationOnce( () => {
         throw new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).get( "/area/1/2/3/4" );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/area/1/2/3/4` );
     } );
 
     given( 'Não há pontos na area designada', () => {

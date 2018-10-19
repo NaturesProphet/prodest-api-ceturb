@@ -3,8 +3,10 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PontoItinerarioService } from '../services/pontos_x_itinerarios.service';
 import { PontoItinerario } from '../models/pontoItinerario.entity';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'pontosItinerarios' )
+@Controller( `${raiz}/pontosItinerarios` )
 @ApiUseTags( 'Pontos x Itinerarios' )
 export class PontosItinerariosController {
 

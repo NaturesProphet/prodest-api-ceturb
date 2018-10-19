@@ -1,8 +1,10 @@
 import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { FeriadoService } from '../services/feriado.service';
 import { ApiOperation, ApiResponse, ApiImplicitParam, ApiUseTags } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/feriado' )
+@Controller( `${raiz}/transcoldb/feriado` )
 @ApiUseTags( 'Feriados@TranscolDB' )
 export class BDFeriadoController {
     constructor( private readonly Service: FeriadoService ) { }

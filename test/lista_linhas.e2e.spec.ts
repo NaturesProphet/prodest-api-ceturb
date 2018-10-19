@@ -5,6 +5,8 @@ import { LinhasService } from '../src/ceturb/services/linhas.service';
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaLinhas.feature" );
 jest.mock( '../src/ceturb/services/linhas.service' );
 
@@ -44,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações das linhas registrados", async () => {
-      resposta = await request( app.getHttpServer() ).get( '/linhas' );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas` );
     } );
 
     when( "eu pesquisar", async () => {
@@ -70,7 +72,7 @@ defineFeature( feature, test => {
       LinhasService.prototype.retornar_linhas = jest.fn().mockImplementationOnce( () => {
         return new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).get( "/linhas" );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas` );
       expect( resposta.body.status ).toBe( 204 );
     } );
 

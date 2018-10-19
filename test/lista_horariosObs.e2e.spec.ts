@@ -3,6 +3,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaHorarioObs.feature" );
 jest.mock( '../src/ceturb/services/horario.service' );
 
@@ -45,13 +47,13 @@ defineFeature( feature, test => {
 
     given( "Eu quero saber as informações adicionais sobre horarios de uma linha", () => {
       request( app.getHttpServer() )
-        .get( "/horarios/obs/500" )
+        .get( `${raiz}/horarios/obs/500` )
         .expect( 200 );
     } );
 
     when( "eu pesquisar as observações do horário da linha", async () => {
       linha = 500;
-      let requisicao = await request( app.getHttpServer() ).get( "/horarios/" + linha );
+      let requisicao = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
       horarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
@@ -72,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar as observações do horário da linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `/horarios/obs/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/obs/${linha}` );
     } );
 
     then( "retornará uma mensagem informando que não há registros", async () => {

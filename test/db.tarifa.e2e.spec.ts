@@ -4,8 +4,11 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AgenciaService } from '../src/transcolDB/services/agencia.service';
 import { AppModule } from '../src/app.module';
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/db.tarifa.feature" );
 jest.mock( '../src/transcolDB/services/agencia.service' );
+
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -43,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de tarifas", async () => {
-      endpoint = '/transcoldb/agencia/tarifa';
+      endpoint = `${raiz}/transcoldb/agencia/tarifa`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -62,7 +65,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de tarifas", async () => {
-      endpoint = '/transcoldb/agencia/tarifa';
+      endpoint = `${raiz}/transcoldb/agencia/tarifa`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -88,7 +91,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de tarifas", async () => {
-      endpoint = '/transcoldb/agencia/tarifa';
+      endpoint = `${raiz}/transcoldb/agencia/tarifa`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

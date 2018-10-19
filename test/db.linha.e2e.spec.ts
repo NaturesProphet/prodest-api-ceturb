@@ -6,6 +6,8 @@ import { LinhaService } from '../src/transcolDB/services/linha.service';
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.linha.feature" );
 jest.mock( '../src/transcolDB/services/linha.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -43,7 +45,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de linhas", async () => {
-      endpoint = '/transcoldb/linha';
+      endpoint = `${raiz}/transcoldb/linha`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -62,7 +64,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de linhas", async () => {
-      endpoint = '/transcoldb/linha';
+      endpoint = `${raiz}/transcoldb/linha`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -88,7 +90,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de linhas", async () => {
-      endpoint = '/transcoldb/linha';
+      endpoint = `${raiz}/transcoldb/linha`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

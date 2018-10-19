@@ -2,8 +2,10 @@ import { Controller, Get, Res, Param, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { ItinerariosService } from '../services/itinerarios.service';
 import { InformationNotFound } from '../models/exception/InformationNotFound';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'itinerarios' )
+@Controller( `${raiz}/itinerarios` )
 @ApiUseTags( 'Itinerarios' )
 export class ItinerariosController {
 

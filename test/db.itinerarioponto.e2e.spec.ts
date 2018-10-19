@@ -6,6 +6,8 @@ import { ItinerariopontoService } from '../src/transcolDB/services/itinerariopon
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.itinerarioponto.feature" );
 jest.mock( '../src/transcolDB/services/itinerarioponto.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -42,7 +44,7 @@ defineFeature( feature, test => {
         then
     } ) => {
         given( "quero ver a lista de associações", async () => {
-            endpoint = '/transcoldb/itinerario_ponto';
+            endpoint = `${raiz}/transcoldb/itinerario_ponto`;
         } );
 
         when( "eu pesquisar", async () => {
@@ -61,7 +63,7 @@ defineFeature( feature, test => {
         then
     } ) => {
         given( "quero ver a lista de associações", async () => {
-            endpoint = '/transcoldb/itinerario_ponto';
+            endpoint = `${raiz}/transcoldb/itinerario_ponto`;
         } );
 
         given( "O banco de dados está vazio", async () => {
@@ -87,7 +89,7 @@ defineFeature( feature, test => {
         then
     } ) => {
         given( "quero ver a lista de associações", async () => {
-            endpoint = '/transcoldb/itinerario_ponto';
+            endpoint = `${raiz}/transcoldb/itinerario_ponto`;
         } );
 
         given( "algum problema lógico ou de infra ocorreu", async () => {

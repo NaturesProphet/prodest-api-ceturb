@@ -4,6 +4,8 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { ViagemService } from '../src/transcolDB/services/viagem.service';
 import { AppModule } from '../src/app.module';
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/db.viagem.feature" );
 jest.mock( '../src/transcolDB/services/viagem.service' );
 
@@ -42,7 +44,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de viagems", async () => {
-      endpoint = '/transcoldb/viagem';
+      endpoint = `${raiz}/transcoldb/viagem`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -61,7 +63,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de viagems", async () => {
-      endpoint = '/transcoldb/viagem';
+      endpoint = `${raiz}/transcoldb/viagem`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -87,7 +89,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de viagems", async () => {
-      endpoint = '/transcoldb/viagem';
+      endpoint = `${raiz}/transcoldb/viagem`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

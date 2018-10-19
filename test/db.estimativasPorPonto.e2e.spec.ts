@@ -6,6 +6,8 @@ import { PontoService } from '../src/transcolDB/services/ponto.service';
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.estimativasPorPonto.feature" );
 jest.mock( '../src/transcolDB/services/ponto.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 
 //--------------------------------------------------------------------//
@@ -46,7 +48,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de estimativas de viagems registradas para um ponto", async () => {
       codigo_ponto = '123';
-      endpoint = `/transcoldb/ponto/estimativas/${codigo_ponto}`;
+      endpoint = `${raiz}/transcoldb/ponto/estimativas/${codigo_ponto}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -66,7 +68,7 @@ defineFeature( feature, test => {
   } ) => {
     given( "quero ver a lista de estimativas de viagems registradas para um ponto", async () => {
       codigo_ponto = '0000';
-      endpoint = `/transcoldb/ponto/estimativas/${codigo_ponto}`;
+      endpoint = `${raiz}/transcoldb/ponto/estimativas/${codigo_ponto}`;
     } );
 
     given( "não existem estiamtivas registradas", async () => {

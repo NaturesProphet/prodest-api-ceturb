@@ -3,8 +3,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { PontoService } from '../src/ceturb/services/ponto.ceturb.service'
+import { PontoService } from '../src/ceturb/services/ponto.ceturb.service';
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/pontos_de_parada.feature" );
 jest.mock( '../src/ceturb/services/ponto.ceturb.service' );
 
@@ -84,7 +86,7 @@ defineFeature( feature, test => {
         return [ obj1, obj2, obj3 ];
 
       } );
-      resposta = await request( app.getHttpServer() ).get( "/pontos" );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos` );
       expect( resposta.status || resposta.body.status ).toBe( 200 );
     } );
 
@@ -104,7 +106,7 @@ defineFeature( feature, test => {
       PontoService.prototype.retornar_pontos = jest.fn().mockImplementationOnce( () => {
         return new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).get( "/pontos" );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos` );
       expect( resposta.body.status ).toBe( 204 );
     } );
 

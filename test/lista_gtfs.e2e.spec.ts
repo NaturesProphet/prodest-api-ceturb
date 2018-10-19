@@ -4,6 +4,8 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaGtfs.feature" );
 
 //--------------------------------------------------------------------//
@@ -43,7 +45,7 @@ defineFeature( feature, test => {
   } ) => {
 
     given( "Eu quero saber as informações dos arquivos GTFS criados", async () => {
-      endpoint = '/gtfs';
+      endpoint = `${raiz}/gtfs`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -62,14 +64,14 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações dos arquivos GTFS criados", () => {
-      endpoint = '/gtfs';
+      endpoint = `${raiz}/gtfs`;
     } );
 
     given( "Não há informações sobre esses arquivos", async () => {
       GtfsService.prototype.getAll = jest.fn().mockImplementationOnce( () => {
         return [];
       } );
-      resposta = await request( app.getHttpServer() ).get( '/gtfs' );
+      resposta = await request( app.getHttpServer() ).get( endpoint );
       expect( resposta.status ).toBe( 404 );
     } );
 

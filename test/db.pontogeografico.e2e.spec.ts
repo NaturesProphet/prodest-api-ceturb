@@ -6,6 +6,8 @@ import { PontogeograficoService } from '../src/transcolDB/services/pontogeografi
 import { AppModule } from '../src/app.module';
 const feature = loadFeature( "./test/features/db.pontogeografico.feature" );
 jest.mock( '../src/transcolDB/services/pontogeografico.service' );
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -42,7 +44,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = '/transcoldb/pontogeografico';
+      endpoint = `${raiz}/transcoldb/pontogeografico`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -61,7 +63,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = '/transcoldb/pontogeografico';
+      endpoint = `${raiz}/transcoldb/pontogeografico`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -87,7 +89,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = '/transcoldb/pontogeografico';
+      endpoint = `${raiz}/transcoldb/pontogeografico`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

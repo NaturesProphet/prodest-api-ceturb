@@ -4,6 +4,8 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { GtfsService } from "../src/ceturb/services/gtfs.service";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaGtfsAnoMesDia.feature" );
 
 //--------------------------------------------------------------------//
@@ -49,7 +51,7 @@ defineFeature( feature, test => {
       ano = '2018';
       mes = '10';
       dia = '31';
-      endpoint = `/gtfs/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/gtfs/${ano}/${mes}/${dia}`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -75,7 +77,7 @@ defineFeature( feature, test => {
       ano = "0";
       mes = "0";
       dia = "0";
-      endpoint = `/gtfs/${ano}/${mes}/${dia}`;
+      endpoint = `${raiz}/gtfs/${ano}/${mes}/${dia}`;
 
     } );
 

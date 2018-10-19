@@ -5,8 +5,10 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Contato } from '../models/Contato.model';
 import { Feriado } from '../models/Feriado.model';
 import { Tarifa } from '../models/Tarifa.model';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/agencia' )
+@Controller( `${raiz}/transcoldb/agencia` )
 @ApiUseTags( 'Agencias@TranscolDB' )
 export class BDAgenciaController {
     constructor( private readonly Service: AgenciaService ) { }

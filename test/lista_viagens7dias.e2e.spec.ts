@@ -3,8 +3,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { ViagensService } from '../src/ceturb/services/viagens.service'
+import { ViagensService } from '../src/ceturb/services/viagens.service';
 import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
+import { Endpoints } from '../src/commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaViagens7dias.feature" );
 jest.mock( '../src/ceturb/services/viagens.service' );
 
@@ -49,7 +51,7 @@ defineFeature( feature, test => {
                 let obj3 = { "dataAgendada": 1534170720000, "linhaId": 457, "itinerarioId": 601, "dataChegadaEstimada": 1534172495000, "veiculo": "14087", "acessibilidade": true }
                 return [ obj1, obj2, obj3 ];
             } );
-            resposta = await request( app.getHttpServer() ).get( '/viagens/7dias' );
+            resposta = await request( app.getHttpServer() ).get( `${raiz}/viagens/7dias` );
         } );
 
 
@@ -73,7 +75,7 @@ defineFeature( feature, test => {
             ViagensService.prototype.retornar_viagens_7dias = jest.fn().mockImplementationOnce( () => {
                 return new InformationNotFound( "Não há registros" )
             } );
-            resposta = await request( app.getHttpServer() ).get( '/viagens/7dias' );
+            resposta = await request( app.getHttpServer() ).get( `${raiz}/viagens/7dias` );
         } );
 
 

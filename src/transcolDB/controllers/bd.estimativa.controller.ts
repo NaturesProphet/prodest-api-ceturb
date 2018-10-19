@@ -2,8 +2,10 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { EstimativaService } from '../services/estimativa.service';
 import { Estimativa } from '../models/Estimativa.model';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Endpoints } from '../../commom/configs/endpoints.config';
+const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( 'transcoldb/estimativa' )
+@Controller( `${raiz}/transcoldb/estimativa` )
 @ApiUseTags( 'Estimativas@TranscolDB' )
 export class BDEstimativaController {
     constructor( private readonly Service: EstimativaService ) { }
