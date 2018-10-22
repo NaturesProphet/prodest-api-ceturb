@@ -60,4 +60,12 @@ describe( "Ponto Service", () => {
     pontos = await service.retornar_pontos();
     expect( pontos.length ).toBeGreaterThan( 0 );
   } );
+
+  it( 'O retorno de pontos de parada deve ser maior do que 0', async () => {
+    let envelope = [ 1, 2, 3, 4 ];
+    let consulta = await service.BuscaPontosPorArea( envelope );
+    expect( consulta.pontosDeParada.length ).toBeGreaterThan( 0 );
+  } );
+
+
 } );
