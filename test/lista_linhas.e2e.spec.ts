@@ -46,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "Eu quero saber as informações das linhas registrados", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha` );
     } );
 
     when( "eu pesquisar", async () => {
@@ -72,7 +72,7 @@ defineFeature( feature, test => {
       LinhasService.prototype.retornar_linhas = jest.fn().mockImplementationOnce( () => {
         return new InformationNotFound( "nenhum registro encontrado" );
       } );
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha` );
       expect( resposta.body.status ).toBe( 204 );
     } );
 

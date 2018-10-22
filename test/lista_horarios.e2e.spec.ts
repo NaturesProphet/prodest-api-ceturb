@@ -6,7 +6,7 @@ import { AppModule } from "../src/app.module";
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaHorario.feature" );
-jest.mock( '../src/ceturb/services/horario.service' );
+jest.mock( '../src/ceturb/services/linhas.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -52,7 +52,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar uma linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios` );
     } );
 
     then( "retornará os horários cadastrados daquela linha", () => {
@@ -74,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     given( "Não há informações cadastradas", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios` );
       expect( resposta.body.status ).toBe( 204 );
     } );
 

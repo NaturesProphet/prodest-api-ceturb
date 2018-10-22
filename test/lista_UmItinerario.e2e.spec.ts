@@ -6,7 +6,7 @@ import { AppModule } from "../src/app.module";
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaUmItinerario.feature" );
-jest.mock( '../src/ceturb/services/itinerarios.service' );
+jest.mock( '../src/ceturb/services/linhas.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -50,7 +50,7 @@ defineFeature( feature, test => {
     } );
 
     when( "Eu pesquisar uma linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/itinerarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/itinerarios` );
     } );
 
     then( "retorna o itinerário cadastrado de uma linha", () => {
@@ -71,7 +71,7 @@ defineFeature( feature, test => {
     } );
 
     given( "não há registro de itinerários para essa linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/itinerarios/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/itinerarios` );
       expect( resposta.status ).toBe( 200 );
     } );
 

@@ -6,11 +6,9 @@ import { ItinerariosController } from "./ceturb/controllers/itinerarios.controll
 import { ViagensController } from "./ceturb/controllers/viagens.controller";
 import { LinhasController } from "./ceturb/controllers/linhas.controller";
 import { PontosItinerariosController } from "./ceturb/controllers/pontosItinerario.controller";
-import { HorariosController } from "./ceturb/controllers/horarios.controller";
 import { EstimativasController } from "./ceturb/controllers/estimativas.controller";
 import { BDAgenciaController } from "./transcolDB/controllers/bd.agencia.controller";
 import { BDItinerarioController } from "./transcolDB/controllers/bd.itinerario.controller";
-import { BDLinhaController } from "./transcolDB/controllers/bd.linha.controller";
 import { BDPontogeograficoController } from "./transcolDB/controllers/bd.pontogeografico.controller";
 import { BDViagemController } from "./transcolDB/controllers/bd.viagem.controller";
 import { DefaultController } from "./default.controller";
@@ -42,9 +40,6 @@ export class AppModule implements NestModule {
       .forRoutes( PontosItinerariosController );
     consumer
       .apply( redisConf.cacheWithRedis( '10 seconds' ) )
-      .forRoutes( HorariosController );
-    consumer
-      .apply( redisConf.cacheWithRedis( '10 seconds' ) )
       .forRoutes( EstimativasController );
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
@@ -52,9 +47,6 @@ export class AppModule implements NestModule {
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( BDItinerarioController );
-    consumer
-      .apply( redisConf.cacheWithRedis( '3 hours' ) )
-      .forRoutes( BDLinhaController );
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( BDPontogeograficoController );

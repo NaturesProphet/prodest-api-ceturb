@@ -26,34 +26,4 @@ export class ItinerariosController {
                 .send( new InformationNotFound( "Não há registros" ) )
         }
     }
-
-    @Get( '/:linha' )
-    @ApiOperation( { title: 'lista os itinerários existentes de uma linha' } )
-    @ApiResponse( { status: 200, description: 'itinerário encontrado' } )
-    @ApiResponse( { status: 204, description: 'Itinerario não encontrado' } )
-    @ApiImplicitParam( {
-        name: 'linha',
-        description: 'Numero de bandeira da Linha',
-        required: true,
-    } )
-    public async buscar ( @Param( 'linha' ) linha, @Res() res ) {
-        try {
-            let response = await this.service.busca_itinerario( linha );
-            let itinerarios = JSON.parse( JSON.stringify( response ) );
-            if ( itinerarios.length > 0 )
-                res
-                    .status( HttpStatus.OK )
-                    .send( response );
-            else {
-                res
-                    .status( HttpStatus.OK )
-                    .send( "Não há registros de itinerarios para essa linha" );
-            }
-
-        } catch ( err ) {
-            res
-                .status( HttpStatus.INTERNAL_SERVER_ERROR )
-                .send( err.message )
-        }
-    }
 }

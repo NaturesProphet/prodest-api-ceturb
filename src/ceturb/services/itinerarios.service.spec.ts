@@ -44,26 +44,4 @@ describe( 'LinhasService', () => {
     expect( itinerarios.length ).toBeGreaterThan( 0 );
   } );
 
-  it( 'O retorno de um itinerários de uma linha deve ser maior do que 0', async () => {
-    ItinerariosService.prototype.lista_itinerario = jest
-      .fn()
-      .mockImplementationOnce( () => {
-        let obj1 = {
-          "Linha": "0500",
-          "Sentido": "I",
-          "Sequencia": 1,
-          "Tipo": "D",
-          "Desc_Via": "T. VILA VELHA",
-          "Descricao_Linha": "T. VILA VELHA / T. ITACIBÁ VIA 3ª PONTE",
-          "Mensagem": "Processamento sem Erro",
-        }
-        return [ obj1 ];
-      } );
-
-    let itinerarios = [];
-    let linha = 500;
-    itinerarios = await service.busca_itinerario( linha );
-    expect( itinerarios.length ).toBeGreaterThan( 0 );
-  } );
-
 } );

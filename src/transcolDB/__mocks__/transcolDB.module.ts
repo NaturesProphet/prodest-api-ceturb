@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BDAgenciaController } from '../controllers/bd.agencia.controller';
 import { AgenciaService } from '../services/agencia.service';
-import { LinhaService } from '../services/linha.service';
-import { BDLinhaController } from '../controllers/bd.linha.controller';
 import { BDItinerarioController } from '../controllers/bd.itinerario.controller';
 import { ItinerarioService } from '../services/itinerario.service';
 import { BDViagemController } from '../controllers/bd.viagem.controller';
@@ -21,11 +19,11 @@ const orm_sync = ( process.env.TRANSCOLDB_ORM_SYNC === 'true' ) || false;
 
 
 @Module( {
-    controllers: [ BDAgenciaController, BDLinhaController,
+    controllers: [ BDAgenciaController,
         BDItinerarioController, BDViagemController,
         BDPontogeograficoController ],
 
-    providers: [ AgenciaService, LinhaService, ItinerarioService,
+    providers: [ AgenciaService, ItinerarioService,
         ViagemService, PontogeograficoService ]
 } )
 export class TranscolDBModule { }

@@ -9,8 +9,6 @@ import { ItinerariosController } from "../controllers/itinerarios.controller";
 import { ItinerariosService } from "../services/itinerarios.service";
 import { PontosItinerariosController } from "../controllers/pontosItinerario.controller";
 import { PontoItinerarioService } from "../services/pontos_x_itinerarios.service";
-import { HorariosController } from '../controllers/horarios.controller';
-import { HorariosService } from '../services/horario.service';
 import { EstimativasController } from "../controllers/estimativas.controller";
 import { EstimativasService } from "../services/estimativas.service";
 import { GtfsService } from '../services/gtfs.service';
@@ -22,9 +20,9 @@ import { MinioService } from '../services/minio.service'
 @Module( {
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController, PontosItinerariosController,
-    HorariosController, EstimativasController, GtfsController, CalendarioController ],
+    EstimativasController, GtfsController, CalendarioController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    PontoItinerarioService, HorariosService, EstimativasService, GtfsService, MinioService, CalendarioService ]
+    PontoItinerarioService, EstimativasService, GtfsService, MinioService, CalendarioService ]
 } )
 
 

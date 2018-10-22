@@ -6,7 +6,7 @@ import { AppModule } from "../src/app.module";
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/buscaHorarioObs.feature" );
-jest.mock( '../src/ceturb/services/horario.service' );
+jest.mock( '../src/ceturb/services/linhas.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -53,7 +53,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar as observações do horário da linha", async () => {
       linha = 500;
-      let requisicao = await request( app.getHttpServer() ).get( `${raiz}/horarios/${linha}` );
+      let requisicao = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios/obs` );
       horarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
@@ -74,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar as observações do horário da linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/horarios/obs/${linha}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios/obs` );
     } );
 
     then( "retornará uma mensagem informando que não há registros", async () => {
