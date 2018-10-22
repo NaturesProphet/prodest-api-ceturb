@@ -25,7 +25,7 @@
     "persistentdb": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 -v /home/mgarcia/DOCKER/mssql/:/var/opt/mssql --name sql-server-persistent -d microsoft/mssql-server-linux ",
     "sqlserver": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 --name sql-server -d microsoft/mssql-server-linux ",
     "connect": "sqlcmd -S localhost -U SA -PSenh@Dif1cil",
-    "sonar:casa": "sonar-scanner -Dsonar.projectKey=api-ceturb -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=8265f31535ef7c18d4d6abd951ffae41ee6b0b05"
+    "sonar:casa": "sonar-scanner -Dsonar.projectKey=api-ceturb -Dsonar.language=ts -Dsonar.sources=src -Dsonar.host.url=http://localhost:9000 -Dsonar.login=8265f31535ef7c18d4d6abd951ffae41ee6b0b05"
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",

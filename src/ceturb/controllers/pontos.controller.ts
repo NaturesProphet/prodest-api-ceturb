@@ -13,7 +13,7 @@ export class PontosController {
 
   @Get()
   @ApiOperation( {
-    description: "retornar os pontos ativos",
+    description: "lista os pontos de parada ativos. \nOrigem: ceturb/geocontrol",
     title: "Pontos de parada"
   } )
   @ApiResponse( { status: 200, description: "Pontos encontrados" } )
