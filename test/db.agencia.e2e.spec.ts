@@ -44,7 +44,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = `${raiz}/transcoldb/agencia`;
+      endpoint = `${raiz}/agencias`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -63,7 +63,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = `${raiz}/transcoldb/agencia`;
+      endpoint = `${raiz}/agencias`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -89,7 +89,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de agencias", async () => {
-      endpoint = `${raiz}/transcoldb/agencia`;
+      endpoint = `${raiz}/agencias`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

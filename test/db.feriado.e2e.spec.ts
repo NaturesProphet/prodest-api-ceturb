@@ -46,7 +46,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de feriados", async () => {
-      endpoint = `${raiz}/transcoldb/agencia/feriado`;
+      endpoint = `${raiz}/agencias/feriados`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -65,7 +65,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de feriados", async () => {
-      endpoint = `${raiz}/transcoldb/agencia/feriado`;
+      endpoint = `${raiz}/agencias/feriados`;
     } );
 
     given( "O banco de dados está vazio", async () => {
@@ -91,7 +91,7 @@ defineFeature( feature, test => {
     then
   } ) => {
     given( "quero ver a lista de feriados", async () => {
-      endpoint = `${raiz}/transcoldb/agencia/feriado`;
+      endpoint = `${raiz}/agencias/feriados`;
     } );
 
     given( "algum problema lógico ou de infra ocorreu", async () => {

@@ -8,7 +8,7 @@ import { Tarifa } from '../models/Tarifa.model';
 import { Endpoints } from '../../commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( `${raiz}/transcoldb/agencia` )
+@Controller( `${raiz}/agencias` )
 @ApiUseTags( 'Agencias@TranscolDB' )
 export class BDAgenciaController {
     constructor( private readonly Service: AgenciaService ) { }
@@ -16,8 +16,8 @@ export class BDAgenciaController {
 
     @Get()
     @ApiOperation( {
-        description: "Listar agencias registradas no banco auxiliar",
-        title: "Agencias em @TranscolDB"
+        description: "Lista as agencias registradas. \nOrigem: banco de dados",
+        title: "Agencias"
     } )
     @ApiResponse( { status: 302, description: "Agencias encontradas" } )
     @ApiResponse( { status: 404, description: "Agencias não encontradas" } )
@@ -42,10 +42,10 @@ export class BDAgenciaController {
         }
     }
 
-    @Get( '/contato' )
+    @Get( '/contatos' )
     @ApiOperation( {
-        description: "Listar contatos registrados no banco auxiliar",
-        title: "Contatos em @TranscolDB"
+        description: "Lista os contatos que recebem logs do GTFS. \nOrigem: banco de dados",
+        title: "Contatos"
     } )
     @ApiResponse( { status: 302, description: "Contatos encontrados" } )
     @ApiResponse( { status: 404, description: "Contatos não encontrados" } )
@@ -70,10 +70,10 @@ export class BDAgenciaController {
         }
     }
 
-    @Get( '/feriado' )
+    @Get( '/feriados' )
     @ApiOperation( {
-        description: "Listar feriados registrados no banco auxiliar",
-        title: "Feriados em @TranscolDB"
+        description: "Lista os feriados previstos. \nOrigem: banco de dados",
+        title: "Feriados"
     } )
     @ApiResponse( { status: 302, description: "Feriados encontrados" } )
     @ApiResponse( { status: 404, description: "Feriados não encontrados" } )
@@ -99,10 +99,10 @@ export class BDAgenciaController {
     }
 
 
-    @Get( '/tarifa' )
+    @Get( '/tarifas' )
     @ApiOperation( {
-        description: "Listar tarifas registradas no banco auxiliar",
-        title: "Tarifas em @TranscolDB"
+        description: "Lista as tarifas. \nOrigem: banco de dados ",
+        title: "Tarifas"
     } )
     @ApiResponse( { status: 302, description: "Tarifas encontradas" } )
     @ApiResponse( { status: 404, description: "Tarifas não encontradas" } )
