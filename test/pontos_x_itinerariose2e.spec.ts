@@ -54,7 +54,7 @@ defineFeature( feature, test => {
 
             return [ obj1, obj2, obj3 ];
           } );
-        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontosItinerarios` );
+        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
         expect( resposta.status ).toBe( 200 );
       },
     );
@@ -84,7 +84,7 @@ defineFeature( feature, test => {
           jest.fn().mockImplementationOnce( () => {
             return new InformationNotFound( "Não há registros" );
           } );
-        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontosItinerarios` );
+        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
         expect( resposta.body.status ).toBe( 204 );
       },
     );

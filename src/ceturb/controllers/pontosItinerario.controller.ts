@@ -6,7 +6,7 @@ import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { Endpoints } from '../../commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( `${raiz}/pontosItinerarios` )
+@Controller( `${raiz}/pontos/itinerarios` )
 @ApiUseTags( 'Pontos x Itinerarios' )
 export class PontosItinerariosController {
 
