@@ -3,6 +3,7 @@ import { Agencia } from '../models/Agencia.model';
 import { Feriado } from '../models/Feriado.model';
 import { Contato } from '../models/Contato.model';
 import { Tarifa } from '../models/Tarifa.model';
+import { FeriadoResponse } from '../../transcolDB/models/Dto/FeriadoResponse.dto';
 
 @Injectable()
 export class AgenciaService {
@@ -46,5 +47,29 @@ export class AgenciaService {
         } catch ( err ) {
             throw new Error( `Erro ao buscar tarifas\n Erro: ${err.name}\n Mensagem: ${err.message}\n O Banco está conectado e acessível ?` );
         }
+    }
+
+    /**
+     * Método que verifica se uma data consultada é um feriado.
+     * @param d objeto Date contendo a data a ser pesquisada
+     * @returns retorna um objeto FeriadoResponse com a data pesquisada e um booleano informando se é um feriado
+     */
+    async CheckFeriado ( d: Date ) {
+        let resposta = new FeriadoResponse();
+        resposta.dia = d;
+        let hoje: Feriado;
+
+        try {
+            hoje = await Feriado.findOne( { where: { data: d } } );
+        } catch ( err ) {
+            throw new Error( `Falha na consulta de feriados: ${err.message}` );
+        }
+
+        if ( hoje == undefined ) {
+            resposta.feriado = false;
+        } else {
+            resposta.feriado = true;
+        }
+        return resposta;
     }
 }

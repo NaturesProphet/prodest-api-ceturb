@@ -1,7 +1,7 @@
-import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { AgenciaService } from '../services/agencia.service';
 import { Agencia } from '../models/Agencia.model';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Contato } from '../models/Contato.model';
 import { Feriado } from '../models/Feriado.model';
 import { Tarifa } from '../models/Tarifa.model';
@@ -9,7 +9,7 @@ import { Endpoints } from '../../commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 
 @Controller( `${raiz}/agencias` )
-@ApiUseTags( 'Agencias@TranscolDB' )
+@ApiUseTags( 'Agencias' )
 export class BDAgenciaController {
     constructor( private readonly Service: AgenciaService ) { }
 
@@ -97,6 +97,45 @@ export class BDAgenciaController {
                 .send( err.message );
         }
     }
+
+
+    @Get( '/feriados/validar/:ano/:mes/:dia' )
+    @ApiOperation( {
+        description: "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
+        title: "Consulta booleana de Feriados da agencia por data"
+    } )
+    @ApiResponse( { status: 200, description: "Consulta executada com sucesso." } )
+    @ApiImplicitParam( {
+        name: 'ano',
+        description: 'porção da data referente ao ano. exemplo: 2018',
+        required: true,
+    } )
+    @ApiImplicitParam( {
+        name: 'mes',
+        description: 'porção da data referente ao mês. exemplo: 12',
+        required: true,
+    } )
+    @ApiImplicitParam( {
+        name: 'dia',
+        description: 'porção da data referente ao dia. exemplo: 25',
+        required: true,
+    } )
+    async isFeriado ( @Res() res, @Param( 'ano' ) ano, @Param( 'mes' ) mes, @Param( 'dia' ) dia ) {
+        let hoje = new Date( `${ano}/${mes}/${dia}` );
+        let consulta;
+        try {
+            consulta = await this.Service.CheckFeriado( hoje );
+            res
+                .status( HttpStatus.OK )
+                .send( consulta );
+        }
+        catch ( err ) {
+            res
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( err.message );
+        }
+    }
+
 
 
     @Get( '/tarifas' )

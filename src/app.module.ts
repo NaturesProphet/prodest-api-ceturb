@@ -11,7 +11,6 @@ import { EstimativasController } from "./ceturb/controllers/estimativas.controll
 import { AreaController } from "./ceturb/controllers/area.controller";
 import { BDAgenciaController } from "./transcolDB/controllers/bd.agencia.controller";
 import { BDEstimativaController } from "./transcolDB/controllers/bd.estimativa.controller";
-import { BDFeriadoController } from "./transcolDB/controllers/bd.feriado.controller";
 import { BDItinerarioController } from "./transcolDB/controllers/bd.itinerario.controller";
 import { BDItinerariopontoController } from "./transcolDB/controllers/bd.itinerarioponto.controller";
 import { BDLinhaController } from "./transcolDB/controllers/bd.linha.controller";
@@ -60,9 +59,6 @@ export class AppModule implements NestModule {
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( BDEstimativaController );
-    consumer
-      .apply( redisConf.cacheWithRedis( '3 hours' ) )
-      .forRoutes( BDFeriadoController );
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( BDItinerarioController );

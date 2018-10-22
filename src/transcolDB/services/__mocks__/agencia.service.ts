@@ -3,6 +3,7 @@ import { Agencia } from '../../models/Agencia.model';
 import { Contato } from '../../models/Contato.model';
 import { Feriado } from '../../models/Feriado.model';
 import { Tarifa } from '../../models/Tarifa.model';
+import { FeriadoResponse } from '../../../transcolDB/models/Dto/FeriadoResponse.dto';
 
 @Injectable()
 export class AgenciaService {
@@ -60,6 +61,23 @@ export class AgenciaService {
 
 
         resposta.push( entidade );
+        return resposta;
+    }
+
+    /**
+     * Método que verifica se uma data consultada é um feriado.
+     * @param d objeto Date contendo a data a ser pesquisada
+     * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
+     */
+    async CheckFeriado ( d: Date ) {
+        let resposta = new FeriadoResponse();
+        if ( d.getDate() == 25 && d.getUTCMonth() == 11 ) { //11 mesmo. Javascript é do carai!
+            resposta.dia = d;
+            resposta.feriado = true;
+        } else {
+            resposta.dia = d;
+            resposta.feriado = false;
+        }
         return resposta;
     }
 }

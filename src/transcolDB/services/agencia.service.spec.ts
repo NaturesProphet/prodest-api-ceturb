@@ -4,6 +4,7 @@ jest.mock( './agencia.service' );
 
 describe( 'AgenciaService', () => {
   let service: AgenciaService;
+  let resposta;
 
 
   beforeAll( async () => {
@@ -37,5 +38,18 @@ describe( 'AgenciaService', () => {
       let retorno = await service.getTarifas();
       expect( retorno.length ).toBeGreaterThan( 0 );
     } );
+
+  it( 'O retorno ao consultar uma data que é feriado deve ser true', async () => {
+    let natal: Date = new Date( '2018/12/25' );
+    resposta = await service.CheckFeriado( natal );
+    expect( resposta.feriado ).toBe( true );
+  } );
+
+
+  it( 'O retorno ao consultar uma data que NÃO é feriado deve ser false', async () => {
+    let diachato: Date = new Date( '2018/10/04' )
+    resposta = await service.CheckFeriado( diachato )
+    expect( resposta.feriado ).toBe( false );
+  } );
 
 } );
