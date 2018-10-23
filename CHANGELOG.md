@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.10.1...v1.11.0) (2018-10-23)
+
+
+### Features
+
+* **Itinerarios:** adição da funcionalidade listar shapes, correção de rotas e ajustes de swagger ([ee52843](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/ee52843))
+* **Pontos:** consulta de itinerarios por pontos especificos em todas as horas ([ee55411](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/ee55411))
+
+
+
 <a name="1.10.1"></a>
 ## [1.10.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.10.0...v1.10.1) (2018-10-19)
 
