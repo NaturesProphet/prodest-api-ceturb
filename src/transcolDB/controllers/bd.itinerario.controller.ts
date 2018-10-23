@@ -4,59 +4,60 @@ import { Itinerario } from '../models/Itinerario.model';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Viagem } from '../models/Viagem.model';
 import { Endpoints } from '../../commom/configs/endpoints.config';
+import { PontoGeografico } from 'transcolDB/models/PontoGeografico.model';
 const raiz: string = new Endpoints().rotaRaiz;
 
-@Controller( `${raiz}/transcoldb/itinerario` )
-@ApiUseTags( 'Itinerarios@TranscolDB' )
+@Controller( `${raiz}/itinerarios` )
+@ApiUseTags( 'Itinerarios' )
 export class BDItinerarioController {
     constructor( private readonly Service: ItinerarioService ) { }
 
-
-    @Get()
-    @ApiOperation( {
-        description: "Listar itinerarios registrados no banco auxiliar",
-        title: "Itinerarios em @TranscolDB"
-    } )
-    @ApiResponse( { status: 302, description: "Itinerarios encontrados" } )
-    @ApiResponse( { status: 404, description: "Itinerarios não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
-
-    async getItinerarios ( @Res() res ) {
-        try {
-            let itinerarios: Itinerario[] = await this.Service.getItinerarios();
-            if ( itinerarios.length > 0 ) {
+    /*
+        @Get()
+        @ApiOperation( {
+            description: "Listar itinerarios registrados no banco auxiliar",
+            title: "Itinerarios em @TranscolDB"
+        } )
+        @ApiResponse( { status: 302, description: "Itinerarios encontrados" } )
+        @ApiResponse( { status: 404, description: "Itinerarios não encontrados" } )
+        @ApiResponse( { status: 502, description: "Erro na busca" } )
+    
+        async getItinerarios ( @Res() res ) {
+            try {
+                let itinerarios: Itinerario[] = await this.Service.getItinerarios();
+                if ( itinerarios.length > 0 ) {
+                    res
+                        .status( HttpStatus.FOUND )
+                        .send( itinerarios );
+                } else {
+                    res
+                        .status( HttpStatus.NOT_FOUND )
+                        .send( "Nenhum itinerario encontrado na busca" )
+                }
+            } catch ( err ) {
                 res
-                    .status( HttpStatus.FOUND )
-                    .send( itinerarios );
-            } else {
-                res
-                    .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhum itinerario encontrado na busca" )
+                    .status( HttpStatus.BAD_GATEWAY )
+                    .send( err.message );
             }
-        } catch ( err ) {
-            res
-                .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
         }
-    }
+    */
 
-
-    @Get( '/:codigo' )
+    @Get( '/:codigo_linha' )
     @ApiOperation( {
-        description: "Listar os itinerarios de uma linha especifica no banco auxiliar pelo seu codigo",
-        title: "Itinerarios por Linha em @TranscolDB"
+        description: "Listar os itinerarios de uma linha especifica. \nOrigem: banco de dados",
+        title: "Itinerarios por Linha"
     } )
     @ApiResponse( { status: 302, description: "Itinerarios encontrados" } )
     @ApiResponse( { status: 404, description: "Itinerarios não encontrados" } )
     @ApiResponse( { status: 502, description: "Erro na busca" } )
     @ApiImplicitParam( {
-        name: 'codigo',
-        description: 'codigo da linha (não é o id, é o código)',
+        name: 'codigo_linha',
+        description: 'codigo da linha. Ex. 509',
         required: true,
     } )
-    async getItinerariosByCodigo ( @Res() res, @Param( 'codigo' ) codigo ) {
+    async getItinerariosByCodigo ( @Res() res, @Param( 'codigo_linha' ) codigo_linha ) {
         try {
-            let itinerarios: Itinerario[] = await this.Service.getItinerariosByCodigo( codigo );
+            let itinerarios: Itinerario[] = await this.Service.getItinerariosByCodigo( codigo_linha );
             if ( itinerarios.length > 0 ) {
                 res
                     .status( HttpStatus.FOUND )
@@ -74,22 +75,22 @@ export class BDItinerarioController {
     }
 
 
-    @Get( '/viagem/:codigo' )
+    @Get( '/:codigo_itinerario/viagens' )
     @ApiOperation( {
-        description: "Listar as viagems de um itinerário especifico no banco auxiliar pelo seu codigo",
-        title: "Viagems por Itinerario em @TranscolDB"
+        description: "Listar as viagens de um itinerário especifico. \nOrigem: banco de dados",
+        title: "Viagens por Itinerario"
     } )
     @ApiResponse( { status: 302, description: "Viagems encontradas" } )
     @ApiResponse( { status: 404, description: "Viagems não encontrados" } )
     @ApiResponse( { status: 502, description: "Erro na busca" } )
     @ApiImplicitParam( {
-        name: 'codigo',
-        description: 'codigo do itinerario (não é o id, é o código)',
+        name: 'codigo_itinerario',
+        description: 'codigo do itinerario',
         required: true,
     } )
-    async getViagemsByCodigo ( @Res() res, @Param( 'codigo' ) codigo ) {
+    async getViagemsByCodigo ( @Res() res, @Param( 'codigo_itinerario' ) codigo_itinerario ) {
         try {
-            let viagems: Viagem[] = await this.Service.getViagemByItinerarioCode( codigo );
+            let viagems: Viagem[] = await this.Service.getViagemByItinerarioCode( codigo_itinerario );
             if ( viagems.length > 0 ) {
                 res
                     .status( HttpStatus.FOUND )
@@ -98,6 +99,39 @@ export class BDItinerarioController {
                 res
                     .status( HttpStatus.NOT_FOUND )
                     .send( "Nenhuma viagem encontrada na busca" )
+            }
+        } catch ( err ) {
+            res
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( err.message );
+        }
+    }
+
+
+    @Get( '/:codigo_itinerario/shapes' )
+    @ApiOperation( {
+        description: "Listar os pontos geográficos percorridos por um itinerario (SHAPES). \nOrigem: banco de dados",
+        title: "Pontos geográficos por Itinerario"
+    } )
+    @ApiResponse( { status: 302, description: "coordenadas encontradas" } )
+    @ApiResponse( { status: 404, description: "coordenadas não encontrados" } )
+    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiImplicitParam( {
+        name: 'codigo_itinerario',
+        description: 'codigo do itinerario (não é o id, é o código)',
+        required: true,
+    } )
+    async getShapes ( @Res() res, @Param( 'codigo_itinerario' ) codigo_itinerario ) {
+        try {
+            let shapes: PontoGeografico[] = await this.Service.getShapesPorItinerario( codigo_itinerario );
+            if ( shapes.length > 0 ) {
+                res
+                    .status( HttpStatus.FOUND )
+                    .send( shapes );
+            } else {
+                res
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( "Nenhuma coordenada encontrada na busca" )
             }
         } catch ( err ) {
             res

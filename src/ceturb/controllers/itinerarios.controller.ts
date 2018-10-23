@@ -12,7 +12,10 @@ export class ItinerariosController {
     constructor( private readonly service: ItinerariosService ) { }
 
     @Get()
-    @ApiOperation( { title: 'lista os itinerários existentes' } )
+    @ApiOperation( {
+        title: 'Listar itinerarios',
+        description: 'lista os itinerários existentes. \nOrigem: Geocontrol'
+    } )
     @ApiResponse( { status: 200, description: 'Itinerários encontrados' } )
     @ApiResponse( { status: 204, description: 'Itinerários não encontrados' } )
     public async listar ( @Res() res ) {

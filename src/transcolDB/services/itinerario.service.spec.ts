@@ -13,12 +13,13 @@ describe( 'ItinerarioService', () => {
     service = module.get<ItinerarioService>( ItinerarioService );
   } );
 
-
-  it( 'Espera-se que o serviço devolva um array como resposta, que seja maior que 0',
-    async () => {
-      let retorno = await service.getItinerarios();
-      expect( retorno.length ).toBeGreaterThan( 0 );
-    } );
+  /*
+    it( 'Espera-se que o serviço devolva um array como resposta, que seja maior que 0',
+      async () => {
+        let retorno = await service.getItinerarios();
+        expect( retorno.length ).toBeGreaterThan( 0 );
+      } );
+  */
 
   it( 'Espera-se que o serviço devolva um array como resposta, que seja maior que 0',
     async () => {
@@ -29,6 +30,12 @@ describe( 'ItinerarioService', () => {
   it( 'Espera-se que o serviço devolva um array como resposta, que seja maior que 0',
     async () => {
       let retorno = await service.getViagemByItinerarioCode( '123' );
+      expect( retorno.length ).toBeGreaterThan( 0 );
+    } );
+
+  it( 'getShapesPorItinerario() deve retornar um array como resposta, que seja maior que 0',
+    async () => {
+      let retorno = await service.getShapesPorItinerario( '123' );
       expect( retorno.length ).toBeGreaterThan( 0 );
     } );
 

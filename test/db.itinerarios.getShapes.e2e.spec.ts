@@ -2,11 +2,11 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
-import { ItinerarioService } from '../src/transcolDB/services/itinerario.service';
+import { PontogeograficoService } from '../src/transcolDB/services/pontogeografico.service';
 import { AppModule } from '../src/app.module';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
+const feature = loadFeature( "./test/features/db.itinerarios.getShapes.feature" );
 const raiz: string = new Endpoints().rotaRaiz;
-const feature = loadFeature( "./test/features/db.viagemsPorItinerario.feature" );
 jest.mock( '../src/transcolDB/services/itinerario.service' );
 
 //--------------------------------------------------------------------//
@@ -23,10 +23,9 @@ jest.mock( '../src/ceturb/services/minio.service' );
 
 
 
-
 let resposta: any;
+let codigo: string;
 let endpoint: string;
-let codigo_itinerario: string
 
 defineFeature( feature, test => {
   let module: TestingModule;
@@ -40,41 +39,38 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-  test( "Viagems encontradas", ( {
+  test( "Pontos geográficos encontrados", ( {
     given,
     when,
     then
   } ) => {
-    given( "quero ver a lista de viagems de um itinerário específico", async () => {
-      codigo_itinerario = '12345'
-      endpoint = `${raiz}/itinerarios/${codigo_itinerario}/viagens`;
+    given( "quero ver a lista de pontos geográficos percorridos pelo itinerario", async () => {
+      codigo = '123';
+      endpoint = `${raiz}/itinerarios/${codigo}/shapes`;
     } );
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
-    then( "recebo uma lista de viagems daquele itinerário", () => {
+    then( "recebo uma lista de pontos geográficos", () => {
       expect( resposta.status ).toBe( 302 );
     } );
   } );
 
 
-  test( "Viagems não encontradas", ( {
+  test( "Pontos geográficos não encontrados", ( {
     given,
     when,
     then
   } ) => {
-    given( "quero ver a lista de viagems de um itinerário específico", async () => {
-      codigo_itinerario = '000000000000000'
-      endpoint = `${raiz}/itinerarios/${codigo_itinerario}/viagens`;
+    given( "quero ver a lista de pontos geográficos percorridos pelo itinerario", async () => {
+      endpoint = `${raiz}/itinerarios/${codigo}/shapes`;
     } );
 
-    given( "Não há registros disponíveis", async () => {
-      //simula um banco vazio
-      ItinerarioService.prototype.getViagemByItinerarioCode = jest.fn().mockImplementationOnce( ( cod: string ) => {
-        return [];
-      } );
+    given( "não há registros", async () => {
+      codigo = '0';
+      endpoint = `${raiz}/itinerarios/${codigo}/shapes`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -83,7 +79,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhuma viagem encontrada na busca" );
+      expect( resposta.text ).toBe( "Nenhuma coordenada encontrada na busca" );
     } );
   } );
 
