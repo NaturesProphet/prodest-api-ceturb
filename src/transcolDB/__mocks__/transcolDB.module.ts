@@ -3,8 +3,6 @@ import { BDAgenciaController } from '../controllers/bd.agencia.controller';
 import { AgenciaService } from '../services/agencia.service';
 import { BDItinerarioController } from '../controllers/bd.itinerario.controller';
 import { ItinerarioService } from '../services/itinerario.service';
-import { BDViagemController } from '../controllers/bd.viagem.controller';
-import { ViagemService } from '../services/viagem.service';
 import { BDPontogeograficoController } from '../controllers/bd.pontogeografico.controller';
 import { PontogeograficoService } from '../services/pontogeografico.service';
 
@@ -20,10 +18,8 @@ const orm_sync = ( process.env.TRANSCOLDB_ORM_SYNC === 'true' ) || false;
 
 @Module( {
     controllers: [ BDAgenciaController,
-        BDItinerarioController, BDViagemController,
-        BDPontogeograficoController ],
+        BDItinerarioController, BDPontogeograficoController ],
 
-    providers: [ AgenciaService, ItinerarioService,
-        ViagemService, PontogeograficoService ]
+    providers: [ AgenciaService, ItinerarioService, PontogeograficoService ]
 } )
 export class TranscolDBModule { }
