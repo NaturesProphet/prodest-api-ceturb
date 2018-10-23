@@ -2,7 +2,6 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
-import { PontogeograficoService } from '../src/transcolDB/services/pontogeografico.service';
 import { AppModule } from '../src/app.module';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const feature = loadFeature( "./test/features/db.itinerarios.getShapes.feature" );

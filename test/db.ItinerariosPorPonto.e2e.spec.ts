@@ -2,12 +2,11 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
-import { PontogeograficoService } from '../src/transcolDB/services/pontogeografico.service';
 import { AppModule } from '../src/app.module';
-const feature = loadFeature( "./test/features/db.pontogeografico.feature" );
-jest.mock( '../src/transcolDB/services/pontogeografico.service' );
 import { Endpoints } from '../src/commom/configs/endpoints.config';
+const feature = loadFeature( "./test/features/db.ItinerariosPorPonto.feature" );
 const raiz: string = new Endpoints().rotaRaiz;
+jest.mock( '../src/transcolDB/services/ponto.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -24,6 +23,7 @@ jest.mock( '../src/ceturb/services/minio.service' );
 
 
 let resposta: any;
+let codigo_ponto: string;
 let endpoint: string;
 
 defineFeature( feature, test => {
@@ -38,39 +38,40 @@ defineFeature( feature, test => {
     await app.init();
   } );
 
-  test( "Pontos geográficos encontrados", ( {
+
+
+  test( "Itinerarios encontrados", ( {
     given,
     when,
     then
   } ) => {
-    given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = `${raiz}/transcoldb/pontogeografico`;
+    given( "quero ver a lista de itinerarios que passam por um ponto", async () => {
+      codigo_ponto = '123';
+      endpoint = `${raiz}/pontos/${codigo_ponto}/itinerarios`;
     } );
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() ).get( endpoint );
     } );
 
-    then( "recebo uma lista de pontos geográficos", () => {
+    then( "recebo uma lista itinerarios", () => {
       expect( resposta.status ).toBe( 302 );
     } );
   } );
 
 
-  test( "Pontos geográficos não encontrados", ( {
+  test( "Itinerarios não encontrados", ( {
     given,
     when,
     then
   } ) => {
-    given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = `${raiz}/transcoldb/pontogeografico`;
+    given( "quero ver a lista de itinerarios que passam por um ponto", async () => {
+      endpoint = `${raiz}/pontos/${codigo_ponto}/itinerarios`;
     } );
 
-    given( "O banco de dados está vazio", async () => {
-      //simula um banco vazio
-      PontogeograficoService.prototype.getPontogeograficos = jest.fn().mockImplementationOnce( () => {
-        return [];
-      } );
+    given( "não há registros", async () => {
+      codigo_ponto = '0';
+      endpoint = `${raiz}/pontos/${codigo_ponto}/itinerarios`;
     } );
 
     when( "eu pesquisar", async () => {
@@ -78,34 +79,8 @@ defineFeature( feature, test => {
       expect( resposta.status ).toBe( 404 );
     } );
 
-    then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhum ponto geográfico encontrado na busca" );
-    } );
-  } );
-
-  test( "Erro na busca", ( {
-    given,
-    when,
-    then
-  } ) => {
-    given( "quero ver a lista de pontos geográficos", async () => {
-      endpoint = `${raiz}/transcoldb/pontogeografico`;
-    } );
-
-    given( "algum problema lógico ou de infra ocorreu", async () => {
-      //simula o banco offline
-      PontogeograficoService.prototype.getPontogeograficos = jest.fn().mockImplementationOnce( () => {
-        throw new Error( `Erro ao buscar pontos geográficos\nO Banco está conectado e acessível ?` );
-      } );
-    } );
-
-    when( "eu pesquisar", async () => {
-      resposta = await request( app.getHttpServer() ).get( endpoint );
-      expect( resposta.status ).toBe( 502 );
-    } );
-
-    then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( `Erro ao buscar pontos geográficos\nO Banco está conectado e acessível ?` );
+    then( "recebo uma mensagem de não encontrado", () => {
+      expect( resposta.text ).toBe( "Nenhum itinerario encontrado na busca" );
     } );
   } );
 

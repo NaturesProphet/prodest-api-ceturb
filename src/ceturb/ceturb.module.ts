@@ -13,17 +13,15 @@ import { EstimativasController } from "./controllers/estimativas.controller";
 import { EstimativasService } from "./services/estimativas.service";
 import { GtfsService } from './services/gtfs.service';
 import { GtfsController } from './controllers/gtfs.controller';
-import { CalendarioService } from "./services/calendario.service";
-import { CalendarioController } from "./controllers/calendario.controller";
 import { MinioService } from './services/minio.service'
 
 @Module( {
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController, PontosItinerariosController,
-    EstimativasController, GtfsController, CalendarioController ],
+    EstimativasController, GtfsController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    PontoItinerarioService, EstimativasService, GtfsService, MinioService, CalendarioService ]
+    PontoItinerarioService, EstimativasService, GtfsService, MinioService ]
 } )
 
 

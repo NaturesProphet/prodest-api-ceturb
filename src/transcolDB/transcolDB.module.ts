@@ -4,9 +4,9 @@ import { BDAgenciaController } from './controllers/bd.agencia.controller';
 import { AgenciaService } from './services/agencia.service';
 import { BDItinerarioController } from './controllers/bd.itinerario.controller';
 import { ItinerarioService } from './services/itinerario.service';
-import { BDPontogeograficoController } from './controllers/bd.pontogeografico.controller';
-import { PontogeograficoService } from './services/pontogeografico.service';
 import { BancoConfig } from '../commom/configs/banco.config';
+import { BDPontosController } from './controllers/bd.pontos.controller';
+import { PontoService } from './services/ponto.service';
 const database = new BancoConfig();
 
 
@@ -24,9 +24,9 @@ const database = new BancoConfig();
             encrypt: false
         }
     } ) ],
-    controllers: [ BDAgenciaController, BDItinerarioController, BDPontogeograficoController ],
+    controllers: [ BDAgenciaController, BDItinerarioController, BDPontosController ],
 
-    providers: [ AgenciaService, ItinerarioService, PontogeograficoService ]
+    providers: [ AgenciaService, ItinerarioService, PontoService ]
 } )
 
 export class TranscolDBModule { }
