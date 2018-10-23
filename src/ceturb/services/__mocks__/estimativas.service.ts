@@ -32,7 +32,7 @@ export class EstimativasService {
                 },
             ]
         }
-        if ( Params.id != 0 ) {
+        if ( Params.id_origem != 0 ) {
             return resposta;
         } else {
             throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );

@@ -50,7 +50,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/estimativas/origem/${ponto_id}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/estimativas/ponto/${ponto_id}/origem` );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -76,7 +76,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/estimativas/origem/${ponto_id}` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/estimativas/ponto/${ponto_id}/origem` );
       expect( resposta.status ).toBe( 404 );
     } );
 

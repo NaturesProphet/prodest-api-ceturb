@@ -13,7 +13,7 @@ export class EstimativasService {
         const options = {
             method: 'POST',
             uri: `${this.url}/obterEstimativasPorOrigem`,
-            body: { pontoDeOrigemId: parseInt( Params.id ) },
+            body: { pontoDeOrigemId: parseInt( Params.id_origem ) },
             json: true
         };
         return request( options );

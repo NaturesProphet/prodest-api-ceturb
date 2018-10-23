@@ -50,7 +50,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .get( `${raiz}/estimativas/origemEDestino/${id_origem}/${id_destino}` );
+        .get( `${raiz}/estimativas/ponto/${id_origem}/origem/${id_destino}/destino` );
       expect( resposta.status ).toBe( 200 );
     } );
 
@@ -78,7 +78,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar", async () => {
       resposta = await request( app.getHttpServer() )
-        .get( `${raiz}/estimativas/origemEDestino/${id_origem}/${id_destino}` );
+        .get( `${raiz}/estimativas/ponto/${id_origem}/origem/${id_destino}/destino` );
       expect( resposta.status ).toBe( 404 );
     } );
 

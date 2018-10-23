@@ -10,15 +10,15 @@ const raiz: string = new Endpoints().rotaRaiz;
 export class EstimativasController {
     constructor( private readonly Service: EstimativasService ) { }
 
-    @Get( "/origem/:id" )
+    @Get( "/ponto/:id_origem/origem" )
     @ApiOperation( {
-        description: "retornar estimativas por ponto de origem",
+        description: "retornar estimativas por ponto de origem. \nOrigem: Geocontrol",
         title: "Estimativas por Origem"
     } )
     @ApiResponse( { status: 200, description: "Estimativas encontradas" } )
     @ApiResponse( { status: 204, description: "Estimativas não encontrados" } )
     @ApiImplicitParam( {
-        name: 'id',
+        name: 'id_origem',
         description: 'Numero de identificação do ponto de origem',
         required: true,
     } )
@@ -37,9 +37,9 @@ export class EstimativasController {
     }
 
 
-    @Get( "/origemEDestino/:id_origem/:id_destino" )
+    @Get( "/ponto/:id_origem/origem/:id_destino/destino" )
     @ApiOperation( {
-        description: "retornar estimativas por ponto de origem e ponto destino",
+        description: "retornar estimativas por ponto de origem e ponto destino. \nOrigem: Geocontrol",
         title: "Estimativas por Origem e Destino"
     } )
     @ApiResponse( { status: 200, description: "Estimativas encontradas" } )
@@ -68,9 +68,9 @@ export class EstimativasController {
     }
 
 
-    @Get( "/origemELinha/:id_origem/:id_linha" )
+    @Get( "/ponto/:id_origem/origem/:id_linha/linha" )
     @ApiOperation( {
-        description: "retornar estimativas por ponto de origem e linha",
+        description: "retornar estimativas por ponto de origem e linha. \nOrigem: Geocontrol",
         title: "Estimativas por Origem e linha"
     } )
     @ApiResponse( { status: 200, description: "Estimativas encontradas" } )
