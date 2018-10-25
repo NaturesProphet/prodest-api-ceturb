@@ -67,48 +67,6 @@ defineFeature( feature, test => {
         } );
     } );
 
-
-
-
-
-
-
-    test( "Não existem viagens registradas", ( { given, when, then } ) => {
-
-
-        given( "Eu quero saber as informações das viagens cadastradas", async () => {
-            ViagensService.prototype.retornar_viagens = jest.fn().mockImplementationOnce( () => {
-                return new InformationNotFound( "Não há registros" )
-            } );
-            resposta = await request( app.getHttpServer() ).get( `${raiz}/viagens` );
-        } );
-
-
-
-        given( "Não há registros disponíveis", async () => {
-            expect( resposta.body.status ).toBe( 204 );
-        } );
-
-
-
-
-        when( "eu pesquisar viagens", async () => {
-            //busca ja feita acima
-        } );
-
-
-
-
-        then( "retorna uma mensagem informando que não há informações disponíveis", () => {
-            viagens = JSON.parse( JSON.stringify( resposta.body ) );
-            expect( resposta.body.message ).toBe( "Não há registros" );
-        } );
-    } );
-
-
-
-
-
     afterAll( async () => {
         await app.close();
     } );
