@@ -56,7 +56,7 @@ export class AgenciaService {
      */
     async CheckFeriado ( d: Date ) {
         let resposta = new FeriadoResponse();
-        resposta.dia = d;
+        resposta.data = d;
         let hoje: Feriado;
 
         try {

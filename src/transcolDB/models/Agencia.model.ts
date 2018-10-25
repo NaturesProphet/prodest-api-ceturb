@@ -4,22 +4,27 @@ import { Contato } from './Contato.model';
 import { Feriado } from './Feriado.model';
 import { Tarifa } from './Tarifa.model';
 import { Auditoria } from './Auditoria.model';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Agencia extends Auditoria {
 
     @Index( { unique: true } )
     @Column()
+    @ApiModelProperty()
     nome: string;
 
     @Index( { unique: true } )
     @Column()
+    @ApiModelProperty()
     url: string;
 
     @Column()
+    @ApiModelProperty()
     telefone: string;
 
     @Column( "bit", { default: 0 } )
+    @ApiModelProperty()
     historico: boolean;
 
 

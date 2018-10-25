@@ -79,7 +79,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhuma agencia encontrada na busca" );
+      expect( resposta.body.mensagem ).toBe( "Nenhuma agencia encontrada na busca" );
     } );
   } );
 
@@ -105,7 +105,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( `Erro ao buscar agencias\nO Banco está conectado e acessível ?` );
+      expect( resposta.body.mensagem ).toBe( `Erro ao buscar agencias\nO Banco está conectado e acessível ?` );
     } );
   } );
 

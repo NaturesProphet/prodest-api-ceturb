@@ -72,10 +72,10 @@ export class AgenciaService {
     async CheckFeriado ( d: Date ) {
         let resposta = new FeriadoResponse();
         if ( d.getDate() == 25 && d.getUTCMonth() == 11 ) { //11 mesmo. Javascript é do carai!
-            resposta.dia = d;
+            resposta.data = d;
             resposta.feriado = true;
         } else {
-            resposta.dia = d;
+            resposta.data = d;
             resposta.feriado = false;
         }
         return resposta;

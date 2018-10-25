@@ -6,22 +6,32 @@ import { Contato } from '../models/Contato.model';
 import { Feriado } from '../models/Feriado.model';
 import { Tarifa } from '../models/Tarifa.model';
 import { Endpoints } from '../../commom/configs/endpoints.config';
+import { FeriadoResponse } from '../../transcolDB/models/Dto/FeriadoResponse.dto';
+import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
 const raiz: string = new Endpoints().rotaRaiz;
+const path = `${raiz}/agencias`;
 
 @Controller( `${raiz}/agencias` )
 @ApiUseTags( 'Agencias' )
 export class BDAgenciaController {
     constructor( private readonly Service: AgenciaService ) { }
 
-
     @Get()
     @ApiOperation( {
         description: "Lista as agencias registradas. \nOrigem: banco de dados",
         title: "Agencias"
     } )
-    @ApiResponse( { status: 302, description: "Agencias encontradas" } )
-    @ApiResponse( { status: 404, description: "Agencias não encontradas" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "Agencias encontradas",
+        type: Agencia,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: "Agencias não encontradas",
+        type: ErrorMessage
+    } )
 
     async getAgencias ( @Res() res ) {
         try {
@@ -31,14 +41,22 @@ export class BDAgenciaController {
                     .status( HttpStatus.FOUND )
                     .send( agencias );
             } else {
+                let msg: string = "Nenhuma agencia encontrada na busca";
+                let rota: string = path;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhuma agencia encontrada na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = path;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -47,9 +65,17 @@ export class BDAgenciaController {
         description: "Lista os contatos que recebem logs do GTFS. \nOrigem: banco de dados",
         title: "Contatos"
     } )
-    @ApiResponse( { status: 302, description: "Contatos encontrados" } )
-    @ApiResponse( { status: 404, description: "Contatos não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "Contatos encontrados",
+        type: Contato,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: "Contatos não encontrados",
+        type: ErrorMessage
+    } )
 
     async getContatos ( @Res() res ) {
         try {
@@ -59,14 +85,22 @@ export class BDAgenciaController {
                     .status( HttpStatus.FOUND )
                     .send( contatos );
             } else {
+                let msg: string = "Nenhum contato encontrado na busca";
+                let rota: string = `${path}/contatos`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhum contato encontrado na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/contatos`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -75,9 +109,18 @@ export class BDAgenciaController {
         description: "Lista os feriados previstos. \nOrigem: banco de dados",
         title: "Feriados"
     } )
-    @ApiResponse( { status: 302, description: "Feriados encontrados" } )
-    @ApiResponse( { status: 404, description: "Feriados não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "Feriados encontrados",
+        type: Feriado,
+        isArray: true
+    } )
+
+    @ApiResponse( {
+        status: 404,
+        description: "Feriados não encontrados",
+        type: ErrorMessage
+    } )
 
     async getFeriados ( @Res() res ) {
         try {
@@ -87,14 +130,22 @@ export class BDAgenciaController {
                     .status( HttpStatus.FOUND )
                     .send( feriados );
             } else {
+                let msg: string = "Nenhum feriado encontrado na busca";
+                let rota: string = `${path}/feriados`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhum feriado encontrado na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/feriados`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -104,7 +155,11 @@ export class BDAgenciaController {
         description: "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
         title: "Consulta booleana de Feriados da agencia por data"
     } )
-    @ApiResponse( { status: 200, description: "Consulta executada com sucesso." } )
+    @ApiResponse( {
+        status: 200,
+        description: "Consulta executada com sucesso.",
+        type: FeriadoResponse
+    } )
     @ApiImplicitParam( {
         name: 'ano',
         description: 'porção da data referente ao ano. exemplo: 2018',
@@ -130,9 +185,13 @@ export class BDAgenciaController {
                 .send( consulta );
         }
         catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/feriados/validar/${ano}/${mes}/${dia}`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -143,9 +202,17 @@ export class BDAgenciaController {
         description: "Lista as tarifas. \nOrigem: banco de dados ",
         title: "Tarifas"
     } )
-    @ApiResponse( { status: 302, description: "Tarifas encontradas" } )
-    @ApiResponse( { status: 404, description: "Tarifas não encontradas" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "Tarifas encontradas",
+        type: Tarifa,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: "Tarifas não encontradas",
+        type: ErrorMessage
+    } )
 
     async getTarifas ( @Res() res ) {
         try {
@@ -155,14 +222,22 @@ export class BDAgenciaController {
                     .status( HttpStatus.FOUND )
                     .send( tarifas );
             } else {
+                let msg: string = "Nenhuma tarifa encontrada na busca";
+                let rota: string = `${path}/tarifas`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhuma tarifa encontrada na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/tarifas`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 

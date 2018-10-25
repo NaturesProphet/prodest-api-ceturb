@@ -22,7 +22,11 @@ export class PontosItinerariosController {
         description: 'Lista de associações entre pontos e itinerários',
         type: PontoItinerario,
     } )
-    @ApiResponse( { status: 204, description: 'Dados não encontrados' } )
+    @ApiResponse( {
+        status: 204,
+        description: 'Dados não encontrados',
+        type: 'Dados não encontrados'
+    } )
     async retornar_pontosItinerarios ( @Res() res ) {
         try {
             res

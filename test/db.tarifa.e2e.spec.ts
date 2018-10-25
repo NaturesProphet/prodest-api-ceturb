@@ -81,7 +81,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhuma tarifa encontrada na busca" );
+      expect( resposta.body.mensagem ).toBe( "Nenhuma tarifa encontrada na busca" );
     } );
   } );
 
@@ -107,7 +107,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( `Erro ao buscar tarifas\nO Banco está conectado e acessível ?` );
+      expect( resposta.body.mensagem ).toBe( `Erro ao buscar tarifas\nO Banco está conectado e acessível ?` );
     } );
   } );
 
