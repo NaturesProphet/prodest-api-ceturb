@@ -4,7 +4,6 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { PontoService } from '../src/ceturb/services/ponto.ceturb.service';
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( "./test/features/pontos_de_parada.feature" );
@@ -104,7 +103,7 @@ defineFeature( feature, test => {
 
     given( "não existem pontos registrados", async () => {
       PontoService.prototype.retornar_pontos = jest.fn().mockImplementationOnce( () => {
-        return new InformationNotFound( "nenhum registro encontrado" );
+        throw new Error( "nenhum registro encontrado" );
       } );
       resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos` );
       expect( resposta.body.status ).toBe( 204 );
@@ -115,7 +114,7 @@ defineFeature( feature, test => {
     } );
 
     then( "o sistema retorna uma mensagem informando que não há registros", () => {
-      expect( resposta.body.message ).toBe( "nenhum registro encontrado" );
+      expect( resposta.body.mensagem ).toBe( "nenhum registro encontrado" );
     } );
   } );
 

@@ -4,7 +4,6 @@ import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { PontoItinerarioService } from '../src/ceturb/services/pontos_x_itinerarios.service';
-import { InformationNotFound } from '../src/ceturb/models/exception/InformationNotFound';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( './test/features/pontos_x_itinerarios.feature' );
@@ -54,7 +53,7 @@ defineFeature( feature, test => {
 
             return [ obj1, obj2, obj3 ];
           } );
-        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
+        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/1/itinerarios` );
         expect( resposta.status ).toBe( 200 );
       },
     );
@@ -82,7 +81,7 @@ defineFeature( feature, test => {
       'que não existam associações entre pontos e itinerários registrados.', async () => {
         PontoItinerarioService.prototype.retornar_pontosItinerarios =
           jest.fn().mockImplementationOnce( () => {
-            return new InformationNotFound( "Não há registros" );
+            return new Error( "Não há registros" );
           } );
         resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
         expect( resposta.body.status ).toBe( 204 );
@@ -99,7 +98,7 @@ defineFeature( feature, test => {
     then(
       'o sistema retorna uma mensagem informando que não há registros',
       () => {
-        expect( resposta.body.message ).toBe( "Não há registros" );
+        expect( resposta.body.mensagem ).toBe( "Não há registros" );
       },
     );
   } );

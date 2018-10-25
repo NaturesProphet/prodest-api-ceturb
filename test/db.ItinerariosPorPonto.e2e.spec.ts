@@ -80,7 +80,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de não encontrado", () => {
-      expect( resposta.text ).toBe( "Nenhum itinerario encontrado na busca" );
+      expect( resposta.body.mensagem ).toBe( "Nenhum itinerario encontrado na busca" );
     } );
   } );
 

@@ -4,7 +4,6 @@ import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
 import { PontoService } from '../src/ceturb/services/ponto.ceturb.service';
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( './test/features/buscaArea.feature' );
@@ -70,7 +69,7 @@ defineFeature( feature, test => {
       area_de_busca = null;
 
       PontoService.prototype.BuscaPontosPorArea = jest.fn().mockImplementationOnce( () => {
-        throw new InformationNotFound( "nenhum registro encontrado" );
+        throw new Error( "Pontos não encontrados" );
       } );
       resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/area/1/2/3/4` );
     } );
@@ -84,7 +83,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há pontos dentro da area designada", () => {
-      expect( resposta.body.message ).toBe( "Pontos não encontrados" );
+      expect( resposta.body.mensagem ).toBe( "Pontos não encontrados" );
     } );
   } );
 
