@@ -83,7 +83,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhuma viagem encontrada na busca" );
+      expect( resposta.body.mensagem ).toBe( "Nenhuma viagem encontrada na busca" );
     } );
   } );
 

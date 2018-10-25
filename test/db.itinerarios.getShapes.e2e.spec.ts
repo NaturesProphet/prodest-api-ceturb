@@ -78,7 +78,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem de erro", () => {
-      expect( resposta.text ).toBe( "Nenhuma coordenada encontrada na busca" );
+      expect( resposta.body.mensagem ).toBe( "Nenhuma coordenada encontrada na busca" );
     } );
   } );
 

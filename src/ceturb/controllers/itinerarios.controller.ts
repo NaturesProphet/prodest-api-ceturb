@@ -1,9 +1,11 @@
-import { Controller, Get, Res, Param, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { ItinerariosService } from '../services/itinerarios.service';
-import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { Endpoints } from '../../commom/configs/endpoints.config';
+import { itinerarioDto } from '../../ceturb/models/dto/itinerario.dto';
+import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
 const raiz: string = new Endpoints().rotaRaiz;
+const path = `${raiz}/itinerarios`;
 
 @Controller( `${raiz}/itinerarios` )
 @ApiUseTags( 'Itinerarios' )
@@ -16,17 +18,30 @@ export class ItinerariosController {
         title: 'Listar itinerarios',
         description: 'lista os itinerários existentes. \nOrigem: Geocontrol'
     } )
-    @ApiResponse( { status: 200, description: 'Itinerários encontrados' } )
-    @ApiResponse( { status: 204, description: 'Itinerários não encontrados' } )
+    @ApiResponse( {
+        status: 200,
+        description: 'Itinerários encontrados',
+        type: itinerarioDto,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 204,
+        description: 'Itinerários não encontrados',
+        type: ErrorMessage
+    } )
     public async listar ( @Res() res ) {
         try {
             res
                 .status( HttpStatus.OK )
                 .send( await this.service.lista_itinerario() );
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
-                .status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Não há registros" ) )
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( resposta )
         }
     }
 }

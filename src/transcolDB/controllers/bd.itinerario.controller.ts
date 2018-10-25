@@ -4,8 +4,10 @@ import { Itinerario } from '../models/Itinerario.model';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Viagem } from '../models/Viagem.model';
 import { Endpoints } from '../../commom/configs/endpoints.config';
-import { PontoGeografico } from 'transcolDB/models/PontoGeografico.model';
+import { PontoGeografico } from '../../transcolDB/models/PontoGeografico.model';
+import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
 const raiz: string = new Endpoints().rotaRaiz;
+const path = `${raiz}/itinerarios`;
 
 @Controller( `${raiz}/itinerarios` )
 @ApiUseTags( 'Itinerarios' )
@@ -47,9 +49,17 @@ export class BDItinerarioController {
         description: "Listar os itinerarios de uma linha especifica. \nOrigem: banco de dados",
         title: "Itinerarios por Linha"
     } )
-    @ApiResponse( { status: 302, description: "Itinerarios encontrados" } )
-    @ApiResponse( { status: 404, description: "Itinerarios não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "Itinerarios encontrados",
+        type: Itinerario,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: "Itinerarios não encontrados",
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'codigo_linha',
         description: 'codigo da linha. Ex. 509',
@@ -63,14 +73,22 @@ export class BDItinerarioController {
                     .status( HttpStatus.FOUND )
                     .send( itinerarios );
             } else {
+                let msg: string = "Nenhum itinerario encontrado na busca";
+                let rota: string = `${path}/${codigo_linha}`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhum itinerario encontrado na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/${codigo_linha}`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -80,9 +98,18 @@ export class BDItinerarioController {
         description: "Listar as viagens de um itinerário especifico. \nOrigem: banco de dados",
         title: "Viagens por Itinerario"
     } )
-    @ApiResponse( { status: 302, description: "Viagems encontradas" } )
-    @ApiResponse( { status: 404, description: "Viagems não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse(
+        {
+            status: 302,
+            description: "Viagems encontradas",
+            type: Viagem,
+            isArray: true
+        } )
+    @ApiResponse( {
+        status: 404,
+        description: "Viagems não encontrados",
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'codigo_itinerario',
         description: 'codigo do itinerario',
@@ -96,14 +123,22 @@ export class BDItinerarioController {
                     .status( HttpStatus.FOUND )
                     .send( viagems );
             } else {
+                let msg: string = "Nenhuma viagem encontrada na busca";
+                let rota: string = `${path}/${codigo_itinerario}/viagens`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhuma viagem encontrada na busca" )
+                    .send( resposta )
             }
         } catch ( err ) {
+            let msg: string = "Nenhuma viagem encontrada na busca";
+            let rota: string = `${path}/${codigo_itinerario}/viagens`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 
@@ -113,9 +148,17 @@ export class BDItinerarioController {
         description: "Listar os pontos geográficos percorridos por um itinerario (SHAPES). \nOrigem: banco de dados",
         title: "Pontos geográficos por Itinerario"
     } )
-    @ApiResponse( { status: 302, description: "coordenadas encontradas" } )
-    @ApiResponse( { status: 404, description: "coordenadas não encontrados" } )
-    @ApiResponse( { status: 502, description: "Erro na busca" } )
+    @ApiResponse( {
+        status: 302,
+        description: "coordenadas encontradas",
+        type: PontoGeografico,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: "coordenadas não encontrados",
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'codigo_itinerario',
         description: 'codigo do itinerario (não é o id, é o código)',
@@ -129,14 +172,23 @@ export class BDItinerarioController {
                     .status( HttpStatus.FOUND )
                     .send( shapes );
             } else {
+                let msg: string = "Nenhuma coordenada encontrada na busca";
+                let rota: string = `${path}/${codigo_itinerario}/shapes`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
                     .status( HttpStatus.NOT_FOUND )
-                    .send( "Nenhuma coordenada encontrada na busca" )
+                    .send( resposta );
             }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/${codigo_itinerario}/shapes`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
+
                 .status( HttpStatus.BAD_GATEWAY )
-                .send( err.message );
+                .send( resposta );
         }
     }
 }

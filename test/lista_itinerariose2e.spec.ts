@@ -3,7 +3,6 @@ import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { AppModule } from "../src/app.module";
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 import { ItinerariosService } from '../src/ceturb/services/itinerarios.service';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
@@ -63,7 +62,7 @@ defineFeature( feature, test => {
     given( "Eu quero saber as informações dos itinerários registrados", async () => {
 
       ItinerariosService.prototype.lista_itinerario = jest.fn().mockImplementationOnce( () => {
-        return new InformationNotFound( "nenhum registro encontrado" );
+        throw new Error( "nenhum registro encontrado" );
       } );
       resposta = await request( app.getHttpServer() ).get( `${raiz}/itinerarios` );
     } );
@@ -73,7 +72,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna uma mensagem informando que não há informações disponíveis", () => {
-      expect( resposta.body.message ).toBe( "nenhum registro encontrado" );
+      expect( resposta.body.mensagem ).toBe( "nenhum registro encontrado" );
     } );
   } );
 

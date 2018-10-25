@@ -4,20 +4,25 @@ import { Viagem } from './Viagem.model';
 import { PontoGeografico } from './PontoGeografico.model';
 import { ItinerarioPonto } from './itinerario_ponto.model';
 import { Auditoria } from './Auditoria.model';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 
 @Entity()
 export class Itinerario extends Auditoria {
     @Column()
+    @ApiModelProperty()
     id_geocontrol: number;
 
     @Column()
+    @ApiModelProperty()
     codigo: string;
 
     @Column()
+    @ApiModelProperty()
     bandeira: string;
 
     @Column( "bit", { default: 0 } )
+    @ApiModelProperty()
     historico: boolean;
 
 
@@ -28,6 +33,7 @@ export class Itinerario extends Auditoria {
     //varios itinerários trabalham para uma linha
     @ManyToOne( type => Linha, { nullable: false } )
     @JoinColumn( { name: "linha_id" } )
+    @ApiModelProperty()
     linha_id: number;
 
     //um itinerário faz varias viagens
