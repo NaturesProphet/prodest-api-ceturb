@@ -1,38 +1,86 @@
 import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { LinhasService } from '../services/linhas.service';
-import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { Endpoints } from '../../commom/configs/endpoints.config';
+import { LinhaDto } from '../../ceturb/models/dto/linha.dto';
+import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
+import { itinerarioDto } from '../../ceturb/models/dto/itinerario.dto';
+import { HorarioDto } from '../../ceturb/models/dto/horarios.dto';
+import { HorarioObsDto } from '../../ceturb/models/dto/horarioObs.dto';
 const raiz: string = new Endpoints().rotaRaiz;
+const path: string = `${raiz}/linha`;
 
 @Controller( `${raiz}/linha` )
 @ApiUseTags( 'Linhas' )
 export class LinhasController {
-
     constructor( public service: LinhasService ) { }
 
+
+
+
+
     @Get()
-    @ApiOperation( { title: 'lista as linhas existentes' } )
-    @ApiResponse( { status: 200, description: 'Linhas encontradas' } )
-    @ApiResponse( { status: 204, description: 'Linhas não encontradas' } )
+    @ApiOperation(
+        {
+            title: 'Linhas',
+            description: 'listar as linhas de ônibus ativas. \nOrigem: Geocontrol'
+        }
+    )
+    @ApiResponse(
+        {
+            status: 200,
+            description: 'Linhas encontradas',
+            type: LinhaDto,
+            isArray: true
+        } )
     public async listar ( @Res() res ) {
         try {
             res
                 .status( HttpStatus.OK )
                 .send( await this.service.retornar_linhas() );
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = path;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
-                .status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Não há registros" ) )
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( resposta )
         }
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Get( '/:numero/itinerarios' )
-    @ApiOperation( { title: 'lista os itinerários existentes de uma linha' } )
-    @ApiResponse( { status: 200, description: 'itinerário encontrado' } )
-    @ApiResponse( { status: 204, description: 'Itinerario não encontrado' } )
+    @ApiOperation( {
+        title: 'Itinerarios por linha',
+        description: 'lista os itinerários existentes de uma linha. \nOrigem: Geocontrol'
+    } )
+    @ApiResponse( {
+        status: 200,
+        description: 'itinerário encontrado',
+        type: itinerarioDto,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: 'Itinerario não encontrado',
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
@@ -47,24 +95,62 @@ export class LinhasController {
                     .status( HttpStatus.OK )
                     .send( response );
             else {
+                let msg: string = "Não há registros de itinerarios para essa linha";
+                let rota: string = `${path}/${numero}/itinerarios`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
                 res
-                    .status( HttpStatus.OK )
-                    .send( "Não há registros de itinerarios para essa linha" );
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( resposta )
             }
 
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/${numero}/itinerarios`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
-                .status( HttpStatus.INTERNAL_SERVER_ERROR )
-                .send( err.message )
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( resposta )
         }
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Get( '/:numero/horarios' )
-    @ApiOperation( { title: 'lista os horarios de uma linha' } )
-    @ApiResponse( { status: 200, description: 'Horarios encontrados' } )
-    @ApiResponse( { status: 204, description: 'Horários não encontrados' } )
+    @ApiOperation( {
+        title: 'Horarios por Linha',
+        description: 'lista os horarios de uma linha. \nOrigem: Geocontrol'
+    } )
+    @ApiResponse( {
+        status: 200,
+        description: 'Horarios encontrados',
+        type: HorarioDto,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: 'Horários não encontrados',
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
@@ -73,21 +159,68 @@ export class LinhasController {
 
     public async listarHorarios ( @Param( 'numero' ) numero, @Res() res ) {
         try {
-            res
-                .status( HttpStatus.OK )
-                .send( await this.service.lista_horario( numero ) );
+            let horarios = await this.service.lista_horario( numero );
+            if ( horarios.length > 0 ) {
+                res
+                    .status( HttpStatus.OK )
+                    .send( horarios );
+            } else {
+                let msg: string = "Horarios não encontrados";
+                let rota: string = `${path}/${numero}/horarios`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
+                res
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( resposta );
+            }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/${numero}/horarios`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
-                .status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Horario não encontrado" ) );
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( resposta );
         }
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Get( '/:numero/horarios/obs' )
-    @ApiOperation( { title: 'lista as possíveis observações sobre os horarios de uma linha' } )
-    @ApiResponse( { status: 200, description: 'Observações encontradas' } )
-    @ApiResponse( { status: 204, description: 'Não há observações' } )
+    @ApiOperation( {
+        title: 'Observações sobre as linhas',
+        description: 'lista as possíveis observações sobre os horarios de uma linha. \nOrigem: Geocontrol'
+    } )
+    @ApiResponse( {
+        status: 200,
+        description: 'Observações encontradas',
+        type: HorarioObsDto,
+        isArray: true
+    } )
+    @ApiResponse( {
+        status: 404,
+        description: 'Não há observações',
+        type: ErrorMessage
+    } )
     @ApiImplicitParam( {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
@@ -96,14 +229,28 @@ export class LinhasController {
 
     public async listarObs ( @Param( 'numero' ) numero, @Res() res ) {
         try {
-            res
-                .status( HttpStatus.OK )
-                .send( await this.service.lista_horarioObs( numero ) );
+            let dados = await this.service.lista_horarioObs( numero );
+            if ( dados.length > 0 ) {
+                res
+                    .status( HttpStatus.OK )
+                    .send( dados );
+            } else {
+                let msg: string = "Observações não encontradas";
+                let rota: string = `${path}/${numero}/horarios/obs`;
+                let status: number = HttpStatus.NOT_FOUND;
+                let resposta = new ErrorMessage( msg, rota, status );
+                res
+                    .status( HttpStatus.NOT_FOUND )
+                    .send( resposta );
+            }
         } catch ( err ) {
+            let msg: string = err.message;
+            let rota: string = `${path}/${numero}/horarios/obs`;
+            let status: number = HttpStatus.BAD_GATEWAY;
+            let resposta = new ErrorMessage( msg, rota, status );
             res
-                .status( HttpStatus.NO_CONTENT )
-                .send( new InformationNotFound( "Observações não encontradas" ) );
+                .status( HttpStatus.BAD_GATEWAY )
+                .send( resposta );
         }
     }
-
 }

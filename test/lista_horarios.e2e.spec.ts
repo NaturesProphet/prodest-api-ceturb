@@ -75,7 +75,7 @@ defineFeature( feature, test => {
 
     given( "Não há informações cadastradas", async () => {
       resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios` );
-      expect( resposta.body.status ).toBe( 204 );
+      expect( resposta.status ).toBe( 404 );
     } );
 
     when( "eu pesquisar uma linha", async () => {
@@ -83,7 +83,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há informações disponíveis", () => {
-      expect( resposta.body.message ).toBe( "Horarios não encontrados" );
+      expect( resposta.body.mensagem ).toBe( "Horarios não encontrados" );
     } );
   } );
 

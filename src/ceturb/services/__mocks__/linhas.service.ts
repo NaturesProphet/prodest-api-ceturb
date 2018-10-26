@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InformationNotFound } from '../../../ceturb/models/exception/InformationNotFound';
 
 @Injectable()
 export class LinhasService {
@@ -81,13 +80,13 @@ export class LinhasService {
                 "Dt_Inicio": "21/08/2016"
             }
             return [ obj1, obj2, obj3 ];
-        } else return new InformationNotFound( "Horarios não encontrados" );
+        } else return [];
     }
 
     public async lista_horarioObs ( linha: number ) {
         if ( linha > 0 ) {
             return [ { "teste": "teste" }, { "teste": "teste" }, { "teste": "teste" } ]
-        } else return new InformationNotFound( "Observações não encontradas" );
+        } else return [];
     }
 
 }

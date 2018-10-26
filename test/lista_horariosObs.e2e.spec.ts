@@ -78,7 +78,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retornará uma mensagem informando que não há registros", async () => {
-      expect( resposta.body.message ).toBe( "Observações não encontradas" );
+      expect( resposta.body.mensagem ).toBe( "Observações não encontradas" );
 
     } );
   } );

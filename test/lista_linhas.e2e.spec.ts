@@ -60,32 +60,6 @@ defineFeature( feature, test => {
   } );
 
 
-  test( "Não existem linhas registradas", ( {
-    given,
-    when,
-    then
-  } ) => {
-    given( "Eu quero saber as informações das linhas registrados", () => {
-    } );
-
-    given( "não há linhas registradas", async () => {
-      LinhasService.prototype.retornar_linhas = jest.fn().mockImplementationOnce( () => {
-        return new InformationNotFound( "nenhum registro encontrado" );
-      } );
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha` );
-      expect( resposta.body.status ).toBe( 204 );
-    } );
-
-
-    when( "eu pesquisar", async () => {
-
-    } );
-
-    then( "retorna uma mensagem informando que não há registros", async () => {
-      expect( resposta.body.message ).toBe( "nenhum registro encontrado" );
-    } );
-  } );
-
 
   afterAll( async () => {
     await app.close();

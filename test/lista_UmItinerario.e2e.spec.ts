@@ -72,7 +72,7 @@ defineFeature( feature, test => {
 
     given( "não há registro de itinerários para essa linha", async () => {
       resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/itinerarios` );
-      expect( resposta.status ).toBe( 200 );
+      expect( resposta.status ).toBe( 404 );
     } );
 
     when( "Eu pesquisar uma linha", async () => {
@@ -80,7 +80,7 @@ defineFeature( feature, test => {
     } );
 
     then( "retorna uma mensagem informando que não há registros", async () => {
-      expect( resposta.text ).toBe( "Não há registros de itinerarios para essa linha" );
+      expect( resposta.body.mensagem ).toBe( "Não há registros de itinerarios para essa linha" );
     } );
   } );
 
