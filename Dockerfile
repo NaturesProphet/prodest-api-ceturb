@@ -1,5 +1,4 @@
-#FROM registry.es.gov.br/espm/dockers/node:8.12.0-alpine
-FROM node:8.12.0-alpine
+FROM registry.es.gov.br/espm/dockers/node:8.12.0-alpine
 
 RUN mkdir -p /usr/app/src
 WORKDIR /usr/app
