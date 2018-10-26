@@ -53,7 +53,7 @@ defineFeature( feature, test => {
 
             return [ obj1, obj2, obj3 ];
           } );
-        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/1/itinerarios` );
+        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
         expect( resposta.status ).toBe( 200 );
       },
     );
@@ -75,33 +75,6 @@ defineFeature( feature, test => {
 
 
 
-  test( 'Não há registros de associações entre pontos e itinerários.', ( { given, when, then, } ) => {
-
-    given(
-      'que não existam associações entre pontos e itinerários registrados.', async () => {
-        PontoItinerarioService.prototype.retornar_pontosItinerarios =
-          jest.fn().mockImplementationOnce( () => {
-            return new Error( "Não há registros" );
-          } );
-        resposta = await request( app.getHttpServer() ).get( `${raiz}/pontos/itinerarios` );
-        expect( resposta.body.status ).toBe( 204 );
-      },
-    );
-
-    when(
-      'o usuário solicitar as informações sobre as associações entre pontos e itinerários.',
-      () => {
-        pontosItinerarios = JSON.parse( JSON.stringify( resposta.body ) );
-      },
-    );
-
-    then(
-      'o sistema retorna uma mensagem informando que não há registros',
-      () => {
-        expect( resposta.body.mensagem ).toBe( "Não há registros" );
-      },
-    );
-  } );
 
   afterAll( async () => {
     await app.close();
