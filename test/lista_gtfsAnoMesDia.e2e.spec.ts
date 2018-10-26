@@ -93,7 +93,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.text ).toBe( "Não há arquivos registrados nesse ano, mês e dia" );
+      expect( resposta.body.mensagem ).toBe( "Não há arquivos registrados nesse ano, mês e dia" );
     } );
   } );
 

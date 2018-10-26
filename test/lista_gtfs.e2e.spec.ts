@@ -80,7 +80,7 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não há arquivos", () => {
-      expect( resposta.text ).toBe( 'Não há arquivos registrados' );
+      expect( resposta.body.mensagem ).toBe( 'Não há arquivos registrados' );
     } );
   } );
 
