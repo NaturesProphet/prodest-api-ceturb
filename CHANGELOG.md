@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.1"></a>
+## [1.11.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.0...v1.11.1) (2018-10-26)
+
+
+
 <a name="1.11.0"></a>
 # [1.11.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.10.1...v1.11.0) (2018-10-23)
 
