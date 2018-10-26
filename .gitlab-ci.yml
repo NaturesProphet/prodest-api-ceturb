@@ -1,12 +1,14 @@
 stages:
   - test
   - quality
+  - coverage
   - build
   - deploy
   - stress
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+#  key: '${CI_COMMIT_REF_SLUG}'
+   key: 'cache-ceturb'
   paths:
   - node_modules/
   
@@ -17,6 +19,7 @@ test_job:
      - npm install
      - npm run test
      - npm run test:e2e
+  retry: 2   
 
 quality_job:
   image: registry.es.gov.br/espm/dockers/ci-node_sonar:8.11.2__3.2
@@ -27,6 +30,11 @@ quality_job:
    - npm install
    - npm run test:cov
    - sonar-scanner
+
+
+coverage_job:
+  script: rspec
+  coverage: '/Code coverage: \d+\.\d+/' 
 
 build_job:
   stage: build
