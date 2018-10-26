@@ -89,6 +89,7 @@ export class GtfsController {
         name: 'ano',
         description: 'Ano do GTFS',
         required: true,
+        type: 'number'
     } )
     public async getByYear ( @Param( 'ano' ) ano, @Res() res ) {
         try {
@@ -148,11 +149,13 @@ export class GtfsController {
         name: 'year',
         description: 'Ano do GTFS',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'month',
         description: 'Mês do GTFS',
         required: true,
+        type: 'number'
     } )
     public async getByYearMonth ( @Param( 'year' ) year, @Param( 'month' ) month, @Res() res ) {
         try {
@@ -214,16 +217,19 @@ export class GtfsController {
         name: 'year',
         description: 'Ano do GTFS',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'month',
         description: 'Mês do GTFS',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'day',
         description: 'Dia do GTFS',
         required: true,
+        type: 'number'
     } )
     public async getByYearMonthDay ( @Param( 'year' ) year, @Param( 'month' ) month, @Param( 'day' ) day, @Res() res ) {
         try {

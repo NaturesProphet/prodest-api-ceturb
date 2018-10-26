@@ -64,6 +64,7 @@ export class BDItinerarioController {
         name: 'codigo_linha',
         description: 'codigo da linha. Ex. 509',
         required: true,
+        type: 'number'
     } )
     async getItinerariosByCodigo ( @Res() res, @Param( 'codigo_linha' ) codigo_linha ) {
         try {
@@ -114,6 +115,7 @@ export class BDItinerarioController {
         name: 'codigo_itinerario',
         description: 'codigo do itinerario',
         required: true,
+        type: 'number'
     } )
     async getViagemsByCodigo ( @Res() res, @Param( 'codigo_itinerario' ) codigo_itinerario ) {
         try {
@@ -163,6 +165,7 @@ export class BDItinerarioController {
         name: 'codigo_itinerario',
         description: 'codigo do itinerario (não é o id, é o código)',
         required: true,
+        type: 'number'
     } )
     async getShapes ( @Res() res, @Param( 'codigo_itinerario' ) codigo_itinerario ) {
         try {

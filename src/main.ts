@@ -6,6 +6,7 @@ import { Endpoints } from './commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const pacote = require( '../package.json' );
 const ambiente = process.env.NODE_ENV || 'development';
+const fs = require( 'fs' );
 
 async function bootstrap () {
   //define o protocolo a ser usado no swagger
@@ -21,6 +22,10 @@ async function bootstrap () {
     .setSchemes( schema )
     .build();
   const document = SwaggerModule.createDocument( app, options );
+  /*
+  //para gerar o swagger.json (copiando a saida do console)
+  console.log( JSON.stringify( document ) );
+  */
   SwaggerModule.setup( `${raiz}/docs`, app, document );
   app.useGlobalFilters( new Filtro() );
   await app.listen( 3000 );

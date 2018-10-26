@@ -33,6 +33,7 @@ export class EstimativasController {
         name: 'id_origem',
         description: 'Numero de identificação do ponto de origem',
         required: true,
+        type: 'number'
     } )
 
     async retornar_estimativas_por_origem ( @Res() res, @Param() params ) {
@@ -83,11 +84,13 @@ export class EstimativasController {
         name: 'id_origem',
         description: 'Numero de identificação do ponto de origem',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'id_destino',
         description: 'Numero de identificação do ponto de destino',
         required: true,
+        type: 'number'
     } )
     async retornar_estimativas_por_origem_e_destino ( @Res() res, @Param() params ) {
         try {
@@ -138,11 +141,13 @@ export class EstimativasController {
         name: 'id_origem',
         description: 'Numero de identificação do ponto de origem',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'id_linha',
         description: 'Numero de identificação da linha',
         required: true,
+        type: 'number'
     } )
     async retornar_estimativas_por_origem_e_linha ( @Res() res, @Param() params ) {
         try {

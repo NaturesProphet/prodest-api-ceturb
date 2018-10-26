@@ -164,16 +164,19 @@ export class BDAgenciaController {
         name: 'ano',
         description: 'porção da data referente ao ano. exemplo: 2018',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'mes',
         description: 'porção da data referente ao mês. exemplo: 12',
         required: true,
+        type: 'number'
     } )
     @ApiImplicitParam( {
         name: 'dia',
         description: 'porção da data referente ao dia. exemplo: 25',
         required: true,
+        type: 'number'
     } )
     async isFeriado ( @Res() res, @Param( 'ano' ) ano, @Param( 'mes' ) mes, @Param( 'dia' ) dia ) {
         let hoje = new Date( `${ano}/${mes}/${dia}` );

@@ -85,6 +85,7 @@ export class LinhasController {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
         required: true,
+        type: 'number'
     } )
     public async buscar ( @Param( 'numero' ) numero, @Res() res ) {
         try {
@@ -155,6 +156,7 @@ export class LinhasController {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
         required: true,
+        type: 'number'
     } )
 
     public async listarHorarios ( @Param( 'numero' ) numero, @Res() res ) {
@@ -225,6 +227,7 @@ export class LinhasController {
         name: 'numero',
         description: 'Numero de bandeira da Linha',
         required: true,
+        type: 'number'
     } )
 
     public async listarObs ( @Param( 'numero' ) numero, @Res() res ) {

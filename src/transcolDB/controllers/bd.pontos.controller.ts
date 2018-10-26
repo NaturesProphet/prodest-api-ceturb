@@ -32,6 +32,7 @@ export class BDPontosController {
     name: 'codigo_ponto',
     description: 'codigo do ponto de parada',
     required: true,
+    type: 'number'
   } )
   async getItinerariosByCodigo ( @Res() res, @Param( 'codigo_ponto' ) codigo_ponto ) {
     try {

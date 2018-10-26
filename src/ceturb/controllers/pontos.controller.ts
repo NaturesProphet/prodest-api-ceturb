@@ -79,21 +79,25 @@ export class PontosController {
     name: 'ponto_geografico_direito_inferior',
     description: 'Coordenada do ponto geográfico direito inferior (SIGNED FLOAT)',
     required: true,
+    type: 'number'
   } )
   @ApiImplicitParam( {
     name: 'ponto_geografico_direito_superior',
     description: 'Coordenada do ponto geográfico direito superior (SIGNED FLOAT)',
     required: true,
+    type: 'number'
   } )
   @ApiImplicitParam( {
     name: 'ponto_geografico_esquerdo_superior',
     description: 'Coordenada do ponto geográfico esquerdo superior (SIGNED FLOAT)',
     required: true,
+    type: 'number'
   } )
   @ApiImplicitParam( {
     name: 'ponto_geografico_esquerdo_inferior',
     description: 'Coordenada do ponto geográfico esquerdo inferior (SIGNED FLOAT)',
     required: true,
+    type: 'number'
   } )
   async retornar_pontos_por_area_do_mapa ( @Res() res, @Param() params ) {
     let Left: number;
