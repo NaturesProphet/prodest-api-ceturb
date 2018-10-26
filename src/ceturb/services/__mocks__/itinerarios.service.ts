@@ -1,5 +1,4 @@
-import { Injectable, HttpService, Res } from '@nestjs/common';
-import { InformationNotFound } from '../../models/exception/InformationNotFound';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ItinerariosService {
@@ -52,7 +51,7 @@ export class ItinerariosService {
             }
 
             return [ obj1, obj2 ];
-        } else return new InformationNotFound( "Não há registros para essa linha" );
+        } else return [];
     }
 }
 

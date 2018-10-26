@@ -41,9 +41,7 @@
     "mssql": "^4.2.1",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
-    "request": "^2.87.0",
     "request-promise": "^4.2.2",
-    "rxjs": "^6.2.2",
     "shelljs": "^0.8.2",
     "typeorm": "^0.2.7",
     "typescript": "^2.6.2"

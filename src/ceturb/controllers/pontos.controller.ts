@@ -1,6 +1,5 @@
 import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { PontoService } from '../services/ponto.ceturb.service';
-import { InformationNotFound } from '../models/exception/InformationNotFound';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Endpoints } from '../../commom/configs/endpoints.config';
 import { Ponto } from "../../ceturb/models/dto/ponto.entity";
@@ -38,9 +37,13 @@ export class PontosController {
         .send( await this.pontoService.retornar_pontos() );
     }
     catch ( error ) {
+      let msg: string = error.message;
+      let rota: string = path;
+      let status: number = HttpStatus.BAD_GATEWAY;
+      let resposta = new ErrorMessage( msg, rota, status );
       res
-        .status( HttpStatus.NO_CONTENT )
-        .send( new InformationNotFound( "Pontos não encontrados" ) );
+        .status( HttpStatus.BAD_GATEWAY )
+        .send( resposta );
     }
   }
 
