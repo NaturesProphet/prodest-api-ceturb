@@ -1,5 +1,4 @@
-import { Injectable, Param } from '@nestjs/common';
-import { InformationNotFound } from '../../models/exception/InformationNotFound';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EstimativasService {
@@ -35,7 +34,7 @@ export class EstimativasService {
         if ( Params.id_origem != 0 ) {
             return resposta;
         } else {
-            throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
+            return { estimativas: [] };
         }
     }
 
@@ -74,7 +73,7 @@ export class EstimativasService {
         }
         if ( parseInt( params.id_destino ) != 0 && parseInt( params.id_origem ) != 0 )
             return resposta;
-        else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
+        else return { estimativas: [] };
     }
 
 
@@ -108,6 +107,6 @@ export class EstimativasService {
         }
         if ( parseInt( params.id_linha ) != 0 && parseInt( params.id_origem ) != 0 )
             return resposta;
-        else throw new InformationNotFound( "Não foram encontradas estimativas para o ponto" );
+        else return { estimativas: [] }
     }
 }

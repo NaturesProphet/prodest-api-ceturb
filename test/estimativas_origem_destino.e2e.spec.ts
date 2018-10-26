@@ -83,11 +83,9 @@ defineFeature( feature, test => {
     } );
 
     then( "recebo uma mensagem informando que não foram encontradas estimativas", () => {
-      expect( resposta.body.message ).toBe( "Estimativas não encontradas" );
+      expect( resposta.body.mensagem ).toBe( "Estimativas não encontradas" );
     } );
   } );
-
-
 
 
   afterAll( async () => {
