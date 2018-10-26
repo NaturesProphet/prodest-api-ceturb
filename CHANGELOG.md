@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.4"></a>
+## [1.11.4](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.3...v1.11.4) (2018-10-26)
+
+
+### Bug Fixes
+
+* **rxjs:** adicionei novamente pq deu ruim ter tirado ([4601b86](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/4601b86))
+
+
+
 <a name="1.11.3"></a>
 ## [1.11.3](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.2...v1.11.3) (2018-10-26)
 
