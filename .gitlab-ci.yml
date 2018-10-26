@@ -8,7 +8,7 @@ stages:
 
 cache:
 #  key: '${CI_COMMIT_REF_SLUG}'
-   key: 'cache-ceturb'
+  key: 'cache-ceturb'
   paths:
   - node_modules/
   
