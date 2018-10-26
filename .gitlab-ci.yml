@@ -1,7 +1,6 @@
 stages:
   - test
   - quality
-  - coverage
   - build
   - deploy
   - stress
@@ -30,11 +29,6 @@ quality_job:
    - npm install
    - npm run test:cov
    - sonar-scanner
-
-
-coverage_job:
-  script: rspec
-  coverage: '/Code coverage: \d+\.\d+/' 
 
 build_job:
   stage: build
