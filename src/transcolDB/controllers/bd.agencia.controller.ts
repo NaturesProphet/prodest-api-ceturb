@@ -182,7 +182,7 @@ export class BDAgenciaController {
         let hoje = new Date( `${ano}/${mes}/${dia}` );
         let consulta;
         try {
-            consulta = await this.Service.CheckFeriado( hoje );
+            consulta = await this.Service.CheckFeriado( hoje.toLocaleDateString() );
             res
                 .status( HttpStatus.OK )
                 .send( consulta );

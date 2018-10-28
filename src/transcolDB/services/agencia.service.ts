@@ -51,10 +51,10 @@ export class AgenciaService {
 
     /**
      * Método que verifica se uma data consultada é um feriado.
-     * @param d objeto Date contendo a data a ser pesquisada
+     * @param d string de data no formato 'YYYY-MM-DD"
      * @returns retorna um objeto FeriadoResponse com a data pesquisada e um booleano informando se é um feriado
      */
-    async CheckFeriado ( d: Date ) {
+    async CheckFeriado ( d: string ) {
         let resposta = new FeriadoResponse();
         resposta.data = d;
         let hoje: Feriado;

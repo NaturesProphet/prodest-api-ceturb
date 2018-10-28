@@ -41,14 +41,14 @@ describe( 'AgenciaService', () => {
 
   it( 'O retorno ao consultar uma data que é feriado deve ser true', async () => {
     let natal: Date = new Date( '2018/12/25' );
-    resposta = await service.CheckFeriado( natal );
+    resposta = await service.CheckFeriado( natal.toLocaleDateString() );
     expect( resposta.feriado ).toBe( true );
   } );
 
 
   it( 'O retorno ao consultar uma data que NÃO é feriado deve ser false', async () => {
     let diachato: Date = new Date( '2018/10/04' )
-    resposta = await service.CheckFeriado( diachato )
+    resposta = await service.CheckFeriado( diachato.toLocaleDateString() )
     expect( resposta.feriado ).toBe( false );
   } );
 

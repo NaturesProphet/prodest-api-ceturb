@@ -4,7 +4,7 @@ import { ApiModelProperty } from "@nestjs/swagger";
 
 export class FeriadoResponse {
     @ApiModelProperty()
-    data: Date;
+    data: string;
 
     @ApiModelProperty()
     feriado: boolean;

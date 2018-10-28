@@ -69,9 +69,9 @@ export class AgenciaService {
      * @param d objeto Date contendo a data a ser pesquisada
      * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
      */
-    async CheckFeriado ( d: Date ) {
+    async CheckFeriado ( d: string ) {
         let resposta = new FeriadoResponse();
-        if ( d.getDate() == 25 && d.getUTCMonth() == 11 ) { //11 mesmo. Javascript é do carai!
+        if ( d == '2018-12-25' ) {
             resposta.data = d;
             resposta.feriado = true;
         } else {
