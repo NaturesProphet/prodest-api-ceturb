@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.7"></a>
+## [1.11.7](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.6...v1.11.7) (2018-10-28)
+
+
+### Bug Fixes
+
+* **CheckFeriados:** Objeto Date substituido por uma string yyyy-mm-dd para evitar confusão nas datas ([e88489c](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/e88489c))
+
+
+
 <a name="1.11.6"></a>
 ## [1.11.6](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.5...v1.11.6) (2018-10-27)
 
