@@ -23,9 +23,6 @@ export class Agencia extends Auditoria {
     @ApiModelProperty()
     telefone: string;
 
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    historico: boolean;
 
 
 

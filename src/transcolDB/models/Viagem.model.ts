@@ -34,12 +34,7 @@ export class Viagem extends Auditoria {
     @Column( "bit", { default: 0 } )
     @ApiModelProperty()
     domingo: boolean;
-
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    historico: boolean;
-
-
+    
     //###################################################################
     //############################ RELAÇÕES #############################
     //###################################################################

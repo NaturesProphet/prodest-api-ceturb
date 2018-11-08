@@ -21,10 +21,6 @@ export class Itinerario extends Auditoria {
     @ApiModelProperty()
     bandeira: string;
 
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    historico: boolean;
-
 
     //###################################################################
     //############################ RELAÇÕES #############################
