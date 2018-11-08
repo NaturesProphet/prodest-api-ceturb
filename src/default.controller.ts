@@ -9,11 +9,11 @@ export class DefaultController {
 
     @Get( raiz )
     @ApiOperation( {
-        description: "Redireciona para a pagina Swagger da API dO_Ob",
-        title: "Swagger"
+        description: "Just a wellcome message.",
+        title: "Hello Developers!"
     } )
-    @ApiResponse( { status: 200, description: "redireciona para a rota do swagger" } )
+    @ApiResponse( { status: 200, description: "Welcome message" } )
     async default ( @Res() res ) {
-        res.redirect( `${raiz}/docs/` );
+        res.send( "Bem vindo a nova API-CETURB desenvolvida pela parceria PRODEST, IFES e FAPES. Acesse a rota /docs e de uma olhada na nossa documentação. Happy Coding! :)" );
     }
 }

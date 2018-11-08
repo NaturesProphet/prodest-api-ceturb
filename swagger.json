@@ -2,29 +2,39 @@
 	"swagger": "2.0",
 	"info": {
 		"description": "API de acesso aos dados do transporte público do estado do Espírito Santo",
-		"version": "1.11.4",
+		"version": "1.11.7",
 		"title": "Nova api-ceturb"
 	},
 	"basePath": "/",
-	"tags": [{
-		"name": "api-ceturb",
-		"description": ""
-	}],
-	"schemes": ["http"],
+	"tags": [
+		{
+			"name": "api-ceturb",
+			"description": ""
+		}
+	],
+	"schemes": [
+		"http"
+	],
 	"securityDefinitions": {},
 	"paths": {
-		"/": {
+		"/docs": {
 			"get": {
 				"summary": "Swagger",
-				"description": "Redireciona para a pagina Swagger da API dO_Ob",
+				"description": "Pagina Swagger da API",
 				"responses": {
 					"200": {
-						"description": "redireciona para a rota do swagger"
+						"description": "documentação em swagger"
 					}
 				},
-				"tags": ["Documentação da API"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Documentação da API"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/pontos": {
@@ -48,40 +58,51 @@
 						}
 					}
 				},
-				"tags": ["Pontos"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Pontos"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/pontos/area/{ponto_geografico_esquerdo_inferior}/{ponto_geografico_esquerdo_superior}/{ponto_geografico_direito_superior}/{ponto_geografico_direito_inferior}": {
 			"get": {
 				"summary": "Pontos de parada por Area do mapa",
 				"description": "Retorna um array com os ids dos pontos de parada dentro da area do mapa especificada.\nAlguns valores para teste: \nponto_geografico_esquerdo_inferior: -20.282983882640348 \nponto_geografico_esquerdo_superior: -40.309548147161195 \nponto_geografico_direito_superior: -40.29407716556429\nponto_geografico_direito_inferior: -20.274791927077008 \nA URL para essa busca ficaria assim:\n/area/-40.309548147161195/-20.282983882640348/-40.29407716556429/-20.274791927077008",
-				"parameters": [{
-					"name": "ponto_geografico_esquerdo_inferior",
-					"required": true,
-					"in": "path",
-					"description": "Coordenada do ponto geográfico esquerdo inferior (SIGNED FLOAT)",
-					"type": "number"
-				}, {
-					"name": "ponto_geografico_esquerdo_superior",
-					"required": true,
-					"in": "path",
-					"description": "Coordenada do ponto geográfico esquerdo superior (SIGNED FLOAT)",
-					"type": "number"
-				}, {
-					"name": "ponto_geografico_direito_superior",
-					"required": true,
-					"in": "path",
-					"description": "Coordenada do ponto geográfico direito superior (SIGNED FLOAT)",
-					"type": "number"
-				}, {
-					"name": "ponto_geografico_direito_inferior",
-					"required": true,
-					"in": "path",
-					"description": "Coordenada do ponto geográfico direito inferior (SIGNED FLOAT)",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "ponto_geografico_esquerdo_inferior",
+						"required": true,
+						"in": "path",
+						"description": "Coordenada do ponto geográfico esquerdo inferior (SIGNED FLOAT)",
+						"type": "number"
+					},
+					{
+						"name": "ponto_geografico_esquerdo_superior",
+						"required": true,
+						"in": "path",
+						"description": "Coordenada do ponto geográfico esquerdo superior (SIGNED FLOAT)",
+						"type": "number"
+					},
+					{
+						"name": "ponto_geografico_direito_superior",
+						"required": true,
+						"in": "path",
+						"description": "Coordenada do ponto geográfico direito superior (SIGNED FLOAT)",
+						"type": "number"
+					},
+					{
+						"name": "ponto_geografico_direito_inferior",
+						"required": true,
+						"in": "path",
+						"description": "Coordenada do ponto geográfico direito inferior (SIGNED FLOAT)",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Pontos encontrados",
@@ -105,9 +126,15 @@
 						}
 					}
 				},
-				"tags": ["Pontos"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Pontos"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/linha": {
@@ -125,22 +152,30 @@
 						}
 					}
 				},
-				"tags": ["Linhas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Linhas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/linha/{numero}/itinerarios": {
 			"get": {
 				"summary": "Itinerarios por linha",
 				"description": "lista os itinerários existentes de uma linha. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "numero",
-					"required": true,
-					"in": "path",
-					"description": "Numero de bandeira da Linha",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "numero",
+						"required": true,
+						"in": "path",
+						"description": "Numero de bandeira da Linha",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "itinerário encontrado",
@@ -158,22 +193,30 @@
 						}
 					}
 				},
-				"tags": ["Linhas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Linhas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/linha/{numero}/horarios": {
 			"get": {
 				"summary": "Horarios por Linha",
 				"description": "lista os horarios de uma linha. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "numero",
-					"required": true,
-					"in": "path",
-					"description": "Numero de bandeira da Linha",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "numero",
+						"required": true,
+						"in": "path",
+						"description": "Numero de bandeira da Linha",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Horarios encontrados",
@@ -191,22 +234,30 @@
 						}
 					}
 				},
-				"tags": ["Linhas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Linhas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/linha/{numero}/horarios/obs": {
 			"get": {
 				"summary": "Observações sobre as linhas",
 				"description": "lista as possíveis observações sobre os horarios de uma linha. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "numero",
-					"required": true,
-					"in": "path",
-					"description": "Numero de bandeira da Linha",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "numero",
+						"required": true,
+						"in": "path",
+						"description": "Numero de bandeira da Linha",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Observações encontradas",
@@ -224,9 +275,15 @@
 						}
 					}
 				},
-				"tags": ["Linhas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Linhas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/viagens": {
@@ -244,9 +301,15 @@
 						}
 					}
 				},
-				"tags": ["Viagens"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Viagens"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/itinerarios": {
@@ -270,9 +333,15 @@
 						}
 					}
 				},
-				"tags": ["Itinerarios"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Itinerarios"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/pontos/itinerarios": {
@@ -296,22 +365,30 @@
 						}
 					}
 				},
-				"tags": ["Pontos x Itinerarios"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Pontos x Itinerarios"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/estimativas/ponto/{id_origem}/origem": {
 			"get": {
 				"summary": "Estimativas por Origem",
 				"description": "retornar estimativas por ponto de origem. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "id_origem",
-					"required": true,
-					"in": "path",
-					"description": "Numero de identificação do ponto de origem",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "id_origem",
+						"required": true,
+						"in": "path",
+						"description": "Numero de identificação do ponto de origem",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Estimativas encontradas",
@@ -329,28 +406,37 @@
 						}
 					}
 				},
-				"tags": ["Estimativas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Estimativas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/estimativas/ponto/{id_origem}/origem/{id_destino}/destino": {
 			"get": {
 				"summary": "Estimativas por Origem e Destino",
 				"description": "retornar estimativas por ponto de origem e ponto destino. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "id_destino",
-					"required": true,
-					"in": "path",
-					"description": "Numero de identificação do ponto de destino",
-					"type": "number"
-				}, {
-					"name": "id_origem",
-					"required": true,
-					"in": "path",
-					"description": "Numero de identificação do ponto de origem",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "id_destino",
+						"required": true,
+						"in": "path",
+						"description": "Numero de identificação do ponto de destino",
+						"type": "number"
+					},
+					{
+						"name": "id_origem",
+						"required": true,
+						"in": "path",
+						"description": "Numero de identificação do ponto de origem",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Estimativas encontradas",
@@ -368,28 +454,37 @@
 						}
 					}
 				},
-				"tags": ["Estimativas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Estimativas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/estimativas/ponto/{id_origem}/origem/{id_linha}/linha": {
 			"get": {
 				"summary": "Estimativas por Origem e linha",
 				"description": "retornar estimativas por ponto de origem e linha. \nOrigem: Geocontrol",
-				"parameters": [{
-					"name": "id_linha",
-					"required": true,
-					"in": "path",
-					"description": "Numero de identificação da linha",
-					"type": "number"
-				}, {
-					"name": "id_origem",
-					"required": true,
-					"in": "path",
-					"description": "Numero de identificação do ponto de origem",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "id_linha",
+						"required": true,
+						"in": "path",
+						"description": "Numero de identificação da linha",
+						"type": "number"
+					},
+					{
+						"name": "id_origem",
+						"required": true,
+						"in": "path",
+						"description": "Numero de identificação do ponto de origem",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Estimativas encontradas",
@@ -407,9 +502,15 @@
 						}
 					}
 				},
-				"tags": ["Estimativas"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Estimativas"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/gtfs": {
@@ -433,22 +534,30 @@
 						}
 					}
 				},
-				"tags": ["GTFS"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"GTFS"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/gtfs/{ano}": {
 			"get": {
 				"summary": "GTFS por ano",
 				"description": "lista os arquivos GTFS existentes no minio de um ano específicos",
-				"parameters": [{
-					"name": "ano",
-					"required": true,
-					"in": "path",
-					"description": "Ano do GTFS",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "ano",
+						"required": true,
+						"in": "path",
+						"description": "Ano do GTFS",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gtfs Encontrado",
@@ -466,28 +575,37 @@
 						}
 					}
 				},
-				"tags": ["GTFS"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"GTFS"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/gtfs/{year}/{month}": {
 			"get": {
 				"summary": "GTFS por ano e mês",
 				"description": "lista os arquivos GTFS existentes no minio de um ano e mês específicos",
-				"parameters": [{
-					"name": "month",
-					"required": true,
-					"in": "path",
-					"description": "Mês do GTFS",
-					"type": "number"
-				}, {
-					"name": "year",
-					"required": true,
-					"in": "path",
-					"description": "Ano do GTFS",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "month",
+						"required": true,
+						"in": "path",
+						"description": "Mês do GTFS",
+						"type": "number"
+					},
+					{
+						"name": "year",
+						"required": true,
+						"in": "path",
+						"description": "Ano do GTFS",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gtfs Encontrado",
@@ -505,34 +623,44 @@
 						}
 					}
 				},
-				"tags": ["GTFS"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"GTFS"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/gtfs/{year}/{month}/{day}": {
 			"get": {
 				"summary": "GTFS por data",
 				"description": "lista os arquivos GTFS existentes no minio de um ano, mês e dia específicos",
-				"parameters": [{
-					"name": "day",
-					"required": true,
-					"in": "path",
-					"description": "Dia do GTFS",
-					"type": "number"
-				}, {
-					"name": "month",
-					"required": true,
-					"in": "path",
-					"description": "Mês do GTFS",
-					"type": "number"
-				}, {
-					"name": "year",
-					"required": true,
-					"in": "path",
-					"description": "Ano do GTFS",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "day",
+						"required": true,
+						"in": "path",
+						"description": "Dia do GTFS",
+						"type": "number"
+					},
+					{
+						"name": "month",
+						"required": true,
+						"in": "path",
+						"description": "Mês do GTFS",
+						"type": "number"
+					},
+					{
+						"name": "year",
+						"required": true,
+						"in": "path",
+						"description": "Ano do GTFS",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Gtfs Encontrado",
@@ -550,9 +678,15 @@
 						}
 					}
 				},
-				"tags": ["GTFS"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"GTFS"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/agencias": {
@@ -576,9 +710,15 @@
 						}
 					}
 				},
-				"tags": ["Agencias"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Agencias"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/agencias/contatos": {
@@ -602,9 +742,15 @@
 						}
 					}
 				},
-				"tags": ["Agencias"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Agencias"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/agencias/feriados": {
@@ -628,34 +774,44 @@
 						}
 					}
 				},
-				"tags": ["Agencias"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Agencias"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/agencias/feriados/validar/{ano}/{mes}/{dia}": {
 			"get": {
 				"summary": "Consulta booleana de Feriados da agencia por data",
 				"description": "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
-				"parameters": [{
-					"name": "dia",
-					"required": true,
-					"in": "path",
-					"description": "porção da data referente ao dia. exemplo: 25",
-					"type": "number"
-				}, {
-					"name": "mes",
-					"required": true,
-					"in": "path",
-					"description": "porção da data referente ao mês. exemplo: 12",
-					"type": "number"
-				}, {
-					"name": "ano",
-					"required": true,
-					"in": "path",
-					"description": "porção da data referente ao ano. exemplo: 2018",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "dia",
+						"required": true,
+						"in": "path",
+						"description": "porção da data referente ao dia. exemplo: 25",
+						"type": "number"
+					},
+					{
+						"name": "mes",
+						"required": true,
+						"in": "path",
+						"description": "porção da data referente ao mês. exemplo: 12",
+						"type": "number"
+					},
+					{
+						"name": "ano",
+						"required": true,
+						"in": "path",
+						"description": "porção da data referente ao ano. exemplo: 2018",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Consulta executada com sucesso.",
@@ -664,9 +820,15 @@
 						}
 					}
 				},
-				"tags": ["Agencias"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Agencias"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/agencias/tarifas": {
@@ -690,22 +852,30 @@
 						}
 					}
 				},
-				"tags": ["Agencias"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Agencias"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/itinerarios/{codigo_linha}": {
 			"get": {
 				"summary": "Itinerarios por Linha",
 				"description": "Listar os itinerarios de uma linha especifica. \nOrigem: banco de dados",
-				"parameters": [{
-					"name": "codigo_linha",
-					"required": true,
-					"in": "path",
-					"description": "codigo da linha. Ex. 509",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "codigo_linha",
+						"required": true,
+						"in": "path",
+						"description": "codigo da linha. Ex. 509",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"302": {
 						"description": "Itinerarios encontrados",
@@ -723,22 +893,30 @@
 						}
 					}
 				},
-				"tags": ["Itinerarios"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Itinerarios"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/itinerarios/{codigo_itinerario}/viagens": {
 			"get": {
 				"summary": "Viagens por Itinerario",
 				"description": "Listar as viagens de um itinerário especifico. \nOrigem: banco de dados",
-				"parameters": [{
-					"name": "codigo_itinerario",
-					"required": true,
-					"in": "path",
-					"description": "codigo do itinerario",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "codigo_itinerario",
+						"required": true,
+						"in": "path",
+						"description": "codigo do itinerario",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"302": {
 						"description": "Viagems encontradas",
@@ -756,22 +934,30 @@
 						}
 					}
 				},
-				"tags": ["Itinerarios"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Itinerarios"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/itinerarios/{codigo_itinerario}/shapes": {
 			"get": {
 				"summary": "Pontos geográficos por Itinerario",
 				"description": "Listar os pontos geográficos percorridos por um itinerario (SHAPES). \nOrigem: banco de dados",
-				"parameters": [{
-					"name": "codigo_itinerario",
-					"required": true,
-					"in": "path",
-					"description": "codigo do itinerario (não é o id, é o código)",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "codigo_itinerario",
+						"required": true,
+						"in": "path",
+						"description": "codigo do itinerario (não é o id, é o código)",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"302": {
 						"description": "coordenadas encontradas",
@@ -789,22 +975,30 @@
 						}
 					}
 				},
-				"tags": ["Itinerarios"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Itinerarios"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		},
 		"/pontos/{codigo_ponto}/itinerarios": {
 			"get": {
 				"summary": "Itinerarios por Ponto",
 				"description": "Listar todos os itinerarios que passam por um ponto. \nOrigem: banco de dados",
-				"parameters": [{
-					"name": "codigo_ponto",
-					"required": true,
-					"in": "path",
-					"description": "codigo do ponto de parada",
-					"type": "number"
-				}],
+				"parameters": [
+					{
+						"name": "codigo_ponto",
+						"required": true,
+						"in": "path",
+						"description": "codigo do ponto de parada",
+						"type": "number"
+					}
+				],
 				"responses": {
 					"302": {
 						"description": "Itinerarios encontrados",
@@ -822,9 +1016,15 @@
 						}
 					}
 				},
-				"tags": ["Pontos"],
-				"produces": ["application/json"],
-				"consumes": ["application/json"]
+				"tags": [
+					"Pontos"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
 			}
 		}
 	},
@@ -860,7 +1060,17 @@
 					"type": "boolean"
 				}
 			},
-			"required": ["id", "codigo", "municipio", "logradouro", "referencia", "latitude", "longitude", "azimute", "terminal"]
+			"required": [
+				"id",
+				"codigo",
+				"municipio",
+				"logradouro",
+				"referencia",
+				"latitude",
+				"longitude",
+				"azimute",
+				"terminal"
+			]
 		},
 		"Date": {
 			"type": "object",
@@ -882,7 +1092,12 @@
 					"type": "number"
 				}
 			},
-			"required": ["mensagem", "data", "rota", "statusCode"]
+			"required": [
+				"mensagem",
+				"data",
+				"rota",
+				"statusCode"
+			]
 		},
 		"LinhaDto": {
 			"type": "object",
@@ -897,7 +1112,11 @@
 					"type": "string"
 				}
 			},
-			"required": ["id", "codigo", "descricao"]
+			"required": [
+				"id",
+				"codigo",
+				"descricao"
+			]
 		},
 		"itinerarioDto": {
 			"type": "object",
@@ -915,7 +1134,12 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "codigo", "bandeira", "linhaId"]
+			"required": [
+				"id",
+				"codigo",
+				"bandeira",
+				"linhaId"
+			]
 		},
 		"HorarioDto": {
 			"type": "object",
@@ -948,7 +1172,17 @@
 					"type": "string"
 				}
 			},
-			"required": ["Linha", "Hora_Saida", "Terminal_Seq", "TP_Horario", "Descricao_Hora", "Descricao_Linha", "Desc_Terminal", "Tipo_Orientacao", "Dt_Inicio"]
+			"required": [
+				"Linha",
+				"Hora_Saida",
+				"Terminal_Seq",
+				"TP_Horario",
+				"Descricao_Hora",
+				"Descricao_Linha",
+				"Desc_Terminal",
+				"Tipo_Orientacao",
+				"Dt_Inicio"
+			]
 		},
 		"HorarioObsDto": {
 			"type": "object",
@@ -960,7 +1194,10 @@
 					"type": "string"
 				}
 			},
-			"required": ["Tipo_Orientacao", "Descricao_Orientacao"]
+			"required": [
+				"Tipo_Orientacao",
+				"Descricao_Orientacao"
+			]
 		},
 		"ViagemDto": {
 			"type": "object",
@@ -984,7 +1221,14 @@
 					"type": "boolean"
 				}
 			},
-			"required": ["dataAgendada", "linhaId", "itinerarioId", "dataChegadaEstimada", "veiculo", "acessibilidade"]
+			"required": [
+				"dataAgendada",
+				"linhaId",
+				"itinerarioId",
+				"dataChegadaEstimada",
+				"veiculo",
+				"acessibilidade"
+			]
 		},
 		"PontoItinerario": {
 			"type": "object",
@@ -1005,7 +1249,13 @@
 					"type": "boolean"
 				}
 			},
-			"required": ["itinerarioId", "ordem", "pontoDeParadaId", "embarque", "desembarque"]
+			"required": [
+				"itinerarioId",
+				"ordem",
+				"pontoDeParadaId",
+				"embarque",
+				"desembarque"
+			]
 		},
 		"estimativasDto": {
 			"type": "object",
@@ -1041,7 +1291,18 @@
 					"type": "number"
 				}
 			},
-			"required": ["veiculo", "acessibilidade", "itinerarioId", "horarioDePartida", "horarioNaOrigem", "horarioDaTransmissao", "pontoFinal", "busStopPosition", "busStopFinalPosition", "horarioNoDestino"]
+			"required": [
+				"veiculo",
+				"acessibilidade",
+				"itinerarioId",
+				"horarioDePartida",
+				"horarioNaOrigem",
+				"horarioDaTransmissao",
+				"pontoFinal",
+				"busStopPosition",
+				"busStopFinalPosition",
+				"horarioNoDestino"
+			]
 		},
 		"gtfsDto": {
 			"type": "object",
@@ -1068,7 +1329,15 @@
 					"type": "string"
 				}
 			},
-			"required": ["year", "month", "day", "hour", "size", "filename", "url"]
+			"required": [
+				"year",
+				"month",
+				"day",
+				"hour",
+				"size",
+				"filename",
+				"url"
+			]
 		},
 		"Agencia": {
 			"type": "object",
@@ -1090,12 +1359,16 @@
 				},
 				"telefone": {
 					"type": "string"
-				},
-				"historico": {
-					"type": "boolean"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "nome", "url", "telefone", "historico"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"nome",
+				"url",
+				"telefone"
+			]
 		},
 		"Contato": {
 			"type": "object",
@@ -1122,7 +1395,15 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "nome", "email", "ativo", "agencia_id"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"nome",
+				"email",
+				"ativo",
+				"agencia_id"
+			]
 		},
 		"Feriado": {
 			"type": "object",
@@ -1149,19 +1430,30 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "nome", "data", "dataupload", "agencia_id"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"nome",
+				"data",
+				"dataupload",
+				"agencia_id"
+			]
 		},
 		"FeriadoResponse": {
 			"type": "object",
 			"properties": {
 				"data": {
-					"$ref": "#/definitions/Date"
+					"type": "string"
 				},
 				"feriado": {
 					"type": "boolean"
 				}
 			},
-			"required": ["data", "feriado"]
+			"required": [
+				"data",
+				"feriado"
+			]
 		},
 		"Tarifa": {
 			"type": "object",
@@ -1185,7 +1477,14 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "preco", "dataupload", "agencia_id"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"preco",
+				"dataupload",
+				"agencia_id"
+			]
 		},
 		"Itinerario": {
 			"type": "object",
@@ -1203,7 +1502,12 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "codigo", "bandeira", "linhaId"]
+			"required": [
+				"id",
+				"codigo",
+				"bandeira",
+				"linhaId"
+			]
 		},
 		"Viagem": {
 			"type": "object",
@@ -1238,14 +1542,23 @@
 				"domingo": {
 					"type": "boolean"
 				},
-				"historico": {
-					"type": "boolean"
-				},
 				"itinerario_id": {
 					"type": "number"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "horadasaida", "horadachegada", "veiculo", "acessibilidade", "diautil", "sabado", "domingo", "historico", "itinerario_id"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"horadasaida",
+				"horadachegada",
+				"veiculo",
+				"acessibilidade",
+				"diautil",
+				"sabado",
+				"domingo",
+				"itinerario_id"
+			]
 		},
 		"PontoGeografico": {
 			"type": "object",
@@ -1278,7 +1591,17 @@
 					"type": "number"
 				}
 			},
-			"required": ["id", "dataregistro", "atualizadoem", "latitude", "longitude", "altitude", "sequencia", "dataupload", "itinerario_id"]
+			"required": [
+				"id",
+				"dataregistro",
+				"atualizadoem",
+				"latitude",
+				"longitude",
+				"altitude",
+				"sequencia",
+				"dataupload",
+				"itinerario_id"
+			]
 		}
 	}
 }
