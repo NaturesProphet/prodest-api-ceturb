@@ -692,6 +692,29 @@
 				]
 			}
 		},
+		"/swagger": {
+			"get": {
+				"summary": "swagger.json",
+				"description": "Retorna o arquivo swagger.json para auxiliar na criação de clients pela comunidade",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/json"
+						}
+					}
+				},
+				"tags": [
+					"swagger.json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		},
 		"/agencias": {
 			"get": {
 				"summary": "Agencias",
@@ -1295,6 +1318,10 @@
 				"filename",
 				"url"
 			]
+		},
+		"json": {
+			"type": "object",
+			"properties": {}
 		},
 		"Agencia": {
 			"type": "object",

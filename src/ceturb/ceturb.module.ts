@@ -12,14 +12,16 @@ import { EstimativasService } from "./services/estimativas.service";
 import { GtfsService } from './services/gtfs.service';
 import { GtfsController } from './controllers/gtfs.controller';
 import { MinioService } from './services/minio.service'
+import { SwaggerService } from "./services/swagger.service";
+import { SwaggerController } from "./controllers/swagger.controller";
 
 @Module( {
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController,
     ItinerariosController,
-    EstimativasController, GtfsController ],
+    EstimativasController, GtfsController, SwaggerController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    EstimativasService, GtfsService, MinioService ]
+    EstimativasService, GtfsService, MinioService, SwaggerService ]
 } )
 
 

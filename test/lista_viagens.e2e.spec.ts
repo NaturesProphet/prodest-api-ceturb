@@ -6,7 +6,6 @@ import { AppModule } from "../src/app.module";
 import { ViagensService } from '../src/ceturb/services/viagens.service';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
-import { InformationNotFound } from "../src/ceturb/models/exception/InformationNotFound";
 const feature = loadFeature( "./test/features/buscaViagens.feature" );
 jest.mock( '../src/ceturb/services/viagens.service' );
 

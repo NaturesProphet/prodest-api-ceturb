@@ -10,6 +10,7 @@ import { BDAgenciaController } from "./transcolDB/controllers/bd.agencia.control
 import { BDItinerarioController } from "./transcolDB/controllers/bd.itinerario.controller";
 import { DefaultController } from "./default.controller";
 import { RedisConfig } from "./commom/configs/redis.config";
+import { SwaggerController } from "ceturb/controllers/swagger.controller";
 const redisConf = new RedisConfig();
 
 
@@ -41,5 +42,8 @@ export class AppModule implements NestModule {
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( BDItinerarioController );
+    consumer
+      .apply( redisConf.cacheWithRedis( '24 hours' ) )
+      .forRoutes( SwaggerController );
   }
 }

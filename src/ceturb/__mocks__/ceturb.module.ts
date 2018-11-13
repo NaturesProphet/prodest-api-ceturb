@@ -12,13 +12,15 @@ import { EstimativasService } from "../services/estimativas.service";
 import { GtfsService } from '../services/gtfs.service';
 import { GtfsController } from '../controllers/gtfs.controller';
 import { MinioService } from '../services/minio.service'
+import { SwaggerController } from "../../ceturb/controllers/swagger.controller";
+import { SwaggerService } from "../../ceturb/services/swagger.service";
 
 @Module( {
   controllers: [ PontosController, LinhasController, ViagensController,
-    ItinerariosController,
+    ItinerariosController, SwaggerController,
     EstimativasController, GtfsController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    EstimativasService, GtfsService, MinioService ]
+    EstimativasService, GtfsService, MinioService, SwaggerService ]
 } )
 
 
