@@ -64,20 +64,21 @@ export class AgenciaService {
         return resposta;
     }
 
-    /**
-     * Método que verifica se uma data consultada é um feriado.
-     * @param d objeto Date contendo a data a ser pesquisada
-     * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
-     */
-    async CheckFeriado ( d: string ) {
-        let resposta = new FeriadoResponse();
-        if ( d == '2018-12-25' ) {
-            resposta.data = d;
-            resposta.feriado = true;
-        } else {
-            resposta.data = d;
-            resposta.feriado = false;
-        }
-        return resposta;
-    }
+    //DESATIVADO NA VERSÃO 1.11.9
+    // /**
+    //  * Método que verifica se uma data consultada é um feriado.
+    //  * @param d objeto Date contendo a data a ser pesquisada
+    //  * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
+    //  */
+    // async CheckFeriado ( d: string ) {
+    //     let resposta = new FeriadoResponse();
+    //     if ( d == '2018-12-25' ) {
+    //         resposta.data = d;
+    //         resposta.feriado = true;
+    //     } else {
+    //         resposta.data = d;
+    //         resposta.feriado = false;
+    //     }
+    //     return resposta;
+    // }
 }

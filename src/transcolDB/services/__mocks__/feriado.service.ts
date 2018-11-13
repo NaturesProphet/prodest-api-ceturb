@@ -5,22 +5,23 @@ import { FeriadoResponse } from '../../models/Dto/FeriadoResponse.dto';
 @Injectable()
 export class FeriadoService {
 
-    /**
-     * Método que verifica se uma data consultada é um feriado.
-     * @param d objeto Date contendo a data a ser pesquisada
-     * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
-     */
-    async CheckFeriado ( d: Date ) {
-        let resposta = new FeriadoResponse();
-        if ( d.getDate() == 25 && d.getUTCMonth() == 11 ) { //11 mesmo. Javascript é do carai!
-            resposta.dia = d;
-            resposta.feriado = true;
-        } else {
-            resposta.dia = d;
-            resposta.feriado = false;
-        }
-        return resposta;
-    }
+    //DESATIVADO NA VERSÃO 1.11.9
+    // /**
+    //  * Método que verifica se uma data consultada é um feriado.
+    //  * @param d objeto Date contendo a data a ser pesquisada
+    //  * @returns retorna um objeto com a data pesquisada e um booleano informando se é um feriado
+    //  */
+    // async CheckFeriado ( d: Date ) {
+    //     let resposta = new FeriadoResponse();
+    //     if ( d.getDate() == 25 && d.getUTCMonth() == 11 ) { //11 mesmo. Javascript é do carai!
+    //         resposta.dia = d;
+    //         resposta.feriado = true;
+    //     } else {
+    //         resposta.dia = d;
+    //         resposta.feriado = false;
+    //     }
+    //     return resposta;
+    // }
 
     /**
      * Método que lista todos os feriados registrados no banco

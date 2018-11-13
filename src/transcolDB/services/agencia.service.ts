@@ -49,27 +49,28 @@ export class AgenciaService {
         }
     }
 
-    /**
-     * Método que verifica se uma data consultada é um feriado.
-     * @param d string de data no formato 'YYYY-MM-DD"
-     * @returns retorna um objeto FeriadoResponse com a data pesquisada e um booleano informando se é um feriado
-     */
-    async CheckFeriado ( d: string ) {
-        let resposta = new FeriadoResponse();
-        resposta.data = d;
-        let hoje: Feriado;
+    //desativado na versão 1.11.9
+    // /**
+    //  * Método que verifica se uma data consultada é um feriado.
+    //  * @param d string de data no formato 'YYYY-MM-DD"
+    //  * @returns retorna um objeto FeriadoResponse com a data pesquisada e um booleano informando se é um feriado
+    //  */
+    // async CheckFeriado ( d: string ) {
+    //     let resposta = new FeriadoResponse();
+    //     resposta.data = d;
+    //     let hoje: Feriado;
 
-        try {
-            hoje = await Feriado.findOne( { where: { data: d } } );
-        } catch ( err ) {
-            throw new Error( `Falha na consulta de feriados: ${err.message}` );
-        }
+    //     try {
+    //         hoje = await Feriado.findOne( { where: { data: d } } );
+    //     } catch ( err ) {
+    //         throw new Error( `Falha na consulta de feriados: ${err.message}` );
+    //     }
 
-        if ( hoje == undefined ) {
-            resposta.feriado = false;
-        } else {
-            resposta.feriado = true;
-        }
-        return resposta;
-    }
+    //     if ( hoje == undefined ) {
+    //         resposta.feriado = false;
+    //     } else {
+    //         resposta.feriado = true;
+    //     }
+    //     return resposta;
+    // }
 }

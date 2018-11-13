@@ -39,17 +39,18 @@ describe( 'AgenciaService', () => {
       expect( retorno.length ).toBeGreaterThan( 0 );
     } );
 
-  it( 'O retorno ao consultar uma data que é feriado deve ser true', async () => {
-    let natal: Date = new Date( '2018/12/25' );
-    resposta = await service.CheckFeriado( natal.toLocaleDateString() );
-    expect( resposta.feriado ).toBe( true );
-  } );
+  //DESATIVADOS NA VERSÃO 1.11.9
+  // it( 'O retorno ao consultar uma data que é feriado deve ser true', async () => {
+  //   let natal: Date = new Date( '2018/12/25' );
+  //   resposta = await service.CheckFeriado( natal.toLocaleDateString() );
+  //   expect( resposta.feriado ).toBe( true );
+  // } );
 
 
-  it( 'O retorno ao consultar uma data que NÃO é feriado deve ser false', async () => {
-    let diachato: Date = new Date( '2018/10/04' )
-    resposta = await service.CheckFeriado( diachato.toLocaleDateString() )
-    expect( resposta.feriado ).toBe( false );
-  } );
+  // it( 'O retorno ao consultar uma data que NÃO é feriado deve ser false', async () => {
+  //   let diachato: Date = new Date( '2018/10/04' )
+  //   resposta = await service.CheckFeriado( diachato.toLocaleDateString() )
+  //   expect( resposta.feriado ).toBe( false );
+  // } );
 
 } );

@@ -149,54 +149,54 @@ export class BDAgenciaController {
         }
     }
 
-
-    @Get( '/feriados/validar/:ano/:mes/:dia' )
-    @ApiOperation( {
-        description: "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
-        title: "Consulta booleana de Feriados da agencia por data"
-    } )
-    @ApiResponse( {
-        status: 200,
-        description: "Consulta executada com sucesso.",
-        type: FeriadoResponse
-    } )
-    @ApiImplicitParam( {
-        name: 'ano',
-        description: 'porção da data referente ao ano. exemplo: 2018',
-        required: true,
-        type: 'number'
-    } )
-    @ApiImplicitParam( {
-        name: 'mes',
-        description: 'porção da data referente ao mês. exemplo: 12',
-        required: true,
-        type: 'number'
-    } )
-    @ApiImplicitParam( {
-        name: 'dia',
-        description: 'porção da data referente ao dia. exemplo: 25',
-        required: true,
-        type: 'number'
-    } )
-    async isFeriado ( @Res() res, @Param( 'ano' ) ano, @Param( 'mes' ) mes, @Param( 'dia' ) dia ) {
-        let hoje = new Date( `${ano}/${mes}/${dia}` );
-        let consulta;
-        try {
-            consulta = await this.Service.CheckFeriado( hoje.toLocaleDateString() );
-            res
-                .status( HttpStatus.OK )
-                .send( consulta );
-        }
-        catch ( err ) {
-            let msg: string = err.message;
-            let rota: string = `${path}/feriados/validar/${ano}/${mes}/${dia}`;
-            let status: number = HttpStatus.BAD_GATEWAY;
-            let resposta = new ErrorMessage( msg, rota, status );
-            res
-                .status( HttpStatus.BAD_GATEWAY )
-                .send( resposta );
-        }
-    }
+    //DESATIVADO NA VERSÃO 1.11.9
+    // @Get( '/feriados/validar/:ano/:mes/:dia' )
+    // @ApiOperation( {
+    //     description: "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
+    //     title: "Consulta booleana de Feriados da agencia por data"
+    // } )
+    // @ApiResponse( {
+    //     status: 200,
+    //     description: "Consulta executada com sucesso.",
+    //     type: FeriadoResponse
+    // } )
+    // @ApiImplicitParam( {
+    //     name: 'ano',
+    //     description: 'porção da data referente ao ano. exemplo: 2018',
+    //     required: true,
+    //     type: 'number'
+    // } )
+    // @ApiImplicitParam( {
+    //     name: 'mes',
+    //     description: 'porção da data referente ao mês. exemplo: 12',
+    //     required: true,
+    //     type: 'number'
+    // } )
+    // @ApiImplicitParam( {
+    //     name: 'dia',
+    //     description: 'porção da data referente ao dia. exemplo: 25',
+    //     required: true,
+    //     type: 'number'
+    // } )
+    // async isFeriado ( @Res() res, @Param( 'ano' ) ano, @Param( 'mes' ) mes, @Param( 'dia' ) dia ) {
+    //     let hoje = new Date( `${ano}/${mes}/${dia}` );
+    //     let consulta;
+    //     try {
+    //         consulta = await this.Service.CheckFeriado( hoje.toLocaleDateString() );
+    //         res
+    //             .status( HttpStatus.OK )
+    //             .send( consulta );
+    //     }
+    //     catch ( err ) {
+    //         let msg: string = err.message;
+    //         let rota: string = `${path}/feriados/validar/${ano}/${mes}/${dia}`;
+    //         let status: number = HttpStatus.BAD_GATEWAY;
+    //         let resposta = new ErrorMessage( msg, rota, status );
+    //         res
+    //             .status( HttpStatus.BAD_GATEWAY )
+    //             .send( resposta );
+    //     }
+    // }
 
 
 
