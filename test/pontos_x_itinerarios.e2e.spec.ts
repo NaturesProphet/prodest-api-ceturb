@@ -3,11 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
-import { PontoItinerarioService } from '../src/ceturb/services/pontos_x_itinerarios.service';
+import { PontoService } from '../src/ceturb/services/ponto.ceturb.service';
 import { Endpoints } from '../src/commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 const feature = loadFeature( './test/features/pontos_x_itinerarios.feature' );
-jest.mock( '../src/ceturb/services/pontos_x_itinerarios.service' );
+jest.mock( '../src/ceturb/services/ponto.ceturb.service' );
 
 //--------------------------------------------------------------------//
 //---------------------mocks GLOBAIS obrigatórios --------------------//
@@ -43,7 +43,7 @@ defineFeature( feature, test => {
 
     given(
       'que existam associações entre pontos e itinerários registrados.', async () => {
-        PontoItinerarioService.prototype.retornar_pontosItinerarios =
+        PontoService.prototype.retornar_pontosItinerarios =
           jest.fn().mockImplementationOnce( () => {
             let obj1 = { "itinerarioId": 448, "ordem": 1, "pontoDeParadaId": 3752, "embarque": true, "desembarque": false }
 

@@ -15,7 +15,7 @@ async function bootstrap () {
 
   const app = await NestFactory.create( AppModule );
   const options = new DocumentBuilder()
-    .setTitle( 'Nova api-ceturb' )
+    .setTitle( 'api-ceturb' )
     .setDescription( pacote.description )
     .setVersion( pacote.version )
     .addTag( 'api-ceturb' )

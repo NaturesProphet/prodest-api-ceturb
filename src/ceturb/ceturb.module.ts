@@ -7,8 +7,6 @@ import { ViagensController } from "./controllers/viagens.controller";
 import { ViagensService } from "./services/viagens.service";
 import { ItinerariosController } from "./controllers/itinerarios.controller";
 import { ItinerariosService } from "./services/itinerarios.service";
-import { PontosItinerariosController } from "./controllers/pontosItinerario.controller";
-import { PontoItinerarioService } from "./services/pontos_x_itinerarios.service";
 import { EstimativasController } from "./controllers/estimativas.controller";
 import { EstimativasService } from "./services/estimativas.service";
 import { GtfsService } from './services/gtfs.service';
@@ -18,10 +16,10 @@ import { MinioService } from './services/minio.service'
 @Module( {
   imports: [ HttpModule ],
   controllers: [ PontosController, LinhasController, ViagensController,
-    ItinerariosController, PontosItinerariosController,
+    ItinerariosController,
     EstimativasController, GtfsController ],
   providers: [ PontoService, LinhasService, ViagensService, ItinerariosService,
-    PontoItinerarioService, EstimativasService, GtfsService, MinioService ]
+    EstimativasService, GtfsService, MinioService ]
 } )
 
 

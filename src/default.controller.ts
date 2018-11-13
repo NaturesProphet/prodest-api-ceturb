@@ -4,16 +4,20 @@ import { Endpoints } from './commom/configs/endpoints.config';
 const raiz: string = new Endpoints().rotaRaiz;
 
 @Controller()
-@ApiUseTags( 'Documentação da API' )
+@ApiUseTags( 'raiz' )
 export class DefaultController {
 
     @Get( raiz )
     @ApiOperation( {
-        description: "Just a wellcome message.",
-        title: "Hello Developers!"
+        description: "Mensagem de boas vindas",
+        title: "Hello World!"
     } )
-    @ApiResponse( { status: 200, description: "Welcome message" } )
+    @ApiResponse( {
+        status: 200,
+        description: "Welcome message",
+        type: 'string'
+    } )
     async default ( @Res() res ) {
-        res.send( "Bem vindo a nova API-CETURB desenvolvida pela parceria PRODEST, IFES e FAPES. Acesse a rota /docs e de uma olhada na nossa documentação. Happy Coding! :)" );
+        res.send( "Bem vindo(a) a nova API-CETURB desenvolvida pela parceria PRODEST, IFES e FAPES. Acesse o link https://api.es.gov.br/transcol/docs/ e de uma olhada na nossa documentação mais recente. Happy Coding! :)" );
     }
 }

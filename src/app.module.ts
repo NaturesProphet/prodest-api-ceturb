@@ -5,7 +5,6 @@ import { PontosController } from "./ceturb/controllers/pontos.controller";
 import { ItinerariosController } from "./ceturb/controllers/itinerarios.controller";
 import { ViagensController } from "./ceturb/controllers/viagens.controller";
 import { LinhasController } from "./ceturb/controllers/linhas.controller";
-import { PontosItinerariosController } from "./ceturb/controllers/pontosItinerario.controller";
 import { EstimativasController } from "./ceturb/controllers/estimativas.controller";
 import { BDAgenciaController } from "./transcolDB/controllers/bd.agencia.controller";
 import { BDItinerarioController } from "./transcolDB/controllers/bd.itinerario.controller";
@@ -33,9 +32,6 @@ export class AppModule implements NestModule {
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( LinhasController );
-    consumer
-      .apply( redisConf.cacheWithRedis( '3 hours' ) )
-      .forRoutes( PontosItinerariosController );
     consumer
       .apply( redisConf.cacheWithRedis( '10 seconds' ) )
       .forRoutes( EstimativasController );

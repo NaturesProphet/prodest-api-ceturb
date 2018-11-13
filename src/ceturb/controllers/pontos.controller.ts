@@ -4,6 +4,7 @@ import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs
 import { Endpoints } from '../../commom/configs/endpoints.config';
 import { Ponto } from "../../ceturb/models/dto/ponto.entity";
 import { ErrorMessage } from "../../commom/DTOs/errorMessages/errorMessage";
+import { PontoItinerario } from "../../ceturb/models/pontoItinerario.entity";
 const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/pontos`;
 
@@ -135,6 +136,39 @@ export class PontosController {
       let resposta = new ErrorMessage( msg, rota, status );
       res
         .status( HttpStatus.NOT_FOUND )
+        .send( resposta );
+    }
+  }
+
+  @Get( '/itinerarios' )
+  @ApiOperation( {
+    description: 'retornar todas as associações entre pontos e itinerários',
+    title: 'Pontos associados a Itinerários',
+  } )
+  @ApiResponse( {
+    status: 200,
+    description: 'Lista de associações entre pontos e itinerários',
+    type: PontoItinerario,
+    isArray: true
+  } )
+  @ApiResponse( {
+    status: 204,
+    description: 'Dados não encontrados',
+    type: ErrorMessage
+  } )
+  async retornar_pontosItinerarios ( @Res() res ) {
+    try {
+      let dados = await this.pontoService.retornar_pontosItinerarios();
+      res
+        .status( HttpStatus.OK )
+        .send( dados );
+    } catch ( error ) {
+      let msg: string = error.message;
+      let rota: string = path;
+      let status: number = HttpStatus.BAD_GATEWAY;
+      let resposta = new ErrorMessage( msg, rota, status );
+      res
+        .status( HttpStatus.BAD_GATEWAY )
         .send( resposta );
     }
   }
