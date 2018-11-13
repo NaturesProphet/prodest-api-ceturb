@@ -22,10 +22,10 @@ async function bootstrap () {
     .setSchemes( schema )
     .build();
   const document = SwaggerModule.createDocument( app, options );
-  /*
-  //para gerar o swagger.json (copiando a saida do console)
-  console.log( JSON.stringify( document ) );
-  */
+
+  // para gerar o swagger.json (copiando a saida do console)
+  // console.log( JSON.stringify( document ) );
+
   SwaggerModule.setup( `${raiz}/docs`, app, document );
   app.useGlobalFilters( new Filtro() );
   await app.listen( 3000 );

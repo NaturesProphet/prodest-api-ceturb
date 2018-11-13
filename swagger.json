@@ -2,8 +2,8 @@
 	"swagger": "2.0",
 	"info": {
 		"description": "API de acesso aos dados do transporte público do estado do Espírito Santo",
-		"version": "1.11.7",
-		"title": "Nova api-ceturb"
+		"version": "1.11.9",
+		"title": "api-ceturb"
 	},
 	"basePath": "/",
 	"tags": [
@@ -17,17 +17,20 @@
 	],
 	"securityDefinitions": {},
 	"paths": {
-		"/docs": {
+		"/": {
 			"get": {
-				"summary": "Swagger",
-				"description": "Pagina Swagger da API",
+				"summary": "Hello World!",
+				"description": "Mensagem de boas vindas",
 				"responses": {
 					"200": {
-						"description": "documentação em swagger"
+						"description": "Welcome message",
+						"schema": {
+							"type": "string"
+						}
 					}
 				},
 				"tags": [
-					"Documentação da API"
+					"raiz"
 				],
 				"produces": [
 					"application/json"
@@ -121,6 +124,38 @@
 					},
 					"400": {
 						"description": "Parâmetros fora do formato numérico",
+						"schema": {
+							"$ref": "#/definitions/ErrorMessage"
+						}
+					}
+				},
+				"tags": [
+					"Pontos"
+				],
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		},
+		"/pontos/itinerarios": {
+			"get": {
+				"summary": "Pontos associados a Itinerários",
+				"description": "retornar todas as associações entre pontos e itinerários",
+				"responses": {
+					"200": {
+						"description": "Lista de associações entre pontos e itinerários",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/PontoItinerario"
+							}
+						}
+					},
+					"204": {
+						"description": "Dados não encontrados",
 						"schema": {
 							"$ref": "#/definitions/ErrorMessage"
 						}
@@ -335,38 +370,6 @@
 				},
 				"tags": [
 					"Itinerarios"
-				],
-				"produces": [
-					"application/json"
-				],
-				"consumes": [
-					"application/json"
-				]
-			}
-		},
-		"/pontos/itinerarios": {
-			"get": {
-				"summary": "Pontos associados a Itinerários",
-				"description": "retornar todas as associações entre pontos e itinerários",
-				"responses": {
-					"200": {
-						"description": "Lista de associações entre pontos e itinerários",
-						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/PontoItinerario"
-							}
-						}
-					},
-					"204": {
-						"description": "Dados não encontrados",
-						"schema": {
-							"$ref": "#/definitions/ErrorMessage"
-						}
-					}
-				},
-				"tags": [
-					"Pontos x Itinerarios"
 				],
 				"produces": [
 					"application/json"
@@ -785,52 +788,6 @@
 				]
 			}
 		},
-		"/agencias/feriados/validar/{ano}/{mes}/{dia}": {
-			"get": {
-				"summary": "Consulta booleana de Feriados da agencia por data",
-				"description": "Indica se a data consultada é um feriado registrado no banco auxiliar ou não.",
-				"parameters": [
-					{
-						"name": "dia",
-						"required": true,
-						"in": "path",
-						"description": "porção da data referente ao dia. exemplo: 25",
-						"type": "number"
-					},
-					{
-						"name": "mes",
-						"required": true,
-						"in": "path",
-						"description": "porção da data referente ao mês. exemplo: 12",
-						"type": "number"
-					},
-					{
-						"name": "ano",
-						"required": true,
-						"in": "path",
-						"description": "porção da data referente ao ano. exemplo: 2018",
-						"type": "number"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Consulta executada com sucesso.",
-						"schema": {
-							"$ref": "#/definitions/FeriadoResponse"
-						}
-					}
-				},
-				"tags": [
-					"Agencias"
-				],
-				"produces": [
-					"application/json"
-				],
-				"consumes": [
-					"application/json"
-				]
-			}
-		},
 		"/agencias/tarifas": {
 			"get": {
 				"summary": "Tarifas",
@@ -1099,6 +1056,33 @@
 				"statusCode"
 			]
 		},
+		"PontoItinerario": {
+			"type": "object",
+			"properties": {
+				"itinerarioId": {
+					"type": "number"
+				},
+				"ordem": {
+					"type": "number"
+				},
+				"pontoDeParadaId": {
+					"type": "number"
+				},
+				"embarque": {
+					"type": "boolean"
+				},
+				"desembarque": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"itinerarioId",
+				"ordem",
+				"pontoDeParadaId",
+				"embarque",
+				"desembarque"
+			]
+		},
 		"LinhaDto": {
 			"type": "object",
 			"properties": {
@@ -1228,33 +1212,6 @@
 				"dataChegadaEstimada",
 				"veiculo",
 				"acessibilidade"
-			]
-		},
-		"PontoItinerario": {
-			"type": "object",
-			"properties": {
-				"itinerarioId": {
-					"type": "number"
-				},
-				"ordem": {
-					"type": "number"
-				},
-				"pontoDeParadaId": {
-					"type": "number"
-				},
-				"embarque": {
-					"type": "boolean"
-				},
-				"desembarque": {
-					"type": "boolean"
-				}
-			},
-			"required": [
-				"itinerarioId",
-				"ordem",
-				"pontoDeParadaId",
-				"embarque",
-				"desembarque"
 			]
 		},
 		"estimativasDto": {
@@ -1438,21 +1395,6 @@
 				"data",
 				"dataupload",
 				"agencia_id"
-			]
-		},
-		"FeriadoResponse": {
-			"type": "object",
-			"properties": {
-				"data": {
-					"type": "string"
-				},
-				"feriado": {
-					"type": "boolean"
-				}
-			},
-			"required": [
-				"data",
-				"feriado"
 			]
 		},
 		"Tarifa": {
