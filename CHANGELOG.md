@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.0"></a>
+# [1.12.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.8...v1.12.0) (2018-11-13)
+
+
+### Bug Fixes
+
+* **feriado:** desativação da rota de checkferiados ([dc964f2](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/dc964f2))
+* **Itinerario_ponto:** alteração na rota para dentro do controller de pontos ([938a575](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/938a575))
+
+
+### Features
+
+* **swagger.json:** endpoint de consulta ao json ([c4654f2](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/c4654f2))
+
+
+
 <a name="1.11.8"></a>
 ## [1.11.8](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.7...v1.11.8) (2018-11-08)
 
