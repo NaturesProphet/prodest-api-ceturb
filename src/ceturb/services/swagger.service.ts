@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-const swagger = require( '../../../swagger.json' );
+const swagger = require( '../../swagger.json' );
 
 @Injectable()
 export class SwaggerService {
