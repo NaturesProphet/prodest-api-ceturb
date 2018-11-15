@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.1"></a>
+## [1.12.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.12.0...v1.12.1) (2018-11-15)
+
+
+### Bug Fixes
+
+* **fix:** consertando o conserto alheio ([fb3e031](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/fb3e031))
+* **main.ts:** criando arquivo swagger.json ([f30c86b](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/f30c86b))
+
+
+
 <a name="1.12.0"></a>
 # [1.12.0](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.11.8...v1.12.0) (2018-11-13)
 
