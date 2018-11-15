@@ -24,7 +24,7 @@ async function bootstrap () {
   const document = SwaggerModule.createDocument( app, options );
 
   // para gerar o swagger.json (copiando a saida do console)
-  fs.writeFileSync('swagger.json', JSON.stringify( document ))
+  fs.writeFileSync( 'swagger.json', JSON.stringify( document ) )
   // console.log( JSON.stringify( document ) );
 
   SwaggerModule.setup( `${raiz}/docs`, app, document );

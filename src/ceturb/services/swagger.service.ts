@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-const swagger = require( '../../swagger.json' );
+const swagger = require( '../../../swagger.json' );
 
 @Injectable()
 export class SwaggerService {
@@ -8,6 +8,5 @@ export class SwaggerService {
         const doc = JSON.stringify( swagger );
         return doc;
     }
-
 }
 
