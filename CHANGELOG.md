@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.2"></a>
+## [1.12.2](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.12.1...v1.12.2) (2018-11-19)
+
+
+### Bug Fixes
+
+* **ci:** swagger.json incluido no dockerfile ([e909fbc](https://gitlab.es.gov.br/espm/apis/api-ceturb/commit/e909fbc))
+
+
+
 <a name="1.12.1"></a>
 ## [1.12.1](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.12.0...v1.12.1) (2018-11-15)
 
