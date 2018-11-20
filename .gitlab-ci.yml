@@ -3,7 +3,7 @@ stages:
   - quality
   - build
   - deploy
-  - stress
+#  - stress
 
 cache:
 #  key: '${CI_COMMIT_REF_SLUG}'
@@ -47,7 +47,7 @@ build_job:
    
 deploy_job:
   stage: deploy
-  image: node:8.11-alpine
+  image: registry.es.gov.br/espm/dockers/node:8.12.0-alpine
   only:
     - tags
   script:
@@ -56,19 +56,19 @@ deploy_job:
   dependencies:
     - build_job
 
-stress_job:
- stage: stress
- image: docker:stable
- dependencies:
-   - deploy_job
- only:
-   - tags
- services:
-   - docker:dind
- script:
-   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-   - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts registry.es.gov.br/espm/dockers/taurus:latest quick_test.yml 2>&1
- artifacts:
-  paths:
-    - $(pwd)/stress/artifacts
-  expire_in: 2 week
+#stress_job:
+# stage: stress
+# image: docker:stable
+# dependencies:
+#   - deploy_job
+# only:
+#   - tags
+# services:
+#   - docker:dind
+# script:
+#   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#   - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts registry.es.gov.br/espm/dockers/taurus:latest quick_test.yml 2>&1
+# artifacts:
+#  paths:
+#    - $(pwd)/stress/artifacts
+#  expire_in: 2 week
