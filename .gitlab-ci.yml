@@ -52,7 +52,7 @@ deploy_job:
     - tags
   script:
     - npm i upgrade-rancher
-    - ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID 1s749
+    - ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID 1s779
   dependencies:
     - build_job
 
