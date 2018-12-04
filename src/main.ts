@@ -17,7 +17,6 @@ async function bootstrap () {
     .setSchemes( 'https', 'http' )
     .build();
   const document = SwaggerModule.createDocument( app, options );
-
   // para gerar o swagger.json (copiando a saida do console)
   fs.writeFileSync( 'swagger.json', JSON.stringify( document ) )
   // console.log( JSON.stringify( document ) );
