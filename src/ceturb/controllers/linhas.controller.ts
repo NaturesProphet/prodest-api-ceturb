@@ -10,7 +10,7 @@ import { HorarioObsDto } from '../../ceturb/models/dto/horarioObs.dto';
 const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/linha`;
 
-@Controller( `${raiz}/linha` )
+@Controller( `${raiz}/linhas` )
 @ApiUseTags( 'Linhas' )
 export class LinhasController {
     constructor( public service: LinhasService ) { }
