@@ -52,7 +52,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar uma linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/horarios` );
     } );
 
     then( "retornará os horários cadastrados daquela linha", () => {
@@ -74,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     given( "Não há informações cadastradas", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/horarios` );
       expect( resposta.status ).toBe( 404 );
     } );
 

@@ -50,7 +50,7 @@ defineFeature( feature, test => {
     } );
 
     when( "Eu pesquisar uma linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/itinerarios` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/itinerarios` );
     } );
 
     then( "retorna o itinerário cadastrado de uma linha", () => {
@@ -71,7 +71,7 @@ defineFeature( feature, test => {
     } );
 
     given( "não há registro de itinerários para essa linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/itinerarios` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/itinerarios` );
       expect( resposta.status ).toBe( 404 );
     } );
 

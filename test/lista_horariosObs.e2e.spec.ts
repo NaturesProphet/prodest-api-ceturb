@@ -53,7 +53,7 @@ defineFeature( feature, test => {
 
     when( "eu pesquisar as observações do horário da linha", async () => {
       linha = 500;
-      let requisicao = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios/obs` );
+      let requisicao = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/horarios/obs` );
       horarios = JSON.parse( JSON.stringify( requisicao.body ) );
     } );
 
@@ -74,7 +74,7 @@ defineFeature( feature, test => {
     } );
 
     when( "eu pesquisar as observações do horário da linha", async () => {
-      resposta = await request( app.getHttpServer() ).get( `${raiz}/linha/${linha}/horarios/obs` );
+      resposta = await request( app.getHttpServer() ).get( `${raiz}/linhas/${linha}/horarios/obs` );
     } );
 
     then( "retornará uma mensagem informando que não há registros", async () => {
