@@ -6,7 +6,7 @@
 
 
 # API-CETURB
-
+Api responsável por disponibilizar dados de transporte público
 ## Variáveis de ambiente configuráveis para o Docker
 ```bash
 NODE_ENV                # definir como 'production' para o swagger operar usando HTTPS
