@@ -6,13 +6,12 @@ stages:
 #  - stress
 
 cache:
-#  key: '${CI_COMMIT_REF_SLUG}'
   key: 'cache-ceturb'
   paths:
   - node_modules/
   
 test_job:
-  image: registry.es.gov.br/espm/dockers/node:8.12.0-alpine
+  image: registry.es.gov.br/espm/infraestrutura/containers/node:8.12.0
   stage: test
   script:
      - npm install
@@ -21,7 +20,7 @@ test_job:
   retry: 2   
 
 quality_job:
-  image: registry.es.gov.br/espm/dockers/ci-node_sonar:8.11.2__3.2
+  image: registry.es.gov.br/espm/infraestrutura/containers/sonar-scanner:3.3.0.1492
   stage: quality
   dependencies:
       - test_job    
@@ -47,7 +46,7 @@ build_job:
    
 deploy_job:
   stage: deploy
-  image: registry.es.gov.br/espm/dockers/node:8.12.0-alpine
+  image: registry.es.gov.br/espm/infraestrutura/containers/node:8.12.0
   only:
     - tags
   script:
