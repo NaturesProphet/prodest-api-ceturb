@@ -4,15 +4,13 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Filtro } from "./commom/filter/Filtro";
 import { Endpoints } from './commom/configs/endpoints.config';
 
-import * as cors from 'cors'
-
 const raiz: string = new Endpoints().rotaRaiz;
 const pacote = require( '../package.json' );
 const fs = require( 'fs' );
 
 async function bootstrap () {
   const app = await NestFactory.create( AppModule );
-  app.use(cors());
+  app.enableCors();
   const options = new DocumentBuilder()
     .setTitle( 'api-ceturb' )
     .setDescription( pacote.description )
