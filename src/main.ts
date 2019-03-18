@@ -10,7 +10,7 @@ const fs = require( 'fs' );
 
 async function bootstrap () {
   const app = await NestFactory.create( AppModule );
-  
+
   const options = new DocumentBuilder()
     .setTitle( 'api-ceturb' )
     .setDescription( pacote.description )
@@ -25,6 +25,7 @@ async function bootstrap () {
 
   SwaggerModule.setup( `${raiz}/docs`, app, document );
   app.useGlobalFilters( new Filtro() );
+  app.enableCors();
   await app.listen( 3000 );
 }
 
