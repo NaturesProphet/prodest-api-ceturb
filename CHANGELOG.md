@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.10"></a>
+## [1.12.10](https://gitlab.es.gov.br/espm/Transcol-Online/api-ceturb/compare/v1.12.9...v1.12.10) (2019-03-18)
+
+
+### Bug Fixes
+
+* **NodeVersion:** Atualizando versao do node e descomentando linhas no gitlabci ([ef9d224](https://gitlab.es.gov.br/espm/Transcol-Online/api-ceturb/commit/ef9d224))
+
+
+
 <a name="1.12.9"></a>
 ## [1.12.9](https://gitlab.es.gov.br/espm/apis/api-ceturb/compare/v1.12.8...v1.12.9) (2019-03-15)
 
