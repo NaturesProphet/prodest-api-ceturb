@@ -98,6 +98,49 @@ Para desligar as imagens docker, execute este outro:
 npm run stopdocker
 ```
 
+### Desenvolvimento, COM persistência de dados
+Para persistir os dados, antes de tudo é necessário criar um novo schema no mssql, e após sua criação, apontar o nome desse schema através da variavel de ambiente TRANSCOLDB_SCHEMA.  
+
+Siga esse passo a passo para a primeira configuração:
+
+#### 1
+inicie o banco de dados persistente com o comando 
+```
+npm run persistentdb
+```
+
+#### 2
+Acesse o banco de dados atraves do DBeaver ou outro client de sua escolha, e então CRIE um novo SCHEMA onde as tabelas serão geradas. use o comando abaixo no DBeaver
+```bash
+CREATE DATABASE TranscolDB  # Ou outro nome que quiser usar
+```
+#### 3
+
+Aponte o nome do banco criado na variavel de ambiente TRANSCOLDB_SCHEMA
+```bash
+export TRANSCOLDB_SCHEMA=TranscolDB
+```
+
+#### 4
+ative o SYNC do ORM para gerar as tabelas automaticamente
+```bash
+export TRANSCOLDB_ORM_SYNC=true
+```
+
+#### 5
+Pronto, agora é só iniciar a aplicação com 
+```bash
+npm start
+```
+
+#### 6
+Agora sempre que quiser utilizar esse banco, é só subir o container novamente com os comandos
+```bash
+npm run persistentdb
+export TRANSCOLDB_SCHEMA=TranscolDB
+```
+
+
 ## Rotas
 /docs - Abre o swagger e exibe todas as rotas disponíveis.  
 
