@@ -3,7 +3,8 @@ SCRIPT DE CREATE COPIADO E ADAPTADO DA ESTRUTURA GERADA PELO TYPEORM  DENTRO DO 
 EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
-CREATE TABLE GoogleTransit.dbo.agencia (
+CREATE TABLE GoogleTransit.dbo.agencia
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -19,7 +20,8 @@ CREATE UNIQUE INDEX IDX_ae6f96e90d951e9e8c68e3930b ON GoogleTransit.dbo.agencia 
 CREATE UNIQUE INDEX IDX_c44350547be6b7a422fdfddc7b ON GoogleTransit.dbo.agencia (nome) go;
 ----------
 
-CREATE TABLE GoogleTransit.dbo.feriado (
+CREATE TABLE GoogleTransit.dbo.feriado
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -32,7 +34,8 @@ CREATE TABLE GoogleTransit.dbo.feriado (
 ) go;
 ------------
 
-CREATE TABLE GoogleTransit.dbo.contato (
+CREATE TABLE GoogleTransit.dbo.contato
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -49,7 +52,8 @@ CREATE UNIQUE INDEX IDX_44d7ccac6a07ce215335a3ade8 ON GoogleTransit.dbo.contato 
 CREATE UNIQUE INDEX IDX_f0323061835775208d577ffabc ON GoogleTransit.dbo.contato (email) go;
 -----------------
 
-CREATE TABLE GoogleTransit.dbo.tarifa (
+CREATE TABLE GoogleTransit.dbo.tarifa
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -61,7 +65,8 @@ CREATE TABLE GoogleTransit.dbo.tarifa (
 ) go;
 -------------------
 
-CREATE TABLE GoogleTransit.dbo.vigencia (
+CREATE TABLE GoogleTransit.dbo.vigencia
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -75,7 +80,8 @@ CREATE TABLE GoogleTransit.dbo.vigencia (
 	CONSTRAINT PK_1c8a4f959d6653320e43384ac55 PRIMARY KEY (id)
 ) go;
 -----------------------------
-CREATE TABLE GoogleTransit.dbo.linha (
+CREATE TABLE GoogleTransit.dbo.linha
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -93,7 +99,8 @@ CREATE TABLE GoogleTransit.dbo.linha (
 ) go;
 ----------------------
 
-CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia (
+CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -109,7 +116,8 @@ CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia (
 ------------
 
 
-CREATE TABLE GoogleTransit.dbo.ponto (
+CREATE TABLE GoogleTransit.dbo.ponto
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -127,7 +135,8 @@ CREATE TABLE GoogleTransit.dbo.ponto (
 ) go;
 ---------------------------
 
-CREATE TABLE GoogleTransit.dbo.itinerario (
+CREATE TABLE GoogleTransit.dbo.itinerario
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -141,7 +150,8 @@ CREATE TABLE GoogleTransit.dbo.itinerario (
 ) go;
 
 -----------------------
-CREATE TABLE GoogleTransit.dbo.itinerario_ponto (
+CREATE TABLE GoogleTransit.dbo.itinerario_ponto
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -157,7 +167,8 @@ CREATE TABLE GoogleTransit.dbo.itinerario_ponto (
 ) go;
 
 ---------------------------
-CREATE TABLE GoogleTransit.dbo.pontogeografico (
+CREATE TABLE GoogleTransit.dbo.pontogeografico
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -171,7 +182,8 @@ CREATE TABLE GoogleTransit.dbo.pontogeografico (
 	CONSTRAINT FK_934fc10a9593a4d2b57ff6ce9df FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
 ) go;
 --------------------------
-CREATE TABLE GoogleTransit.dbo.viagem (
+CREATE TABLE GoogleTransit.dbo.viagem
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
@@ -184,13 +196,14 @@ CREATE TABLE GoogleTransit.dbo.viagem (
 	domingo bit DEFAULT ((0)) NOT NULL,
 	historico bit DEFAULT ((0)) NOT NULL,
 	itinerario_id int NOT NULL,
-	job bigint NOT NULL,
+	dataRegistroMilis bigint NOT NULL,
 	CONSTRAINT PK_a2191e12f865bbe656e9a958f72 PRIMARY KEY (id),
 	CONSTRAINT FK_ef85306fdedfcb0440c71e8e132 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
 ) go;
 -------------------------------
 
-CREATE TABLE GoogleTransit.dbo.estimativa (
+CREATE TABLE GoogleTransit.dbo.estimativa
+(
 	id int NOT NULL IDENTITY(1,1),
 	dataregistro datetime2(7) DEFAULT (getdate()) NOT NULL,
 	atualizadoem datetime2(7) DEFAULT (getdate()) NOT NULL,
