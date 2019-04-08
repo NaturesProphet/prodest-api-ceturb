@@ -1,34 +1,32 @@
 stages:
-  - test
+  # - test
   - quality
   - build
   - deploy
-#  - stress
 
 cache:
   key: 'cache-ceturb'
   paths:
   - node_modules/
   
-test_job:
-  image: registry.es.gov.br/espm/infraestrutura/containers/node:8.12.0
-  stage: test
-  script:
-     - npm install
-     - npm run test
-     - npm run test:e2e
-  retry: 2   
+# test_job:
+#   image: registry.es.gov.br/espm/infraestrutura/containers/node:8.12.0
+#   stage: test
+#   script:
+#      - npm install
+#      - npm run test
+#      - npm run test:e2e
+#   retry: 2   
 
 quality_job:
   image: registry.es.gov.br/espm/infraestrutura/containers/sonar-scanner:3.3.0.1492
   stage: quality
-  dependencies:
-      - test_job    
+  # dependencies:
+  #     - test_job    
   script:
    - npm install
    - npm run test:cov
    - sonar-scanner
-   #- node sonarBreaker.js # n deu mto certo aqui..
 
 build_job:
   stage: build
@@ -55,20 +53,3 @@ deploy_job:
     - ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID 1s779
   dependencies:
     - build_job
-
-#stress_job:
-# stage: stress
-# image: docker:stable
-# dependencies:
-#   - deploy_job
-# only:
-#   - tags
-# services:
-#   - docker:dind
-# script:
-#   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-#   - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts registry.es.gov.br/espm/dockers/taurus:latest quick_test.yml 2>&1
-# artifacts:
-#  paths:
-#    - $(pwd)/stress/artifacts
-#  expire_in: 2 week

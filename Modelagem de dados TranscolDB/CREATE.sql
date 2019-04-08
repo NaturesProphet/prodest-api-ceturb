@@ -184,6 +184,7 @@ CREATE TABLE GoogleTransit.dbo.viagem (
 	domingo bit DEFAULT ((0)) NOT NULL,
 	historico bit DEFAULT ((0)) NOT NULL,
 	itinerario_id int NOT NULL,
+	job bigint NOT NULL,
 	CONSTRAINT PK_a2191e12f865bbe656e9a958f72 PRIMARY KEY (id),
 	CONSTRAINT FK_ef85306fdedfcb0440c71e8e132 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
 ) go;
