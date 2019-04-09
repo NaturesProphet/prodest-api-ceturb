@@ -35,8 +35,6 @@ export class Viagem extends Auditoria {
     @ApiModelProperty()
     domingo: boolean;
 
-    @Column( { type: "bigint", name: 'dataRegistroMilis' } )
-    dataRegistroMilis: number;
 
     //###################################################################
     //############################ RELAÇÕES #############################

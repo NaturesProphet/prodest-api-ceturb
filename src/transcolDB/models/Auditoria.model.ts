@@ -1,5 +1,5 @@
 /*Entidade de auditoria para extender os outros modelos e auditar dados - pedido do Paulo */
-import { BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ApiModelProperty } from "@nestjs/swagger";
 
 export class Auditoria extends BaseEntity {
@@ -7,12 +7,12 @@ export class Auditoria extends BaseEntity {
     @ApiModelProperty()
     id: number;
 
-    @CreateDateColumn()
+    @Column( { type: "bigint", nullable: true } )
     @ApiModelProperty()
-    dataregistro: Date;
+    dataregistro: number;
 
-    @UpdateDateColumn()
+    @Column( { type: "bigint", nullable: true } )
     @ApiModelProperty()
-    atualizadoem: Date;
+    atualizadoem: number;
 
 }

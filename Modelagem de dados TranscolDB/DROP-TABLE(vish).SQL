@@ -1,3 +1,7 @@
+/*
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.0.0
+*/
+
 DROP TABLE GoogleTransit.dbo.estimativa
 go
 
@@ -22,16 +26,16 @@ go
 DROP TABLE GoogleTransit.dbo.itinerario
 go
 
+DROP TABLE GoogleTransit.dbo.linha_tarifa_vigencia
+go
+
 DROP TABLE GoogleTransit.dbo.linha
 go
 
-DROP TABLE GoogleTransit.dbo.tarifa_formapagamento
-go
-
-DROP TABLE GoogleTransit.dbo.formapagamento
-go
-
 DROP TABLE GoogleTransit.dbo.tarifa
+go
+
+DROP TABLE GoogleTransit.dbo.vigencia
 go
 
 DROP TABLE GoogleTransit.dbo.agencia
