@@ -28,7 +28,7 @@ export class AppModule implements NestModule {
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
       .forRoutes( ItinerariosController );
     consumer
-      .apply( redisConf.cacheWithRedis( '3 hours' ) )
+      .apply( redisConf.cacheWithRedis( '30 seconds' ) )
       .forRoutes( ViagensController );
     consumer
       .apply( redisConf.cacheWithRedis( '3 hours' ) )
