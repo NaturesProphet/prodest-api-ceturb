@@ -1,10 +1,9 @@
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { EstimativasService } from '../services/estimativas.service';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
 import { estimativasDto } from '../../ceturb/models/dto/estimativas.dto';
-const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/estimativas`;
 
 @Controller( `${raiz}/estimativas` )

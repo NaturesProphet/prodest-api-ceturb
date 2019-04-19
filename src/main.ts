@@ -1,10 +1,14 @@
+import * as dotenv from 'dotenv';
+if ( process.env.NODE_ENV != 'production' ) {
+  dotenv.config();
+}
+
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Filtro } from "./commom/filter/Filtro";
-import { Endpoints } from './commom/configs/endpoints.config';
+import { apiPort, rootEndPoint } from './commom/configs/endpoints.config';
 
-const raiz: string = new Endpoints().rotaRaiz;
 const pacote = require( '../package.json' );
 const fs = require( 'fs' );
 
@@ -19,14 +23,11 @@ async function bootstrap () {
     .setSchemes( 'https', 'http' )
     .build();
   const document = SwaggerModule.createDocument( app, options );
-  // para gerar o swagger.json (copiando a saida do console)
   fs.writeFileSync( 'swagger.json', JSON.stringify( document ) )
-  // console.log( JSON.stringify( document ) );
-
-  SwaggerModule.setup( `${raiz}/docs`, app, document );
+  SwaggerModule.setup( `${rootEndPoint}/docs`, app, document );
   app.useGlobalFilters( new Filtro() );
   app.enableCors();
-  await app.listen( 3000 );
+  await app.listen( apiPort );
 }
 
 

@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+if ( process.env.NODE_ENV != 'production' ) {
+    dotenv.config();
+}
 import * as apicache from 'apicache';
 import * as redis from 'redis';
 const RedisHost: string = process.env.REDIS_HOST || '127.0.0.1';

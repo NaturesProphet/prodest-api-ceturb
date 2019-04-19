@@ -1,13 +1,12 @@
 import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { LinhasService } from '../services/linhas.service';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { LinhaDto } from '../../ceturb/models/dto/linha.dto';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
 import { itinerarioDto } from '../../ceturb/models/dto/itinerario.dto';
 import { HorarioDto } from '../../ceturb/models/dto/horarios.dto';
 import { HorarioObsDto } from '../../ceturb/models/dto/horarioObs.dto';
-const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/linha`;
 
 @Controller( `${raiz}/linhas` )

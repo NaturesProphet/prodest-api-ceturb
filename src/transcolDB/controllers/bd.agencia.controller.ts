@@ -1,14 +1,12 @@
-import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { AgenciaService } from '../services/agencia.service';
 import { Agencia } from '../models/Agencia.model';
-import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Contato } from '../models/Contato.model';
 import { Feriado } from '../models/Feriado.model';
 import { Tarifa } from '../models/Tarifa.model';
-import { Endpoints } from '../../commom/configs/endpoints.config';
-import { FeriadoResponse } from '../../transcolDB/models/Dto/FeriadoResponse.dto';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
-const raiz: string = new Endpoints().rotaRaiz;
 const path = `${raiz}/agencias`;
 
 @Controller( `${raiz}/agencias` )

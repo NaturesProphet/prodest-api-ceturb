@@ -1,10 +1,9 @@
 import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { PontoService } from "../services/ponto.service";
 import { Itinerario } from "../../ceturb/models/itinerarios.model.Dto";
 import { ErrorMessage } from "../../commom/DTOs/errorMessages/errorMessage";
-const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/pontos`;
 
 @Controller( `${raiz}/pontos` )

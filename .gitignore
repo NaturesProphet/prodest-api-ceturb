@@ -5,3 +5,6 @@ coverage/*
 stress/artifacts/*
 stress/jmeter.log
 package-lock.json
+.env
+.sonarlint
+dist

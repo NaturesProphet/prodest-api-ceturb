@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+if ( process.env.NODE_ENV != 'production' ) {
+    dotenv.config();
+}
 const MINIO_ADDRESS: string = process.env.MINIO_ADDRESS || 'http://127.0.0.1:9000';
 const MINIO_SECRETKEY: string = process.env.MINIO_SECRETKEY || 'admin123';
 const MINIO_KEY: string = process.env.MINIO_KEY || 'admin';

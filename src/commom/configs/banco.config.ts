@@ -1,9 +1,13 @@
-const db_host = process.env.TRANSCOLDB_HOST || '127.0.0.1';
-const db_port: number = parseInt( process.env.TRANSCOLDB_PORT ) || 1433;
-const db_username = process.env.TRANSCOLDB_USER || 'SA';
-const db_password = process.env.TRANSCOLDB_PASSWORD || 'Senh@Dif1cil';
-const db_schema = process.env.TRANSCOLDB_SCHEMA || 'tempdb';
-const orm_sync = ( process.env.TRANSCOLDB_ORM_SYNC === 'true' ) || false;
+import * as dotenv from 'dotenv';
+if ( process.env.NODE_ENV != 'production' ) {
+    dotenv.config();
+}
+const db_host = process.env.TRANSCOLDB_HOST;
+const db_port: number = Number( process.env.TRANSCOLDB_PORT );
+const db_username = process.env.TRANSCOLDB_USER;
+const db_password = process.env.TRANSCOLDB_PASSWORD;
+const db_schema = process.env.TRANSCOLDB_SCHEMA;
+const orm_sync: boolean = Boolean( process.env.TRANSCOLDB_ORM_SYNC == 'true' );
 
 export class BancoConfig {
     constructor(

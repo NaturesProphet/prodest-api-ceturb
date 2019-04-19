@@ -1,11 +1,11 @@
 import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { PontoService } from '../services/ponto.ceturb.service';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { Ponto } from "../../ceturb/models/dto/ponto.entity";
 import { ErrorMessage } from "../../commom/DTOs/errorMessages/errorMessage";
 import { PontoItinerario } from "../../ceturb/models/pontoItinerario.entity";
-const raiz: string = new Endpoints().rotaRaiz;
+
 const path: string = `${raiz}/pontos`;
 
 @Controller( `${raiz}/pontos` )

@@ -1,5 +1,5 @@
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.0.0
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.0
 */
 
 DROP TABLE GoogleTransit.dbo.estimativa
@@ -39,4 +39,7 @@ DROP TABLE GoogleTransit.dbo.vigencia
 go
 
 DROP TABLE GoogleTransit.dbo.agencia
+go
+
+DROP TABLE GoogleTransit.dbo.VeiculoXPontos
 go

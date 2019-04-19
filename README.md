@@ -21,6 +21,7 @@ TRANSCOLDB_SCHEMA       # nome do banco de dados
 TRANSCOLDB_ORM_SYNC     # sincronia do TypeORM com as tabelas do banco - false por padrão
 ```
 
+Você pode criar um arquivo .env na raiz do repositório seguindo como exemplo o conteúdo do arquivo .env.example
 
 ## Antes de rodar
 Essa API está configurada para fazer cache das requisições usando o serviço do <a href="https://redis.io/">redis</a>, portanto, é necessário subir o servidor do redis localmente ou apontar um endereço e porta de um servidor válido através das variaveis de ambiente.  

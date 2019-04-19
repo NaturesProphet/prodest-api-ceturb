@@ -1,10 +1,9 @@
 import { Controller, Get, Res, HttpStatus, Param } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { GtfsService } from '../services/gtfs.service';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { gtfsDto } from '../../ceturb/models/dto/gtfs.dto';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
-const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/gtfs`;
 
 @Controller( `${raiz}/gtfs` )

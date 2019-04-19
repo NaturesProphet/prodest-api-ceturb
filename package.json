@@ -5,6 +5,8 @@
   "author": "Prodest",
   "license": "MIT",
   "scripts": {
+    "stop:all": "docker stop $(docker ps -q -a) && docker rm $(docker ps -q -a)",
+    "clean": "rm -R node_modules",
     "format": "prettier --write \"**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
@@ -22,8 +24,9 @@
     "stopdocker": "docker stop $(docker ps -q -a) && docker rm $(docker ps -q -a)",
     "minio": "docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 minio/minio server /data",
     "commit:build": "git add . && npm run commit && npm run release && git push --tags origin dev",
-    "persistentdb": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 -v /DOCKER-VOLUMES/api-ceturb/mssql:/var/opt/mssql --name sql-server-persistent -d microsoft/mssql-server-linux ",
-    "sqlserver": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 --name sql-server -d microsoft/mssql-server-linux ",
+    "mssql:persistent": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 -v /DOCKER-VOLUMES/api-ceturb/mssql:/var/opt/mssql --name sql-server -d microsoft/mssql-server-linux ",
+    "mssql": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Senh@Dif1cil' -p 1433:1433 --name sql-server -d microsoft/mssql-server-linux ",
+    "stop:mssql": "docker stop sql-server && docker rm sql-server",
     "connect": "sqlcmd -S localhost -U SA -PSenh@Dif1cil",
     "sonar:casa": "sonar-scanner -Dsonar.projectKey=api-ceturb -Dsonar.language=ts -Dsonar.sources=src -Dsonar.host.url=http://localhost:9000 -Dsonar.login=8265f31535ef7c18d4d6abd951ffae41ee6b0b05",
     "stress:casa": "docker run -i --network host --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts registry.es.gov.br/espm/dockers/taurus:latest quick_test.local.yml 2>&1"
@@ -34,6 +37,7 @@
     "@nestjs/swagger": "^2.2.0",
     "@nestjs/typeorm": "^5.2.2",
     "@types/apicache": "^1.2.0",
+    "@types/dotenv": "^6.1.1",
     "@types/redis": "^2.8.6",
     "@types/shelljs": "^0.8.0",
     "apicache": "^1.2.3",
@@ -45,10 +49,10 @@
     "request-promise": "^4.2.2",
     "rxjs": "^6.3.3",
     "shelljs": "^0.8.2",
-    "typeorm": "^0.2.7",
-    "typescript": "^2.6.2",
     "ts-node": "^4.1.0",
-    "tsconfig-paths": "^3.1.1"
+    "tsconfig-paths": "^3.1.1",
+    "typeorm": "^0.2.7",
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.0.0",

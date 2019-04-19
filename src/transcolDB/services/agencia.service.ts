@@ -3,7 +3,6 @@ import { Agencia } from '../models/Agencia.model';
 import { Feriado } from '../models/Feriado.model';
 import { Contato } from '../models/Contato.model';
 import { Tarifa } from '../models/Tarifa.model';
-import { FeriadoResponse } from '../../transcolDB/models/Dto/FeriadoResponse.dto';
 
 @Injectable()
 export class AgenciaService {

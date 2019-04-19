@@ -3,10 +3,9 @@ import { ItinerarioService } from '../services/itinerario.service';
 import { Itinerario } from '../models/Itinerario.model';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 import { Viagem } from '../models/Viagem.model';
-import { Endpoints } from '../../commom/configs/endpoints.config';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { PontoGeografico } from '../../transcolDB/models/PontoGeografico.model';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
-const raiz: string = new Endpoints().rotaRaiz;
 const path = `${raiz}/itinerarios`;
 
 @Controller( `${raiz}/itinerarios` )

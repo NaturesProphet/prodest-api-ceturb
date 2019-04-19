@@ -2,8 +2,7 @@ import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { SwaggerService } from '../../ceturb/services/swagger.service';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { json } from 'body-parser';
-import { Endpoints } from '../../commom/configs/endpoints.config';
-const raiz: string = new Endpoints().rotaRaiz;
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 
 @Controller( `${raiz}/swagger` )
 @ApiUseTags( "swagger.json" )

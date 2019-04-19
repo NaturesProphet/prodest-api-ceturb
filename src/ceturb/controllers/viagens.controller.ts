@@ -1,10 +1,9 @@
 import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { rootEndPoint as raiz } from '../../commom/configs/endpoints.config';
 import { ViagensService } from '../services/viagens.service';
-import { Endpoints } from '../../commom/configs/endpoints.config';
 import { ViagemDto } from '../../ceturb/models/dto/viagem.dto';
 import { ErrorMessage } from '../../commom/DTOs/errorMessages/errorMessage';
-const raiz: string = new Endpoints().rotaRaiz;
 const path: string = `${raiz}/viagens`;
 
 

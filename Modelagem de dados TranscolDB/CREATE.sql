@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.0.0
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.0
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -222,5 +222,16 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 	CONSTRAINT FK_3edd2c6510db1940e5376875932 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id),
 	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
 ) GO;
+-------------------------------
 
-
+CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
+(
+	id int IDENTITY(1,1) NOT NULL,
+	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	ponto_id_geocontrol int NOT NULL,
+	pontoCodigo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	datahora datetime NOT NULL,
+	datahoraMillis bigint NOT NULL,
+	velocidade float NOT NULL,
+	CONSTRAINT PK_79b4f9bee50d5311212cafa2fe8 PRIMARY KEY (id)
+) GO;

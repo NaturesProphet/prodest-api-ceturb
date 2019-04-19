@@ -1,7 +1,6 @@
-import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Endpoints } from './commom/configs/endpoints.config';
-const raiz: string = new Endpoints().rotaRaiz;
+import { rootEndPoint as raiz } from './commom/configs/endpoints.config';
 
 @Controller()
 @ApiUseTags( 'raiz' )
