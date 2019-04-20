@@ -5,7 +5,7 @@ import { Auditoria } from './Auditoria.model';
 
 
 @Entity()
-export class Estimativa extends Auditoria {
+export class Historico extends Auditoria {
 
     @Column( "date" )
     datadecoleta: string;

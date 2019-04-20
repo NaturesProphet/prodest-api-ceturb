@@ -2,12 +2,12 @@ import * as dotenv from 'dotenv';
 if ( process.env.NODE_ENV != 'production' ) {
     dotenv.config();
 }
-const db_host = process.env.TRANSCOLDB_HOST;
-const db_port: number = Number( process.env.TRANSCOLDB_PORT );
-const db_username = process.env.TRANSCOLDB_USER;
-const db_password = process.env.TRANSCOLDB_PASSWORD;
-const db_schema = process.env.TRANSCOLDB_SCHEMA;
-const orm_sync: boolean = Boolean( process.env.TRANSCOLDB_ORM_SYNC == 'true' );
+const db_host = process.env.API_CETURB_TRANSCOLDB_HOST;
+const db_port: number = Number( process.env.API_CETURB_TRANSCOLDB_PORT );
+const db_username = process.env.API_CETURB_TRANSCOLDB_USER;
+const db_password = process.env.API_CETURB_TRANSCOLDB_PASSWORD;
+const db_schema = process.env.API_CETURB_TRANSCOLDB_SCHEMA;
+const orm_sync: boolean = Boolean( process.env.API_CETURB_TRANSCOLDB_ORM_SYNC == 'true' );
 
 export class BancoConfig {
     constructor(

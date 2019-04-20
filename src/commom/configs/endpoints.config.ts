@@ -7,5 +7,5 @@ import * as dotenv from 'dotenv';
 if ( process.env.NODE_ENV != 'production' ) {
     dotenv.config();
 }
-export const rootEndPoint: string = process.env.CETURB_ROOT_ENDPOINT;
-export const apiPort: number = Number( process.env.API_PORT ) || 3000;
+export const rootEndPoint: string = process.env.API_CETURB_ROOT_ENDPOINT;
+export const apiPort: number = Number( process.env.API_CETURB_PORT ) || 3000;

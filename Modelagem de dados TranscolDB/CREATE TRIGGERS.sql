@@ -3,7 +3,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
 */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.2
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.3
 */
 
 CREATE TRIGGER TGR_INSERT_agencia
@@ -304,6 +304,25 @@ BEGIN
     SELECT @ID = id
     FROM inserted
     UPDATE estimativa SET atualizadoem = @DATA
+    WHERE id = @ID
+END
+GO
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+CREATE TRIGGER TGR_UPDATE_historico
+ON GoogleTransit.dbo.historico
+FOR UPDATE
+AS
+BEGIN
+    DECLARE
+    @DATA   bigint
+    DECLARE
+    @ID     int
+    SELECT @DATA = cast(Datediff(s, '1970-01-01', GETDATE()) AS bigint)*1000 - 10800000
+    SELECT @ID = id
+    FROM inserted
+    UPDATE historico SET atualizadoem = @DATA
     WHERE id = @ID
 END
 GO

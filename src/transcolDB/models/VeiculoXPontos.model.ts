@@ -10,7 +10,7 @@ export class VeiculoXPontos extends BaseEntity {
     veiculo: string;
 
     @Column( "int" )
-    ponto_id_geocontrol: number;
+    ponto_id: number;
 
     @Column( "datetime" )
     datahora: Date;

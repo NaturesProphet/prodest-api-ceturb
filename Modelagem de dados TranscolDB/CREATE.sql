@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.2
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.3
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -215,23 +215,43 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 	atualizadoem bigint NULL,
 	datadecoleta date NOT NULL,
 	horarionoponto time NOT NULL,
-	pontofinal bit NOT NULL,
+	pontofinal bit NULL,
 	ponto_id int NOT NULL,
 	viagem_id int NOT NULL,
 	CONSTRAINT PK_ca185d548979052034790fb497d PRIMARY KEY (id),
-	CONSTRAINT FK_3edd2c6510db1940e5376875932 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id),
-	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
+	CONSTRAINT FK_3edd2c6510db1940e5376875932 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id),
+	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id)
+) GO;
+
+-------------------------------
+
+
+CREATE TABLE GoogleTransit.dbo.historico
+(
+	id int IDENTITY(1,1) NOT NULL,
+	dataregistro bigint NULL,
+	atualizadoem bigint NULL,
+	datadecoleta date NOT NULL,
+	horarionoponto time NOT NULL,
+	pontofinal bit NULL,
+	ponto_id int NOT NULL,
+	viagem_id int NOT NULL,
+	CONSTRAINT PK_0fad738d5b2a11ac448686db608 PRIMARY KEY (id),
+	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
+	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
 ) GO;
 -------------------------------
+
 
 CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
 (
 	id int IDENTITY(1,1) NOT NULL,
 	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	ponto_id_geocontrol int NOT NULL,
+	ponto_id int NOT NULL,
 	datahora datetime NOT NULL,
 	datahoraMillis bigint NOT NULL,
 	velocidade float NOT NULL,
 	ignicao bit NOT NULL,
 	CONSTRAINT PK_79b4f9bee50d5311212cafa2fe8 PRIMARY KEY (id)
 ) GO;
+

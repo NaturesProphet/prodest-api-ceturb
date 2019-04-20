@@ -1,8 +1,11 @@
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.2
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.3
 */
 
 DROP TABLE GoogleTransit.dbo.estimativa
+go
+
+DROP TABLE GoogleTransit.dbo.historico
 go
 
 DROP TABLE GoogleTransit.dbo.viagem
