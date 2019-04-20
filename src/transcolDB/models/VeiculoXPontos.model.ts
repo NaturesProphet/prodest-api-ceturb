@@ -12,9 +12,6 @@ export class VeiculoXPontos extends BaseEntity {
     @Column( "int" )
     ponto_id_geocontrol: number;
 
-    @Column()
-    pontoCodigo: string;
-
     @Column( "datetime" )
     datahora: Date;
 

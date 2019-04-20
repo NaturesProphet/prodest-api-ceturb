@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.1
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.2
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -229,7 +229,6 @@ CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
 	id int IDENTITY(1,1) NOT NULL,
 	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	ponto_id_geocontrol int NOT NULL,
-	pontoCodigo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	datahora datetime NOT NULL,
 	datahoraMillis bigint NOT NULL,
 	velocidade float NOT NULL,
