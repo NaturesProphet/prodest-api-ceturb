@@ -23,4 +23,7 @@ export class VeiculoXPontos extends BaseEntity {
 
     @Column( "float" )
     velocidade: number;
+
+    @Column( "bit" )
+    ignicao: number;
 }
