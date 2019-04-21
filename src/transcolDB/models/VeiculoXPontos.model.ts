@@ -1,4 +1,7 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Ponto } from './Ponto.model';
+import { Viagem } from './Viagem.model';
+import { Itinerario } from './Itinerario.model';
 
 @Entity( { name: "VeiculoXPontos" } )
 export class VeiculoXPontos extends BaseEntity {
@@ -8,9 +11,6 @@ export class VeiculoXPontos extends BaseEntity {
 
     @Column()
     veiculo: string;
-
-    @Column( "int" )
-    ponto_id: number;
 
     @Column( "datetime" )
     datahora: Date;
@@ -23,4 +23,25 @@ export class VeiculoXPontos extends BaseEntity {
 
     @Column( "bit" )
     ignicao: number;
+
+    @Column( { name: "pontoInicial", type: "bit", default: false } )
+    pontoInicial: boolean;
+
+    @Column( { name: "pontoFinal", type: "bit", default: false } )
+    pontoFinal: boolean;
+
+    @Column( { name: "sequencia", type: "int", nullable: false } )
+    sequencia: number;
+
+    @ManyToOne( type => Itinerario, { nullable: false } )
+    @JoinColumn( { name: "itinerario_id" } )
+    itinerario_id: number;
+
+    @ManyToOne( type => Viagem, { nullable: false } )
+    @JoinColumn( { name: "viagem_id" } )
+    viagem_id: number;
+
+    @ManyToOne( type => Ponto, { nullable: false } )
+    @JoinColumn( { name: "ponto_id" } )
+    ponto_id: number;
 }
