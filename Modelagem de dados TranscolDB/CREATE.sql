@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.3
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.4
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -25,7 +25,6 @@ CREATE UNIQUE INDEX IDX_ae6f96e90d951e9e8c68e3930b ON GoogleTransit.dbo.agencia 
 CREATE UNIQUE INDEX IDX_c44350547be6b7a422fdfddc7b ON GoogleTransit.dbo.agencia (nome) GO;
 
 ----------
-
 CREATE TABLE GoogleTransit.dbo.feriado
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -40,7 +39,6 @@ CREATE TABLE GoogleTransit.dbo.feriado
 ) GO;
 
 ------------
-
 CREATE TABLE GoogleTransit.dbo.contato
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -61,7 +59,6 @@ CREATE UNIQUE INDEX IDX_44d7ccac6a07ce215335a3ade8 ON GoogleTransit.dbo.contato 
 CREATE UNIQUE INDEX IDX_f0323061835775208d577ffabc ON GoogleTransit.dbo.contato (email) go;
 
 -----------------
-
 CREATE TABLE GoogleTransit.dbo.tarifa
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -73,8 +70,8 @@ CREATE TABLE GoogleTransit.dbo.tarifa
 	CONSTRAINT PK_d213dfbdddef2bfd7b47b6c1e24 PRIMARY KEY (id),
 	CONSTRAINT FK_b5cbf67b1a9bf52beac00b79f2c FOREIGN KEY (agencia_id) REFERENCES GoogleTransit.dbo.agencia(id)
 ) GO;
--------------------
 
+-------------------
 CREATE TABLE GoogleTransit.dbo.vigencia
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -89,6 +86,7 @@ CREATE TABLE GoogleTransit.dbo.vigencia
 	sabado bit NOT NULL,
 	CONSTRAINT PK_1c8a4f959d6653320e43384ac55 PRIMARY KEY (id)
 ) GO;
+
 -----------------------------
 CREATE TABLE GoogleTransit.dbo.linha
 (
@@ -96,8 +94,8 @@ CREATE TABLE GoogleTransit.dbo.linha
 	dataregistro bigint NULL,
 	atualizadoem bigint NULL,
 	id_geocontrol int NOT NULL,
-	codigo nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	descricao nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	codigo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	descricao nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	status bit NOT NULL,
 	diautil bit DEFAULT 0 NOT NULL,
 	sabado bit DEFAULT 0 NOT NULL,
@@ -107,7 +105,6 @@ CREATE TABLE GoogleTransit.dbo.linha
 	CONSTRAINT FK_ac2b1af8c82fd3914e391b056a1 FOREIGN KEY (agencia_id) REFERENCES GoogleTransit.dbo.agencia(id)
 ) GO;
 ----------------------
-
 CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -121,10 +118,7 @@ CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia
 	CONSTRAINT FK_8808e5cd05ad10200318bebac14 FOREIGN KEY (linha_id) REFERENCES GoogleTransit.dbo.linha(id),
 	CONSTRAINT FK_e634a0138a0b393f096a9766ff9 FOREIGN KEY (vigencia_id) REFERENCES GoogleTransit.dbo.vigencia(id)
 ) GO;
-
 ------------
-
-
 CREATE TABLE GoogleTransit.dbo.ponto
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -132,30 +126,29 @@ CREATE TABLE GoogleTransit.dbo.ponto
 	atualizadoem bigint NULL,
 	id_geocontrol int NULL,
 	terminal bit NOT NULL,
-	codigo nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	municipio nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	logradouro nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	latitude nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	longitude nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	referencia nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	codigo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	municipio nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	logradouro nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	latitude nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	longitude nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	referencia nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	azimute int NOT NULL,
 	CONSTRAINT PK_5b69f3e93c4fbf077ad2050682f PRIMARY KEY (id)
 ) GO;
----------------------------
 
+---------------------------
 CREATE TABLE GoogleTransit.dbo.itinerario
 (
 	id int IDENTITY(1,1) NOT NULL,
 	dataregistro bigint NULL,
 	atualizadoem bigint NULL,
 	id_geocontrol int NOT NULL,
-	codigo nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	bandeira nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	codigo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	bandeira nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	linha_id int NOT NULL,
 	CONSTRAINT PK_2baffe7dba24ce00639ec81f961 PRIMARY KEY (id),
 	CONSTRAINT FK_d0685388290522e49d70b3637d0 FOREIGN KEY (linha_id) REFERENCES GoogleTransit.dbo.linha(id)
 ) GO;
-
 
 -----------------------
 CREATE TABLE GoogleTransit.dbo.itinerario_ponto
@@ -197,7 +190,7 @@ CREATE TABLE GoogleTransit.dbo.viagem
 	atualizadoem bigint NULL,
 	horadasaida datetime NOT NULL,
 	horadachegada datetime NOT NULL,
-	veiculo nvarchar(510) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	acessibilidade bit NOT NULL,
 	diautil bit DEFAULT 0 NOT NULL,
 	sabado bit DEFAULT 0 NOT NULL,
@@ -206,8 +199,8 @@ CREATE TABLE GoogleTransit.dbo.viagem
 	CONSTRAINT PK_a2191e12f865bbe656e9a958f72 PRIMARY KEY (id),
 	CONSTRAINT FK_ef85306fdedfcb0440c71e8e132 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
 ) GO;
--------------------------------
 
+-------------------------------
 CREATE TABLE GoogleTransit.dbo.estimativa
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -224,8 +217,6 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 ) GO;
 
 -------------------------------
-
-
 CREATE TABLE GoogleTransit.dbo.historico
 (
 	id int IDENTITY(1,1) NOT NULL,
@@ -240,18 +231,26 @@ CREATE TABLE GoogleTransit.dbo.historico
 	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
 	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
 ) GO;
+
 -------------------------------
-
-
 CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
 (
 	id int IDENTITY(1,1) NOT NULL,
 	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	ponto_id int NOT NULL,
 	datahora datetime NOT NULL,
 	datahoraMillis bigint NOT NULL,
 	velocidade float NOT NULL,
 	ignicao bit NOT NULL,
-	CONSTRAINT PK_79b4f9bee50d5311212cafa2fe8 PRIMARY KEY (id)
+	pontoInicial bit DEFAULT 0 NOT NULL,
+	pontoFinal bit DEFAULT 0 NOT NULL,
+	sequencia int NOT NULL,
+	itinerario_id int NOT NULL,
+	viagem_id int NOT NULL,
+	ponto_id int NOT NULL,
+	CONSTRAINT PK_79b4f9bee50d5311212cafa2fe8 PRIMARY KEY (id),
+	CONSTRAINT FK_5109d8c1bdfc01efc637cd42092 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
+	CONSTRAINT FK_e149ad4c4127d1fce526e22807d FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id),
+	CONSTRAINT FK_f04bd5970733bb1f3300da8e72c FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
 ) GO;
 
+-------------------------------
