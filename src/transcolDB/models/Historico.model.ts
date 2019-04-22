@@ -1,20 +1,35 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 import { Ponto } from './Ponto.model';
 import { Viagem } from './Viagem.model';
-import { Auditoria } from './Auditoria.model';
+import { Itinerario } from './Itinerario.model';
 
 
 @Entity()
-export class Historico extends Auditoria {
+export class Historico extends BaseEntity {
 
-    @Column( "date" )
-    datadecoleta: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-    @Column( 'time' )
+    @Column( "datetime" )
+    datadecoleta: Date;
+
+    @Column( 'datetime' )
     horarionoponto: Date;
 
-    @Column( { type: 'bit', nullable: true } )
+    @Column( { type: 'bit' } )
     pontofinal: boolean;
+
+    @Column( { type: 'bit' } )
+    pontoinicial: boolean;
+
+    @Column( { type: "float", nullable: true } )
+    velocidade: number;
+
+    @Column()
+    veiculo: string;
+
+    @Column( { type: "int" } )
+    sequencia: number;
 
 
     //###################################################################
@@ -33,4 +48,9 @@ export class Historico extends Auditoria {
     @JoinColumn( { name: "viagem_id" } )
     viagem_id: number;
 
+
+    //varias estimativas são de uma viagem
+    @ManyToOne( type => Itinerario, { nullable: false } )
+    @JoinColumn( { name: "itinerario_id" } )
+    itinerario_id: number;
 }

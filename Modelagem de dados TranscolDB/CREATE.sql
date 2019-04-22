@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.4
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.5
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -220,20 +220,25 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 CREATE TABLE GoogleTransit.dbo.historico
 (
 	id int IDENTITY(1,1) NOT NULL,
-	dataregistro bigint NULL,
-	atualizadoem bigint NULL,
-	datadecoleta date NOT NULL,
-	horarionoponto time NOT NULL,
-	pontofinal bit NULL,
+	pontofinal bit NOT NULL,
+	pontoinicial bit NOT NULL,
+	velocidade float NULL,
+	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	sequencia int NOT NULL,
 	ponto_id int NOT NULL,
 	viagem_id int NOT NULL,
+	itinerario_id int NOT NULL,
+	datadecoleta datetime NOT NULL,
+	horarionoponto datetime NOT NULL,
 	CONSTRAINT PK_0fad738d5b2a11ac448686db608 PRIMARY KEY (id),
 	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
+	CONSTRAINT FK_b6381b200db36f04a80d682ed2b FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
 	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
-) GO;
+) 
+GO;
 
 -------------------------------
-CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
+CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto
 (
 	id int IDENTITY(1,1) NOT NULL,
 	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -247,10 +252,10 @@ CREATE TABLE GoogleTransit.dbo.VeiculoXPontos
 	itinerario_id int NOT NULL,
 	viagem_id int NOT NULL,
 	ponto_id int NOT NULL,
-	CONSTRAINT PK_79b4f9bee50d5311212cafa2fe8 PRIMARY KEY (id),
-	CONSTRAINT FK_5109d8c1bdfc01efc637cd42092 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
-	CONSTRAINT FK_e149ad4c4127d1fce526e22807d FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id),
-	CONSTRAINT FK_f04bd5970733bb1f3300da8e72c FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
+	CONSTRAINT PK_889696d73a44b83bce0b4ff0a93 PRIMARY KEY (id),
+	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
+	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
+	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
 ) GO;
 
 -------------------------------

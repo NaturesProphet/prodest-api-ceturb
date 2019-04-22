@@ -3,7 +3,7 @@ import { Ponto } from './Ponto.model';
 import { Viagem } from './Viagem.model';
 import { Itinerario } from './Itinerario.model';
 
-@Entity( { name: "VeiculoXPontos" } )
+@Entity( { name: "veiculo_ponto_viagem_historico_bruto" } )
 export class VeiculoXPontos extends BaseEntity {
 
     @PrimaryGeneratedColumn()
