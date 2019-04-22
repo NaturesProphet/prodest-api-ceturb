@@ -212,8 +212,8 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 	ponto_id int NOT NULL,
 	viagem_id int NOT NULL,
 	CONSTRAINT PK_ca185d548979052034790fb497d PRIMARY KEY (id),
-	CONSTRAINT FK_3edd2c6510db1940e5376875932 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id),
-	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id)
+	CONSTRAINT FK_3edd2c6510db1940e5376875932 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id),
+	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
 ) GO;
 
 -------------------------------
@@ -231,9 +231,9 @@ CREATE TABLE GoogleTransit.dbo.historico
 	datadecoleta datetime NOT NULL,
 	horarionoponto datetime NOT NULL,
 	CONSTRAINT PK_0fad738d5b2a11ac448686db608 PRIMARY KEY (id),
-	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
-	CONSTRAINT FK_b6381b200db36f04a80d682ed2b FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
-	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
+	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
+	CONSTRAINT FK_b6381b200db36f04a80d682ed2b FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
+	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
 ) 
 GO;
 
@@ -253,9 +253,9 @@ CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto
 	viagem_id int NOT NULL,
 	ponto_id int NOT NULL,
 	CONSTRAINT PK_889696d73a44b83bce0b4ff0a93 PRIMARY KEY (id),
-	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
-	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
-	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
+	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
+	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
+	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
 ) GO;
 
 -------------------------------

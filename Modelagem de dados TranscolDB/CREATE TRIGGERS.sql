@@ -310,25 +310,6 @@ GO
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
 
-CREATE TRIGGER TGR_UPDATE_historico
-ON GoogleTransit.dbo.historico
-FOR UPDATE
-AS
-BEGIN
-    DECLARE
-    @DATA   bigint
-    DECLARE
-    @ID     int
-    SELECT @DATA = cast(Datediff(s, '1970-01-01', GETDATE()) AS bigint)*1000 - 10800000
-    SELECT @ID = id
-    FROM inserted
-    UPDATE historico SET atualizadoem = @DATA
-    WHERE id = @ID
-END
-GO
------------------------------------------------------------------------
------------------------------------------------------------------------
-
 CREATE TRIGGER TGR_UPDATE_feriado
 ON GoogleTransit.dbo.feriado
 FOR UPDATE
