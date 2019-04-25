@@ -240,22 +240,22 @@ GO;
 -------------------------------
 CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto
 (
-	id int IDENTITY(1,1) NOT NULL,
-	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	id int NOT NULL IDENTITY(1,1),
+	veiculo nvarchar(255) NOT NULL,
 	datahora datetime NOT NULL,
 	datahoraMillis bigint NOT NULL,
-	velocidade float NOT NULL,
+	velocidade float,
 	ignicao bit NOT NULL,
-	pontoInicial bit DEFAULT 0 NOT NULL,
-	pontoFinal bit DEFAULT 0 NOT NULL,
-	sequencia int NOT NULL,
+	pontoInicial bit DEFAULT ((0)) NOT NULL,
+	pontoFinal bit DEFAULT ((0)) NOT NULL,
+	sequencia int,
 	itinerario_id int NOT NULL,
 	viagem_id int NOT NULL,
-	ponto_id int NOT NULL,
+	ponto_id int,
 	CONSTRAINT PK_889696d73a44b83bce0b4ff0a93 PRIMARY KEY (id),
-	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
-	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
-	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
+	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
+	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
+	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
 ) GO;
 
 -------------------------------

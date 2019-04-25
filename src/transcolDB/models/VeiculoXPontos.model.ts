@@ -18,7 +18,7 @@ export class VeiculoXPontos extends BaseEntity {
     @Column( "bigint" )
     datahoraMillis: number;
 
-    @Column( "float" )
+    @Column( { type: "float", nullable: true } )
     velocidade: number;
 
     @Column( "bit" )
@@ -30,7 +30,7 @@ export class VeiculoXPontos extends BaseEntity {
     @Column( { name: "pontoFinal", type: "bit", default: false } )
     pontoFinal: boolean;
 
-    @Column( { name: "sequencia", type: "int", nullable: false } )
+    @Column( { name: "sequencia", type: "int", nullable: true } )
     sequencia: number;
 
     @ManyToOne( type => Itinerario, { nullable: false } )
@@ -41,7 +41,7 @@ export class VeiculoXPontos extends BaseEntity {
     @JoinColumn( { name: "viagem_id" } )
     viagem_id: number;
 
-    @ManyToOne( type => Ponto, { nullable: false } )
+    @ManyToOne( type => Ponto, { nullable: true } )
     @JoinColumn( { name: "ponto_id" } )
     ponto_id: number;
 }
