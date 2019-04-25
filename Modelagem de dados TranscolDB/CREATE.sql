@@ -4,7 +4,7 @@ EXECUTE OS CREATES ABAIXO UM DE CADA VEZ NO DBEAVER.
  */
 
 /*
-	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.5
+	VERSÃO DO DESENVOLVIMENTO DO BANCO: 2.1.6
 */
 
 CREATE TABLE GoogleTransit.dbo.agencia
@@ -217,25 +217,24 @@ CREATE TABLE GoogleTransit.dbo.estimativa
 ) GO;
 
 -------------------------------
-CREATE TABLE GoogleTransit.dbo.historico
+CREATE TABLE GoogleTransit.dbo.historico_real
 (
-	id int IDENTITY(1,1) NOT NULL,
-	pontofinal bit NOT NULL,
-	pontoinicial bit NOT NULL,
-	velocidade float NULL,
-	veiculo nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	sequencia int NOT NULL,
-	ponto_id int NOT NULL,
-	viagem_id int NOT NULL,
-	itinerario_id int NOT NULL,
+	id int NOT NULL IDENTITY(1,1),
 	datadecoleta datetime NOT NULL,
 	horarionoponto datetime NOT NULL,
-	CONSTRAINT PK_0fad738d5b2a11ac448686db608 PRIMARY KEY (id),
-	CONSTRAINT FK_0eef382837fca298c3062cf1070 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
-	CONSTRAINT FK_b6381b200db36f04a80d682ed2b FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
-	CONSTRAINT FK_fd6c366740c268032a948d097fc FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
-) 
-GO;
+	pontofinal bit NOT NULL,
+	pontoinicial bit NOT NULL,
+	velocidade float,
+	veiculo nvarchar(255) NOT NULL,
+	sequencia int,
+	ponto_id int,
+	viagem_id int NOT NULL,
+	itinerario_id int NOT NULL,
+	CONSTRAINT PK_0f199c6f49dd70c51b8bdf5b1ab PRIMARY KEY (id),
+	CONSTRAINT FK_0999c76d394e93510f517477700 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
+	CONSTRAINT FK_59411e64020041fc6885048965a FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
+	CONSTRAINT FK_afb0990ca29efc7a081bee80b1b FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
+) go;
 
 -------------------------------
 CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto

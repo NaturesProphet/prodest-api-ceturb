@@ -4,7 +4,7 @@ import { Viagem } from './Viagem.model';
 import { Itinerario } from './Itinerario.model';
 
 
-@Entity()
+@Entity( { name: "historico_real" } )
 export class Historico extends BaseEntity {
 
     @PrimaryGeneratedColumn()
@@ -28,7 +28,7 @@ export class Historico extends BaseEntity {
     @Column()
     veiculo: string;
 
-    @Column( { type: "int" } )
+    @Column( { type: "int", nullable: true } )
     sequencia: number;
 
 
@@ -38,7 +38,7 @@ export class Historico extends BaseEntity {
 
 
     //varias estimativas são de um ponto
-    @ManyToOne( type => Ponto, { nullable: false } )
+    @ManyToOne( type => Ponto, { nullable: true } )
     @JoinColumn( { name: "ponto_id" } )
     ponto_id: number;
 
