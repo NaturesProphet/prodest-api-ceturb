@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.6"></a>
+## [1.13.6](https://gitlab.es.gov.br/espm/Transcol-Online/api-ceturb/compare/v1.13.5...v1.13.6) (2019-04-30)
+
+
+
 <a name="1.13.5"></a>
 ## [1.13.5](https://gitlab.es.gov.br/espm/Transcol-Online/api-ceturb/compare/v1.13.4...v1.13.5) (2019-04-25)
 
