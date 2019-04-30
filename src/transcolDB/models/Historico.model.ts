@@ -13,13 +13,13 @@ export class Historico extends BaseEntity {
     @Column( "datetime" )
     datadecoleta: Date;
 
-    @Column( 'datetime' )
+    @Column( { type: "datetime", nullable: true } )
     horarionoponto: Date;
 
-    @Column( { type: 'bit' } )
+    @Column( { type: "bit", nullable: true } )
     pontofinal: boolean;
 
-    @Column( { type: 'bit' } )
+    @Column( { type: "bit", nullable: true } )
     pontoinicial: boolean;
 
     @Column( { type: "float", nullable: true } )

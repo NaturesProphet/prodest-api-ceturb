@@ -221,9 +221,9 @@ CREATE TABLE GoogleTransit.dbo.historico_real
 (
 	id int NOT NULL IDENTITY(1,1),
 	datadecoleta datetime NOT NULL,
-	horarionoponto datetime NOT NULL,
-	pontofinal bit NOT NULL,
-	pontoinicial bit NOT NULL,
+	horarionoponto datetime,
+	pontofinal bit,
+	pontoinicial bit,
 	velocidade float,
 	veiculo nvarchar(255) NOT NULL,
 	sequencia int,
@@ -231,9 +231,9 @@ CREATE TABLE GoogleTransit.dbo.historico_real
 	viagem_id int NOT NULL,
 	itinerario_id int NOT NULL,
 	CONSTRAINT PK_0f199c6f49dd70c51b8bdf5b1ab PRIMARY KEY (id),
-	CONSTRAINT FK_0999c76d394e93510f517477700 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
-	CONSTRAINT FK_59411e64020041fc6885048965a FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
-	CONSTRAINT FK_afb0990ca29efc7a081bee80b1b FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
+	CONSTRAINT FK_0999c76d394e93510f517477700 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
+	CONSTRAINT FK_59411e64020041fc6885048965a FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
+	CONSTRAINT FK_afb0990ca29efc7a081bee80b1b FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
 ) go;
 
 -------------------------------
@@ -252,9 +252,9 @@ CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto
 	viagem_id int NOT NULL,
 	ponto_id int,
 	CONSTRAINT PK_889696d73a44b83bce0b4ff0a93 PRIMARY KEY (id),
-	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES tempdb.dbo.itinerario(id),
-	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES tempdb.dbo.ponto(id),
-	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES tempdb.dbo.viagem(id)
+	CONSTRAINT FK_d9644e392f47ff0610ae82bfc03 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id),
+	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
+	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
 ) GO;
 
 -------------------------------
