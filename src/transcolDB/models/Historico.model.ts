@@ -37,19 +37,19 @@ export class Historico extends BaseEntity {
     //###################################################################
 
 
-    //varias estimativas são de um ponto
+    //varios registros são de um ponto
     @ManyToOne( type => Ponto, { nullable: true } )
     @JoinColumn( { name: "ponto_id" } )
     ponto_id: number;
 
 
-    //varias estimativas são de uma viagem
+    //varios registros são de uma viagem
     @ManyToOne( type => Viagem, { nullable: false } )
     @JoinColumn( { name: "viagem_id" } )
     viagem_id: number;
 
 
-    //varias estimativas são de uma viagem
+    //varios registros são de uma viagem
     @ManyToOne( type => Itinerario, { nullable: false } )
     @JoinColumn( { name: "itinerario_id" } )
     itinerario_id: number;
