@@ -24,18 +24,6 @@ export class Viagem extends Auditoria {
     @ApiModelProperty()
     acessibilidade: boolean;
 
-    @Column( 'bit', { default: 0 } )
-    @ApiModelProperty()
-    diautil: boolean;
-
-    @Column( 'bit', { default: 0 } )
-    @ApiModelProperty()
-    sabado: boolean;
-
-    @Column( 'bit', { default: 0 } )
-    @ApiModelProperty()
-    domingo: boolean;
-
     // ###################################################################
     // ############################ RELAÇÕES #############################
     // ###################################################################
