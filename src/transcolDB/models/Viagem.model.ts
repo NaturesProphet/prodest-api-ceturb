@@ -3,15 +3,16 @@ import { Itinerario } from './Itinerario.model';
 import { Estimativa } from './Estimativa.model';
 import { Auditoria } from './Auditoria.model';
 import { ApiModelProperty } from '@nestjs/swagger';
-
+import { Horario } from './Horario.model';
+import { Historico } from './Historico.model';
 
 @Entity()
 export class Viagem extends Auditoria {
-    @Column( "datetime" )
+    @Column( 'datetime' )
     @ApiModelProperty()
     horadasaida: string;
 
-    @Column( "datetime" )
+    @Column( 'datetime' )
     @ApiModelProperty()
     horadachegada: string;
 
@@ -19,36 +20,28 @@ export class Viagem extends Auditoria {
     @ApiModelProperty()
     veiculo: string;
 
-    @Column( "bit" )
+    @Column( 'bit' )
     @ApiModelProperty()
     acessibilidade: boolean;
 
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    diautil: boolean;
+    // ###################################################################
+    // ############################ RELAÇÕES #############################
+    // ###################################################################
 
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    sabado: boolean;
-
-    @Column( "bit", { default: 0 } )
-    @ApiModelProperty()
-    domingo: boolean;
-
-
-    //###################################################################
-    //############################ RELAÇÕES #############################
-    //###################################################################
-
-
-    //varias viagens são feitas por um itinerario
+    // varias viagens são feitas por um itinerario
     @ManyToOne( type => Itinerario, { nullable: false } )
-    @JoinColumn( { name: "itinerario_id" } )
+    @JoinColumn( { name: 'itinerario_id' } )
     @ApiModelProperty()
     itinerario_id: number;
 
-    //uma viagem possui varias estimativas
-    @OneToMany( type => Estimativa, estimativas => Estimativa )
-    estimativas: Estimativa[];
+    // varias viagens são iniciadas em um horario
+    @ManyToOne( type => Horario, { nullable: false } )
+    @JoinColumn( { name: 'horario_id' } )
+    @ApiModelProperty()
+    horario_id: number;
+
+    // uma viagem possui varios registros no histórico
+    @OneToMany( type => Historico, registros => Historico )
+    registros: Historico[];
 
 }

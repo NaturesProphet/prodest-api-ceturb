@@ -5,6 +5,7 @@ import { PontoGeografico } from './PontoGeografico.model';
 import { ItinerarioPonto } from './itinerario_ponto.model';
 import { Auditoria } from './Auditoria.model';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { Horario } from './Horario.model';
 
 
 @Entity()
@@ -35,6 +36,10 @@ export class Itinerario extends Auditoria {
     //um itinerário faz varias viagens
     @OneToMany( type => Viagem, viagens => Viagem )
     viagens: Viagem[];
+
+    //um itinerário faz varias viagens num quadro de horários
+    @OneToMany( type => Horario, horarios => Horario )
+    horarios: Horario[];
 
     //Vários Itinerários passam por vários pontos via tabela itinerario_ponto
     @OneToMany( type => ItinerarioPonto, pontos => ItinerarioPonto )
