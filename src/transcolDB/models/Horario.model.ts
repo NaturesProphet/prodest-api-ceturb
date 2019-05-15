@@ -12,13 +12,16 @@ export class Horario extends Auditoria {
     @Column( 'time' )
     horadachegada: Date;
 
-    @Column( 'bit', { default: 0 } )
+    @Column( 'bit' )
+    acessibilidade: boolean;
+
+    @Column( 'bit' )
     diautil: boolean;
 
-    @Column( 'bit', { default: 0 } )
+    @Column( 'bit' )
     sabado: boolean;
 
-    @Column( 'bit', { default: 0 } )
+    @Column( 'bit' )
     domingo: boolean;
 
     // ###################################################################
