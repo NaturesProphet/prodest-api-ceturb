@@ -9,10 +9,9 @@ export class Auditoria extends BaseEntity {
 
     @Column( { type: "bigint", nullable: true } )
     @ApiModelProperty()
-    dataregistro: number;
+    inicio_vigencia: number;
 
     @Column( { type: "bigint", nullable: true } )
     @ApiModelProperty()
-    atualizadoem: number;
-
+    fim_vigencia: number;
 }
