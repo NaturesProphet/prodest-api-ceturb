@@ -39,22 +39,22 @@ DROP TABLE IF EXISTS GoogleTransit.dbo.agencia;
 -- CREATE AGENCIA
 CREATE TABLE GoogleTransit.dbo.agencia (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	nome nvarchar(255) NOT NULL,
 	url nvarchar(255) NOT NULL,
 	telefone nvarchar(255) NOT NULL,
     PERIOD FOR SYSTEM_TIME (inicio_vigencia, fim_vigencia),
 	CONSTRAINT PK_014a655a9dc72831c3712b7eb9b PRIMARY KEY (id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.agencia_historico)) 
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.agencia_historico)) 
 CREATE UNIQUE INDEX IDX_ae6f96e90d951e9e8c68e3930b ON GoogleTransit.dbo.agencia (url) 
 CREATE UNIQUE INDEX IDX_c44350547be6b7a422fdfddc7b ON GoogleTransit.dbo.agencia (nome);
 
 -- CREATE CONTATO
 CREATE TABLE GoogleTransit.dbo.contato (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	nome nvarchar(255) NOT NULL,
 	email nvarchar(255) NOT NULL,
 	ativo bit NOT NULL,
@@ -69,8 +69,8 @@ CREATE UNIQUE INDEX IDX_f0323061835775208d577ffabc ON GoogleTransit.dbo.contato 
 -- CREATE FERIADO
 CREATE TABLE GoogleTransit.dbo.feriado (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	nome nvarchar(255) NOT NULL,
 	[data] date NOT NULL,
 	dataupload date NOT NULL,
@@ -83,8 +83,8 @@ CREATE TABLE GoogleTransit.dbo.feriado (
 -- CREATE LINHA
 CREATE TABLE GoogleTransit.dbo.linha (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	id_geocontrol int NOT NULL,
 	codigo nvarchar(255) NOT NULL,
 	descricao nvarchar(255) NOT NULL,
@@ -96,13 +96,13 @@ CREATE TABLE GoogleTransit.dbo.linha (
     PERIOD FOR SYSTEM_TIME (inicio_vigencia, fim_vigencia),
 	CONSTRAINT PK_0ffd987432071dbe15c6d4bf52b PRIMARY KEY (id),
 	CONSTRAINT FK_ac2b1af8c82fd3914e391b056a1 FOREIGN KEY (agencia_id) REFERENCES GoogleTransit.dbo.agencia(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.linha_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.linha_historico));
 
 -- CREATE TARIFA
 CREATE TABLE GoogleTransit.dbo.tarifa (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	preco float NOT NULL,
 	dataupload date NOT NULL,
 	agencia_id int NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE GoogleTransit.dbo.tarifa (
 -- CREATE VIGENCIA
 CREATE TABLE GoogleTransit.dbo.vigencia (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	domingo bit NOT NULL,
 	segunda bit NOT NULL,
 	terca bit NOT NULL,
@@ -130,8 +130,8 @@ CREATE TABLE GoogleTransit.dbo.vigencia (
 -- CREATE LINHA_TARIFA_VIGENCIA
 CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	linha_id int NOT NULL,
 	vigencia_id int NOT NULL,
 	tarifa_id int NOT NULL,
@@ -145,8 +145,8 @@ CREATE TABLE GoogleTransit.dbo.linha_tarifa_vigencia (
 -- CREATE ITINERARIO
 CREATE TABLE GoogleTransit.dbo.itinerario (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	id_geocontrol int NOT NULL,
 	codigo nvarchar(255) NOT NULL,
 	bandeira nvarchar(255) NOT NULL,
@@ -154,13 +154,13 @@ CREATE TABLE GoogleTransit.dbo.itinerario (
     PERIOD FOR SYSTEM_TIME (inicio_vigencia, fim_vigencia),
 	CONSTRAINT PK_2baffe7dba24ce00639ec81f961 PRIMARY KEY (id),
 	CONSTRAINT FK_d0685388290522e49d70b3637d0 FOREIGN KEY (linha_id) REFERENCES GoogleTransit.dbo.linha(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.itinerario_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.itinerario_historico));
 
 -- CREATE PONTO
 CREATE TABLE GoogleTransit.dbo.ponto (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	id_geocontrol int,
 	terminal bit NOT NULL,
 	codigo nvarchar(255) NOT NULL,
@@ -172,13 +172,13 @@ CREATE TABLE GoogleTransit.dbo.ponto (
 	azimute int NOT NULL,
     PERIOD FOR SYSTEM_TIME (inicio_vigencia, fim_vigencia),
 	CONSTRAINT PK_5b69f3e93c4fbf077ad2050682f PRIMARY KEY (id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.ponto_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.ponto_historico));
 
 -- CREATE ITINERARIO_PONTO
 CREATE TABLE GoogleTransit.dbo.itinerario_ponto (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	embarque bit NOT NULL,
 	desembarque bit NOT NULL,
 	ordem int NOT NULL,
@@ -188,13 +188,13 @@ CREATE TABLE GoogleTransit.dbo.itinerario_ponto (
 	CONSTRAINT PK_b67a74149ef5d05809af31c96d3 PRIMARY KEY (id),
 	CONSTRAINT FK_962da8010635564fb00ac2e298a FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
 	CONSTRAINT FK_db70adc54fcd4b9efb33f318f57 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.itinerario_ponto_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.itinerario_ponto_historico));
 
 -- CREATE PONTOGEOGRAFICO
 CREATE TABLE GoogleTransit.dbo.pontogeografico (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	latitude nvarchar(255) NOT NULL,
 	longitude nvarchar(255) NOT NULL,
 	altitude nvarchar(255),
@@ -209,8 +209,8 @@ CREATE TABLE GoogleTransit.dbo.pontogeografico (
 -- CREATE HORARIO
 CREATE TABLE GoogleTransit.dbo.horario (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	horadasaida time NOT NULL,
 	horadachegada time NOT NULL,
 	acessibilidade bit NOT NULL,
@@ -221,13 +221,13 @@ CREATE TABLE GoogleTransit.dbo.horario (
 	PERIOD FOR SYSTEM_TIME (inicio_vigencia, fim_vigencia),
 	CONSTRAINT PK_3c89ff4250bf835ce1f861313c7 PRIMARY KEY (id),
 	CONSTRAINT FK_5cc8658a4202dce8b0797dac3f0 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.horario_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.horario_historico));
 
 -- CREATE ESTIMATIVA
 CREATE TABLE GoogleTransit.dbo.estimativa (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	datadecoleta date NOT NULL,
 	horarionoponto time NOT NULL,
 	pontofinal bit,
@@ -237,13 +237,13 @@ CREATE TABLE GoogleTransit.dbo.estimativa (
 	CONSTRAINT PK_ca185d548979052034790fb497d PRIMARY KEY (id),
 	CONSTRAINT FK_645f2f2f2bdaf7a76dcb9c4f5ed FOREIGN KEY (horario_id) REFERENCES GoogleTransit.dbo.horario(id),
 	CONSTRAINT FK_c3aa9f12682c09fba4ac5581748 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.estimativa_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.estimativa_historico));
 
 -- CREATE VIAGEM
 CREATE TABLE GoogleTransit.dbo.viagem (
 	id int NOT NULL IDENTITY(1,1),
-	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
-	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
+	inicio_vigencia datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+	fim_vigencia datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
 	horadasaida datetime NOT NULL,
 	horadachegada datetime NOT NULL,
 	veiculo nvarchar(255) NOT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE GoogleTransit.dbo.viagem (
 	CONSTRAINT PK_a2191e12f865bbe656e9a958f72 PRIMARY KEY (id),
 	CONSTRAINT FK_cb7e345eba623d8aaec01346122 FOREIGN KEY (horario_id) REFERENCES GoogleTransit.dbo.horario(id),
 	CONSTRAINT FK_ef85306fdedfcb0440c71e8e132 FOREIGN KEY (itinerario_id) REFERENCES GoogleTransit.dbo.itinerario(id)
-) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = GoogleTransit.dbo.viagem_historico));
+) with ( SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.viagem_historico));
 
 -- CREATE HISTORICO_REAL
 CREATE TABLE GoogleTransit.dbo.historico_real (
