@@ -294,3 +294,8 @@ CREATE TABLE GoogleTransit.dbo.veiculo_ponto_viagem_historico_bruto (
 	CONSTRAINT FK_ef1c7f95f79217d955f19b65181 FOREIGN KEY (ponto_id) REFERENCES GoogleTransit.dbo.ponto(id),
 	CONSTRAINT FK_f6854f50dcbe1b0d7ea46c16124 FOREIGN KEY (viagem_id) REFERENCES GoogleTransit.dbo.viagem(id)
 );
+
+-- ÍNDICES SUGERIDOS PELO DBA
+USE [GoogleTransit]
+CREATE NONCLUSTERED INDEX [IDX_viagem__horadasaida_itinerario_id] ON [dbo].[viagem] ([horadasaida],[itinerario_id])
+CREATE NONCLUSTERED INDEX [IDX_itinerario_ponto__itinerario_id] ON [dbo].[itinerario_ponto] ([itinerario_id])
